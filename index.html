@@ -231,7 +231,7 @@ async function login(){
   if(sessionError)throw sessionError;
   if(!sessionData.session){const result=await sb.auth.signInAnonymously({options:{data:{username:first+' '+last,department}}});if(result.error)throw result.error;user=result.data.user}
   else user=sessionData.session.user;
-  const {error:profileError}=await sb.from('profiles').upsert({id:user.id,email:'',username:first+' '+last,department,role:'PERSONNEL'},{onConflict:'id'});
+  const {error:profileError}=await sb.from('profiles').update({username:first+' '+last,department}).eq('id',user.id);
   if(profileError)throw profileError;
   await loadProfile();showAuth(false);toast('Accès ouvert · '+first+' '+last);
  }catch(error){message('authMsg','Connexion impossible : '+(error.message||'vérifiez que les connexions anonymes sont activées dans Supabase.'),'error')}
