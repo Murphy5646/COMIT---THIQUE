@@ -457,6 +457,67 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden}body{background:#0a100
 }
 @media(max-width:420px){.topbar .r .hide-s{display:none}.workspace-heading h1{font-size:29px}.dicon{width:49px}.win{width:calc(100vw - 64px)}.start{left:64px;width:calc(100vw - 70px)}}
 
+
+/* ===== CORRECTION FINALE — POSITIONNEMENT DE L'ECRAN DE CONNEXION ===== */
+.lock{position:fixed!important;inset:0!important;z-index:999!important;width:100%;height:100%;min-height:100dvh;padding:0!important;overflow-y:auto!important;overflow-x:hidden!important;align-items:stretch!important;justify-content:flex-start!important}
+.lock.on{display:flex!important}
+.access-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;flex:0 0 64px;width:100%;min-height:64px;padding:0 clamp(16px,4vw,56px)!important}
+.access-layout{position:relative;z-index:1;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(410px, min(43vw,520px))!important;grid-template-rows:minmax(0,1fr);align-items:stretch;width:100%;min-height:0;flex:1 0 auto;overflow:visible}
+.access-visual{min-width:0;min-height:0;display:flex;justify-content:center;overflow:hidden;padding:clamp(24px,5vw,72px)!important}
+.visual-content{width:100%;max-width:600px;margin:auto 0!important}
+.visual-content h1{font-size:clamp(42px,5.2vw,76px)!important}
+.access-panel{min-width:0;min-height:0;display:flex;align-items:center;justify-content:center;overflow-x:hidden!important;overflow-y:auto!important;padding:22px 0!important}
+.panel-inner{box-sizing:border-box;width:min(430px,calc(100% - 64px))!important;max-width:430px;padding:clamp(16px,3vh,30px) 0!important;margin:auto}
+.panel-heading{margin:clamp(14px,2.6vh,25px) 0!important}
+.panel-heading h2{font-size:clamp(30px,3vw,40px)!important}
+#authBox.authbox{width:100%;max-height:none!important;overflow:visible!important}
+#authBox .lform .field{margin:0 0 13px!important;gap:6px!important}
+.access-input-wrap{width:100%;min-height:48px!important}
+#authBox .lform input,#authBox .lform select{height:46px!important;min-height:46px!important}
+#authBox .lbtn{height:50px!important;min-height:50px!important;margin-top:5px!important}
+#authBox #authMsg{min-height:0}
+.panel-security{margin-top:16px!important;padding:11px 13px!important}
+.panel-footer{margin-top:17px!important;padding-top:11px!important}
+.panel-side-label{right:7px}
+.access-footer{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;flex:0 0 36px;min-height:36px;width:100%;padding:0 20px!important}
+@media(max-width:900px){
+ .access-layout{grid-template-columns:minmax(0,1fr) minmax(370px,46%)!important}
+ .access-visual{padding:26px!important}
+ .visual-content h1{font-size:clamp(38px,5vw,58px)!important}
+ .panel-inner{width:calc(100% - 48px)!important}
+}
+@media(max-width:760px){
+ .lock{overflow-y:auto!important}
+ .access-top{flex-basis:56px;min-height:56px;padding:0 16px!important}
+ .access-layout{display:flex!important;flex-direction:column!important;flex:1 0 auto;min-height:0;overflow:visible!important}
+ .access-visual{display:block;flex:none;min-height:0;padding:17px 24px!important;border-right:0!important;border-bottom:1px solid #c6a36f30}
+ .visual-emblem,.visual-line,.visual-bottom,.visual-watermark{display:none!important}
+ .visual-tag{font-size:7px!important}
+ .visual-kicker{margin:8px 0 5px!important;font-size:8px!important}
+ .visual-content h1{font-size:32px!important;line-height:1!important}
+ .visual-content h1 br{display:none}
+ .visual-description{max-width:520px;font-size:10px!important;line-height:1.45!important;margin:7px 0 0!important}
+ .access-panel{display:flex;flex:none;min-height:0;overflow:visible!important;padding:0 0 18px!important}
+ .panel-inner{width:min(440px,calc(100% - 42px))!important;padding:20px 0!important}
+ .panel-heading{margin:16px 0!important}
+ .panel-heading h2{font-size:31px!important}
+ .panel-security{margin-top:13px!important}
+ .panel-footer{margin-top:14px!important}
+ .panel-side-label{display:none!important}
+ .access-footer{flex:0 0 auto;min-height:32px;padding:7px 12px!important}
+}
+@media(max-height:720px) and (min-width:761px){
+ .access-top{flex-basis:52px;min-height:52px}
+ .panel-inner{padding:12px 0!important}
+ .panel-heading{margin:10px 0!important}
+ #authBox .lform .field{margin-bottom:8px!important}
+ .access-input-wrap{min-height:42px!important}
+ #authBox .lform input,#authBox .lform select{height:40px!important;min-height:40px!important}
+ #authBox .lbtn{height:44px!important;min-height:44px!important}
+ .panel-security{margin-top:9px!important;padding:8px 10px!important}
+ .panel-footer{margin-top:9px!important;padding-top:8px!important}
+ .access-footer{flex-basis:30px;min-height:30px}
+}
 </style>
 </head>
 <body><div class="desktop" id="desktop">
