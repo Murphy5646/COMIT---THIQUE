@@ -1033,8 +1033,29 @@ const ico=(id,sm)=>`<span class="ico${sm?' sm':''}" style="background:${APPS[id]
 const win=id=>document.getElementById('win-'+id);let zTop=20,openN=0;
 function mk(cls,html,fn,id){const b=document.createElement('button');b.className=cls;b.innerHTML=html;b.onclick=fn;if(id)b.id=id;return b}
 const isPce=()=>profile?.role==='PCE';
-function openApp(id){if(id==='admin'&&!isPce())return toast('Accès réservé à la Présidence du Comité.');if(id!=='store'&&!APPS[id]&&!EXTRA_APPS[id])return; if(EXTRA_APPS[id])ensureExtraWindow(id); const w=win(id);if(!w)return; if(!w.dataset.placed){const n=openN++%6;w.style.left=Math.max(8,(innerWidth-Math.min(920,innerWidth*.94))/2+(n-2)*26)+'px';w.style.top=(52+n*24)+'px';w.dataset.placed=1}w.classList.add('on');w.classList.remove('min');focusApp(id);closeStart()}
-function focusApp(id){document.querySelectorAll('.win').forEach(w=>w.classList.remove('act'));const w=win(id);w.style.zIndex=++zTop;w.classList.add('act');syncTask()}
+function applyWindowGeometry(w){
+ if(!w)return;
+ const small=innerWidth<=560,mid=innerWidth<=850;
+ w.style.setProperty('position','fixed','important');
+ w.style.setProperty('inset','auto','important');
+ w.style.setProperty('left',small?'calc(50% + 29px)':mid?'calc(50% + 38px)':'calc(50% + 52px)','important');
+ w.style.setProperty('top','calc(50% - 2px)','important');
+ w.style.setProperty('right','auto','important');w.style.setProperty('bottom','auto','important');
+ w.style.setProperty('transform','translate(-50%,-50%)','important');
+ w.style.setProperty('width',small?'calc(100vw - 78px)':mid?'calc(100vw - 110px)':'min(1120px,calc(100vw - 160px))','important');
+ w.style.setProperty('height',small?'calc(100dvh - 145px)':mid?'calc(100dvh - 150px)':'min(820px,calc(100dvh - 150px))','important');
+ w.style.setProperty('min-width',small?'0':'min(340px,calc(100vw - 24px))','important');
+ w.style.setProperty('min-height',small?'220px':'300px','important');
+ w.style.setProperty('max-width','none','important');w.style.setProperty('max-height','none','important');
+ const bar=w.querySelector('.wbar'),body=w.querySelector('.wbody');
+ if(bar){bar.style.setProperty('display','flex','important');bar.style.setProperty('height',small?'42px':'46px','important');bar.style.setProperty('min-height',small?'42px':'46px','important');bar.style.setProperty('flex','0 0 '+(small?'42px':'46px'),'important');bar.style.setProperty('width','100%','important');bar.style.setProperty('position','relative','important');}
+ if(body){body.style.setProperty('display','block','important');body.style.setProperty('flex','1 1 auto','important');body.style.setProperty('min-height','0','important');body.style.setProperty('height','auto','important');body.style.setProperty('overflow','auto','important');body.style.setProperty('width','100%','important');}
+}
+function openApp(id){if(id==='admin'&&!isPce())return toast('Accès réservé à la Présidence du Comité.');if(id!=='store'&&!APPS[id]&&!EXTRA_APPS[id])return;if(EXTRA_APPS[id])ensureExtraWindow(id);const w=win(id);if(!w)return;w.classList.add('on');w.classList.remove('min','max');applyWindowGeometry(w);focusApp(id);closeStart()}
+function focusApp(id){document.querySelectorAll('.win').forEach(w=>w.classList.remove('act'));const w=win(id);if(!w)return;applyWindowGeometry(w);w.style.zIndex=++zTop;w.classList.add('act');syncTask()}
+
+/* Géométrie appliquée directement par le gestionnaire de fenêtres */
+window.addEventListener('resize',()=>{document.querySelectorAll('.win.on:not(.max):not(.min)').forEach(applyWindowGeometry)});
 function toggleApp(id){const w=win(id);if(!w.classList.contains('on')||w.classList.contains('min'))return openApp(id);if(w.classList.contains('act'))return minApp(id);focusApp(id)}
 function minApp(id){const w=win(id);w.classList.add('min');w.classList.remove('act');syncTask()}
 function closeApp(id){const w=win(id);w.classList.remove('on','min','act','max');syncTask()}
