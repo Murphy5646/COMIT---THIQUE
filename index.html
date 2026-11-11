@@ -749,6 +749,51 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#eee9dc}
  .store-grid{grid-template-columns:1fr!important}
 }
 
+
+/* ===== PATCH AFFICHAGE FENÊTRES — POSITION ET DIMENSIONS ===== */
+#desktop>.win{
+ position:fixed!important;
+ left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;
+ transform:translate(-50%,-50%)!important;
+ width:min(1120px,calc(100vw - 190px))!important;
+ height:min(820px,calc(100dvh - 170px))!important;
+ min-width:min(340px,calc(100vw - 24px))!important;
+ min-height:300px!important;max-width:none!important;max-height:none!important;
+ margin:0!important;overflow:hidden!important;
+}
+#desktop>.win.on{display:flex!important;visibility:visible!important;opacity:1!important}
+#desktop>.win.on>.wbar{
+ display:flex!important;visibility:visible!important;position:relative!important;
+ inset:auto!important;flex:0 0 46px!important;height:46px!important;min-height:46px!important;
+ width:100%!important;z-index:2!important;transform:none!important;
+}
+#desktop>.win.on>.wbody{
+ display:block!important;position:relative!important;flex:1 1 auto!important;
+ width:100%!important;min-width:0!important;min-height:0!important;height:auto!important;
+ max-height:none!important;overflow:auto!important;visibility:visible!important;
+}
+#desktop>.win.max{
+ position:fixed!important;left:104px!important;top:58px!important;right:0!important;bottom:76px!important;
+ width:auto!important;height:auto!important;min-width:0!important;min-height:0!important;
+ transform:none!important;border-radius:0!important;
+}
+#desktop>.win.min{display:none!important}
+#desktop>.win.on.act{z-index:500!important}
+#desktop>.win:not(.act){z-index:100!important}
+#desktop>.win .wtitle{display:block!important;visibility:visible!important;opacity:1!important}
+#desktop>.win .wctl{display:flex!important;visibility:visible!important}
+@media(max-width:850px){
+ #desktop>.win{width:calc(100vw - 110px)!important;height:calc(100dvh - 150px)!important}
+ #desktop>.win.max{left:76px!important;top:58px!important;right:0!important;bottom:76px!important}
+}
+@media(max-width:560px){
+ #desktop>.win{left:calc(50% + 29px)!important;top:calc(50% - 8px)!important;
+  width:calc(100vw - 78px)!important;height:calc(100dvh - 145px)!important;
+  min-width:0!important;min-height:220px!important;transform:translate(-50%,-50%)!important}
+ #desktop>.win.max{left:58px!important;top:52px!important;right:0!important;bottom:70px!important;transform:none!important}
+ #desktop>.win.on>.wbar{flex-basis:42px!important;height:42px!important;min-height:42px!important}
+}
+
 </style>
 </head>
 <body><div class="desktop" id="desktop">
