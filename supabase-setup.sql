@@ -158,3 +158,80 @@ grant select, insert on public.reports to authenticated;
 -- ÉTAPE INITIALE : après création et confirmation du premier compte,
 -- remplacer l'adresse ci-dessous par celle du premier titulaire PCE puis exécuter :
 -- update public.profiles set role = 'PCE' where email = 'pce@exemple.fr';
+
+
+-- ===== Modules de travail connectés (annonces, agenda, demandes, notes privées) =====
+create table if not exists public.announcements (
+ id uuid primary key default gen_random_uuid(),
+ title text not null,
+ body text not null,
+ category text not null default 'Information',
+ pinned boolean not null default false,
+ author_id uuid not null references auth.users(id) on delete restrict,
+ author_name text not null default 'Présidence',
+ created_at timestamptz not null default now()
+);
+create table if not exists public.agenda_events (
+ id uuid primary key default gen_random_uuid(),
+ title text not null,
+ description text,
+ event_date timestamptz not null,
+ location text,
+ created_by uuid not null references auth.users(id) on delete restrict,
+ created_at timestamptz not null default now()
+);
+create table if not exists public.requests (
+ id uuid primary key default gen_random_uuid(),
+ user_id uuid not null references auth.users(id) on delete cascade,
+ requester_name text not null,
+ department text not null default 'Personnel',
+ category text not null default 'Autre',
+ title text not null,
+ details text not null,
+ status text not null default 'Reçue' check(status in ('Reçue','En traitement','Réponse apportée','Refusée')),
+ created_at timestamptz not null default now()
+);
+create table if not exists public.personal_notes (
+ user_id uuid primary key references auth.users(id) on delete cascade,
+ content text not null default '',
+ updated_at timestamptz not null default now()
+);
+create index if not exists agenda_events_date_idx on public.agenda_events(event_date);
+create index if not exists requests_user_created_idx on public.requests(user_id,created_at desc);
+create index if not exists announcements_created_idx on public.announcements(created_at desc);
+alter table public.announcements enable row level security;
+alter table public.agenda_events enable row level security;
+alter table public.requests enable row level security;
+alter table public.personal_notes enable row level security;
+drop policy if exists "announcements_read_authenticated" on public.announcements;
+create policy "announcements_read_authenticated" on public.announcements for select to authenticated using (true);
+drop policy if exists "announcements_insert_pce" on public.announcements;
+create policy "announcements_insert_pce" on public.announcements for insert to authenticated with check ((select public.is_current_user_pce()) and author_id=(select auth.uid()));
+drop policy if exists "announcements_update_pce" on public.announcements;
+create policy "announcements_update_pce" on public.announcements for update to authenticated using ((select public.is_current_user_pce())) with check ((select public.is_current_user_pce()));
+drop policy if exists "announcements_delete_pce" on public.announcements;
+create policy "announcements_delete_pce" on public.announcements for delete to authenticated using ((select public.is_current_user_pce()));
+drop policy if exists "agenda_read_authenticated" on public.agenda_events;
+create policy "agenda_read_authenticated" on public.agenda_events for select to authenticated using (true);
+drop policy if exists "agenda_insert_pce" on public.agenda_events;
+create policy "agenda_insert_pce" on public.agenda_events for insert to authenticated with check ((select public.is_current_user_pce()) and created_by=(select auth.uid()));
+drop policy if exists "agenda_update_pce" on public.agenda_events;
+create policy "agenda_update_pce" on public.agenda_events for update to authenticated using ((select public.is_current_user_pce())) with check ((select public.is_current_user_pce()));
+drop policy if exists "agenda_delete_pce" on public.agenda_events;
+create policy "agenda_delete_pce" on public.agenda_events for delete to authenticated using ((select public.is_current_user_pce()));
+drop policy if exists "requests_insert_own" on public.requests;
+create policy "requests_insert_own" on public.requests for insert to authenticated with check (user_id=(select auth.uid()));
+drop policy if exists "requests_read_own_or_pce" on public.requests;
+create policy "requests_read_own_or_pce" on public.requests for select to authenticated using (user_id=(select auth.uid()) or (select public.is_current_user_pce()));
+drop policy if exists "requests_update_pce" on public.requests;
+create policy "requests_update_pce" on public.requests for update to authenticated using ((select public.is_current_user_pce())) with check ((select public.is_current_user_pce()));
+drop policy if exists "notes_own_select" on public.personal_notes;
+create policy "notes_own_select" on public.personal_notes for select to authenticated using (user_id=(select auth.uid()));
+drop policy if exists "notes_own_insert" on public.personal_notes;
+create policy "notes_own_insert" on public.personal_notes for insert to authenticated with check (user_id=(select auth.uid()));
+drop policy if exists "notes_own_update" on public.personal_notes;
+create policy "notes_own_update" on public.personal_notes for update to authenticated using (user_id=(select auth.uid())) with check (user_id=(select auth.uid()));
+grant select,insert,update,delete on public.announcements to authenticated;
+grant select,insert,update,delete on public.agenda_events to authenticated;
+grant select,insert,update on public.requests to authenticated;
+grant select,insert,update on public.personal_notes to authenticated;
