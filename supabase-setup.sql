@@ -235,3 +235,26 @@ grant select,insert,update,delete on public.announcements to authenticated;
 grant select,insert,update,delete on public.agenda_events to authenticated;
 grant select,insert,update on public.requests to authenticated;
 grant select,insert,update on public.personal_notes to authenticated;
+
+
+-- Bibliothèque documentaire interne, liens HTTP(S) et résumés.
+create table if not exists public.library_documents (
+ id uuid primary key default gen_random_uuid(),
+ title text not null,
+ category text not null default 'Archive',
+ summary text,
+ url text,
+ author_id uuid not null references auth.users(id) on delete restrict,
+ author_name text not null default 'Présidence',
+ created_at timestamptz not null default now()
+);
+alter table public.library_documents enable row level security;
+drop policy if exists "library_documents_read_authenticated" on public.library_documents;
+create policy "library_documents_read_authenticated" on public.library_documents for select to authenticated using (true);
+drop policy if exists "library_documents_insert_pce" on public.library_documents;
+create policy "library_documents_insert_pce" on public.library_documents for insert to authenticated with check ((select public.is_current_user_pce()) and author_id=(select auth.uid()));
+drop policy if exists "library_documents_update_pce" on public.library_documents;
+create policy "library_documents_update_pce" on public.library_documents for update to authenticated using ((select public.is_current_user_pce())) with check ((select public.is_current_user_pce()));
+drop policy if exists "library_documents_delete_pce" on public.library_documents;
+create policy "library_documents_delete_pce" on public.library_documents for delete to authenticated using ((select public.is_current_user_pce()));
+grant select,insert,update,delete on public.library_documents to authenticated;
