@@ -279,8 +279,7 @@ function wsEmpty(el,msg){el.replaceChildren();const d=document.createElement('di
 async function loadWorkspaceData(){if(!sb||!user)return;try{await Promise.all([loadCloudNotes(),loadAnnouncements(),loadAgenda(),loadRequests(),renderProfile()])}catch(e){console.warn('Workspace Supabase:',e);toast('Certaines applications ne se chargent pas : '+(e.message||'erreur Supabase'))}}
 async function loadCloudNotes(){const {data,error}=await sb.from('personal_notes').select('content,updated_at').eq('user_id',user.id).maybeSingle();if(error)throw error;const el=$('notesText');if(data&&el.value!==data.content)el.value=data.content||'';$('noteState').textContent=data?.updated_at?'Synchronisé avec Supabase':'Nouvelle note privée';}
 let noteSaveTimer=null,noteSaveBusy=false;
-notesText.removeEventListener?.('input',()=>{});
-notesText.addEventListener('input',()=>{clearTimeout(noteSaveTimer);$('noteState').textContent='Synchronisation…';noteSaveTimer=setTimeout(saveCloudNotes,700)});
+$('notesText').addEventListener('input',()=>{clearTimeout(noteSaveTimer);$('noteState').textContent='Synchronisation…';noteSaveTimer=setTimeout(saveCloudNotes,700)});
 async function saveCloudNotes(){if(!user||!sb)return;if(noteSaveBusy){noteSaveTimer=setTimeout(saveCloudNotes,500);return}noteSaveBusy=true;try{const {error}=await sb.from('personal_notes').upsert({user_id:user.id,content:notesText.value,updated_at:new Date().toISOString()},{onConflict:'user_id'});if(error)throw error;$('noteState').textContent='Sauvegardé dans Supabase'}catch(e){$('noteState').textContent='Échec de synchronisation';console.error(e)}finally{noteSaveBusy=false}}
 $('clearNotes').onclick=async()=>{if(!confirm('Effacer définitivement vos notes privées synchronisées ?'))return;notesText.value='';if(user){const {error}=await sb.from('personal_notes').upsert({user_id:user.id,content:'',updated_at:new Date().toISOString()},{onConflict:'user_id'});if(error)return toast(error.message)}$('noteState').textContent='Notes effacées'};
 async function loadAnnouncements(){const el=$('announcementList');const {data,error}=await sb.from('announcements').select('id,title,body,category,pinned,author_name,created_at').order('pinned',{ascending:false}).order('created_at',{ascending:false}).limit(100);if(error)throw error;if(!data.length)return wsEmpty(el,'Aucune annonce publiée pour le moment.');el.replaceChildren();data.forEach(a=>el.append(wsCard((a.pinned?'★ ':'')+a.title,a.body,(a.category||'Information')+' · '+(a.author_name||'Présidence')+' · '+new Date(a.created_at).toLocaleString('fr-FR'))))}
@@ -301,8 +300,7 @@ const oldSetAuth=setAuthUI;
 /* ===== outils Windows décoratifs ===== */
 const notesText=$('notesText');
 try{notesText.value=''}catch(e){}
-notesText.addEventListener('input',()=>{try{localStorage.setItem('site73-notes',notesText.value);$('noteState').textContent='Enregistré'}catch(e){$('noteState').textContent='Stockage indisponible'}});
-$('clearNotes').onclick=()=>{if(confirm('Effacer toutes les notes enregistrées sur cet appareil ?')){notesText.value='';try{localStorage.removeItem('site73-notes')}catch(e){}$('noteState').textContent='Notes effacées'}};
+/* Les notes sont désormais synchronisées dans Supabase par le module connecté. */
 let calcExpr='';
 $('calcKeys').addEventListener('click',e=>{const b=e.target.closest('button[data-k]');if(!b)return;const k=b.dataset.k;if(k==='C')calcExpr='';else if(k==='back')calcExpr=calcExpr.slice(0,-1);else if(k==='='){try{if(!calcExpr||!/^[0-9+*/(). -]+$/.test(calcExpr))throw 0;const result=Function('"use strict";return ('+calcExpr+')')();if(!Number.isFinite(result))throw 0;calcExpr=String(Math.round((result+Number.EPSILON)*1e10)/1e10)}catch(e){calcExpr='Erreur'}}else if(calcExpr==='Erreur')calcExpr=k;else calcExpr+=k;$('calcDisplay').value=calcExpr||'0'});
 let calDate=new Date();
