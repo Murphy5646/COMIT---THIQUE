@@ -564,6 +564,45 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden}body{background:#0a100
  #lock .panel-footer{margin-top:8px!important;padding-top:7px!important}
 }
 
+
+/* ===== REFONTE ENVIRONNEMENT DE BUREAU ===== */
+.desktop{background:radial-gradient(ellipse at 78% 8%,#293728 0%,#111b12 38%,#080d09 100%)!important}
+.topbar{height:54px!important;background:#101810f5!important;border-bottom:1px solid #b89a6438!important;backdrop-filter:blur(18px)}
+.top-brand{letter-spacing:.13em}.top-brand img{filter:drop-shadow(0 2px 6px #0008)}
+.app-rail{background:#0d140ff0!important;border-right:1px solid #c5a36a24!important}
+.work-area{background:radial-gradient(ellipse at 70% 10%,#28372955,transparent 55%)!important}
+.workspace-heading{padding:38px 42px 22px!important}
+.workspace-heading h1{font-size:clamp(30px,3vw,46px)!important;letter-spacing:-.04em!important}
+.desktop-hint{margin:0 42px!important;border:1px solid #d1b37c2a!important;border-radius:12px!important;background:#111a13a8!important;padding:18px 20px!important}
+.task{height:62px!important;bottom:12px!important;border:1px solid #c6a16b44!important;border-radius:16px!important;background:#111810eF!important;box-shadow:0 18px 45px #0009!important;backdrop-filter:blur(22px)!important}
+.tb{width:42px!important;height:42px!important;border-radius:11px!important;transition:transform .16s,background .16s!important}
+.tb:hover{transform:translateY(-4px)!important;background:#ffffff1b!important}
+.tb.run:after{bottom:-4px!important}
+.dicon{width:84px!important;min-height:82px!important;border-radius:10px!important;font:11px/1.25 var(--ui)!important}
+.dicon:hover{background:#d8c69a18!important;border-color:#d8c69a38!important}
+.ico{border-radius:13px!important;box-shadow:0 8px 20px #0005,inset 0 1px #ffffff38!important}
+.win{border-radius:13px!important;border:1px solid #d3b47b66!important;box-shadow:0 24px 75px #000b,0 0 0 1px #0008!important;resize:both;min-width:320px;min-height:240px}
+.wbar{height:44px!important;background:linear-gradient(110deg,#263426,#151e16)!important;cursor:grab!important}
+.wbar:active{cursor:grabbing!important}
+.wctl button{width:42px!important}
+.wbody{background:#f4f2ec!important;padding:clamp(16px,2.4vw,30px)!important}
+.start{border:1px solid #c6a16b66!important;border-radius:16px!important;background:#121a13f5!important;box-shadow:0 22px 70px #000b!important;backdrop-filter:blur(24px)!important}
+.desktop-context-full{min-width:238px!important;padding:8px!important;border-radius:12px!important;background:#151e17f5!important;border-color:#c5a36a66!important;box-shadow:0 20px 55px #000b!important;backdrop-filter:blur(20px)!important}
+.desktop-context-full button{padding:10px 12px!important;border-radius:7px!important;font-size:12px!important}
+.desktop-context-full button:hover{background:#d7c39e20!important}
+.desktop-context-full button:disabled{opacity:.4}
+.store-head{display:flex;justify-content:space-between;align-items:center;padding:22px;border-radius:13px;background:linear-gradient(120deg,#263a2a,#172319);color:#f3e9d6}
+.store-head small{font:10px var(--mono);letter-spacing:.14em;color:#c7b58f}.store-head h1{margin:8px 0;font:700 30px var(--ui)}.store-head p{margin:0;color:#d2d4c8;font:13px var(--ui)}.store-mark{font:800 30px Georgia;color:#d8bb84;border:1px solid #d8bb8455;border-radius:50%;width:76px;height:76px;display:grid;place-items:center}
+.store-tabs{display:flex;gap:8px;margin:20px 0 14px;border-bottom:1px solid var(--line)}.store-tabs button{padding:10px 16px;background:none;border:0;color:var(--muted);font:600 12px var(--ui);border-bottom:2px solid transparent}.store-tabs button.selected{color:var(--green);border-color:#a77c42}
+.store-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.store-card{display:flex;align-items:center;gap:12px;padding:14px;background:#fffdf8;border:1px solid var(--line);border-radius:11px;min-width:0}
+.store-appicon{width:46px;height:46px;flex:none;border-radius:12px;display:grid;place-items:center;background:#e9e2d2;color:#354331;font-size:24px}
+.store-copy{flex:1;min-width:0}.store-copy h3{margin:0;color:#263326;font:700 14px var(--ui)}.store-copy p{margin:4px 0;color:#666d60;font:12px/1.4 var(--ui)}.store-copy small{color:#8b806d;font:10px var(--ui)}
+.store-glyph{font:700 19px var(--ui);color:#fff}
+.miniapp{max-width:620px;margin:0 auto;padding:22px;background:#fffdf8;border:1px solid var(--line);border-radius:12px;color:#263326}.miniapp h2{font:700 24px var(--ui);margin:0 0 8px}.miniapp p{font:13px var(--ui);color:#687064}.miniapp input,.miniapp textarea{width:100%;padding:12px;border:1px solid #c9bea7;border-radius:7px;background:white;color:#25301f;font:14px var(--ui)}.miniapp textarea{resize:vertical}.timer-read{font:700 clamp(40px,8vw,72px) var(--mono);text-align:center;padding:28px;color:#344b35}.mini-result{font:700 20px var(--ui)!important;color:#344b35!important}
+.desk-compact .dicon{width:68px!important;min-height:68px!important}.desk-compact .ico{width:36px;height:36px}
+@media(max-width:760px){.workspace-heading{padding:24px 18px!important}.desktop-hint{margin:0 18px!important}.store-head{padding:16px}.store-mark{width:54px;height:54px;font-size:22px}.store-card{align-items:flex-start;flex-wrap:wrap}.store-card .btn{margin-left:58px}}
+
 </style>
 </head>
 <body><div class="desktop" id="desktop">
@@ -594,6 +633,7 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden}body{background:#0a100
 <div class="win" id="win-demandes" role="dialog" aria-label="Demandes internes"><div class="wbar"><i class="wico"></i><span class="wtitle">Demandes internes — Site 73</span><div class="wctl"><button data-act="min">−</button><button data-act="max" class="mx">□</button><button data-act="close" class="x">×</button></div></div><div class="wbody"><h2 class="workspace-title">Centre des demandes</h2><p class="workspace-sub">Transmettre une demande administrative à la Présidence et suivre son traitement.</p><form id="requestForm" class="workspace-form"><strong>Nouvelle demande</strong><select id="requestCategory"><option>Demande administrative</option><option>Demande de consultation</option><option>Demande de médiation</option><option>Question au Comité</option><option>Autre</option></select><input id="requestTitle" required maxlength="160" placeholder="Objet de la demande"><textarea id="requestDetails" required maxlength="6000" placeholder="Expliquez votre demande"></textarea><button class="btn gold" type="submit">Envoyer la demande</button><div id="requestMsg" class="msg"></div></form><div class="workspace-actions"><button class="btn" id="refreshRequests">Actualiser mes demandes</button><span class="appmuted">Le suivi est privé : seul l’émetteur et le PCE y ont accès.</span></div><div class="workspace-list" id="requestList"><div class="workspace-empty">Connectez-vous pour consulter vos demandes.</div></div></div></div>
 <div class="win" id="win-profil" role="dialog" aria-label="Mon profil"><div class="wbar"><i class="wico"></i><span class="wtitle">Mon profil — Identité du personnel</span><div class="wctl"><button data-act="min">−</button><button data-act="max" class="mx">□</button><button data-act="close" class="x">×</button></div></div><div class="wbody"><h2 class="workspace-title">Dossier personnel</h2><p class="workspace-sub">Informations du compte actuellement connecté.</p><div class="workspace-grid"><div class="workspace-card"><h3>Identité</h3><p id="profileName">Non connecté</p><div class="workspace-meta" id="profileEmail">—</div></div><div class="workspace-card"><h3>Affectation</h3><p id="profileDepartment">—</p><div class="workspace-meta" id="profileRole">—</div></div><div class="workspace-card"><h3>Compte</h3><p id="profileCreated">Session non ouverte</p><div class="workspace-meta">Session locale</div></div><div class="workspace-card"><h3>Confidentialité</h3><p>Vos demandes et vos notes privées sont accessibles uniquement à votre compte et aux rôles autorisés par les règles de sécurité.</p></div></div><div class="workspace-actions"><button class="btn" id="refreshProfile">Actualiser mon profil</button><button class="btn" id="profileLogout">Déconnexion</button></div></div></div>
 <div class="win" id="win-archives" role="dialog" aria-label="Archives documentaires"><div class="wbar"><i class="wico"></i><span class="wtitle">Archives documentaires — Site 73</span><div class="wctl"><button data-act="min">−</button><button data-act="max" class="mx">□</button><button data-act="close" class="x">×</button></div></div><div class="wbody"><h2 class="workspace-title">Centre documentaire</h2><p class="workspace-sub">Références, notes de service, procédures et documents internes publiés par la Présidence.</p><div id="documentComposer" class="hidden"><form id="documentForm" class="workspace-form"><strong>Ajouter une référence (PCE)</strong><input id="documentTitle" required maxlength="180" placeholder="Titre du document"><select id="documentCategory"><option>Procédure</option><option>Note de service</option><option>Formulaire</option><option>Archive</option><option>Référence institutionnelle</option></select><input id="documentUrl" type="url" maxlength="1000" placeholder="Lien HTTPS vers le document"><textarea id="documentSummary" maxlength="3000" placeholder="Résumé et informations utiles"></textarea><button class="btn gold" type="submit">Ajouter aux archives</button><div id="documentMsg" class="msg"></div></form></div><div class="workspace-actions"><button class="btn" id="refreshDocuments">Actualiser</button><span class="appmuted">Les liens sont fournis par la Présidence.</span></div><div class="workspace-list" id="documentList"><div class="workspace-empty">Aucun document chargé.</div></div></div></div>
+<div class="win" id="win-store" role="dialog" aria-label="Store d'applications"><div class="wbar"><i class="wico"></i><span class="wtitle">Store — Catalogue des applications</span><div class="wctl"><button data-act="min" aria-label="Réduire">−</button><button data-act="max" class="mx" aria-label="Agrandir">□</button><button data-act="close" class="x" aria-label="Fermer">×</button></div></div><div class="wbody"><div class="store-head"><div><small>FONDATION S.C.P. · DISTRIBUTION LOGICIELLE</small><h1>Centre d’applications</h1><p>Installez des outils complémentaires dans votre environnement de travail.</p></div><div class="store-mark">S73</div></div><div class="store-tabs"><button class="selected" data-store-tab="catalogue">Catalogue</button><button data-store-tab="installed">Installées</button></div><div id="storeGrid" class="store-grid"></div></div></div>
 <div class="start" id="start"><div class="sbody"><input class="ssearch" id="ssearch" placeholder="Rechercher une application ou un article (Entrée)…" autocomplete="off"><div class="sh">Épinglé</div><div class="pins" id="pins"></div><div class="sh">Recommandé</div><div class="recs"><button class="rec" id="recChap"><span class="ico sm" style="background:linear-gradient(135deg,#d9a36b,#a8733b)"><svg viewBox="0 0 24 24"><path d="M4 5h7a2 2 0 0 1 1 1 2 2 0 0 1 1-1h7v14h-7a2 2 0 0 0-1 1 2 2 0 0 0-1-1H4z"/><path d="M12 6v13"/></svg></span><span>Code éthique<small>Consulter les 31 chapitres</small></span></button><button class="rec" data-open="signalement"><span class="ico sm" style="background:linear-gradient(135deg,#c76e4f,#8e3b34)"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h4"/></svg></span><span>Nouveau signalement<small>Transmettre au Comité</small></span></button><button class="rec" data-open="prevention"><span class="ico sm" style="background:linear-gradient(135deg,#6f8a5e,#3f5535)"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span><span>Rappels de prévention<small>Document source</small></span></button><button class="rec" data-open="accueil"><span class="ico sm" style="background:linear-gradient(135deg,#4d5f42,#2e3a29)"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg></span><span>CE-S73-CODE<small>Mise en application : Oui · Version interne</small></span></button></div></div><div class="sfoot"><button id="profileBtn"><span class="ico sm" style="background:#3c4a35;width:26px;height:26px"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/></svg></span><span id="whoStart">Invité</span></button><button id="powerBtn" title="Session"><span id="powerLabel">Écran de connexion</span> ⏻</button></div></div>
 
 <nav class="task" id="task" aria-label="Barre des tâches"></nav>
@@ -749,17 +789,90 @@ boot().catch(e=>toast(e.message));
 /* ===== Interface bureau ===== */
 let guest=false;
 const ICONS={navigateur:'<circle cx="11" cy="11" r="8"/><path d="M3 11h16M11 3c3 4 3 12 0 16M11 3c-3 4-3 12 0 16"/>',messagerie:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 7 9-7"/>',word:'<path d="M5 3h10l4 4v14H5z"/><path d="M14 3v5h5M8 12l1 5 2-4 2 4 1-5"/>',excel:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 8h16M4 13h16M10 8v13M15 8v13"/>',archives:'<path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/>',annonces:'<path d="M4 5h16v14H4z"/><path d="M7 9h10M7 13h7"/>',agenda:'<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 9h18M8 13h3M8 17h7"/>',demandes:'<path d="M5 3h14v18H5z"/><path d="M8 8h8M8 12h8M8 16h5"/>',profil:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3-7 8-7s8 3 8 7"/>',notes:'<path d="M5 3h14v18H5z"/><path d="M8 8h8M8 12h8M8 16h5"/>',calculatrice:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h2M14 11h2M8 16h2M14 16h2"/>',calendrier:'<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 9h18"/>',gestionnaire:'<path d="M3 4h18v16H3z"/><path d="M7 16v-4M12 16V8M17 16v-6"/>',peinture:'<path d="M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 1-4c-1-1-1-2 0-3h3a4 4 0 0 0 4-4c0-4-4-7-9-7z"/><circle cx="7.5" cy="10" r="1"/><circle cx="11" cy="7" r="1"/><circle cx="16" cy="9" r="1"/>',corbeille:'<path d="M4 7h16M10 11v6M14 11v6M5 7l1 14h12l1-14M9 7V4h6v3"/>',accueil:'<path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/>',code:'<path d="M4 5h7a2 2 0 0 1 1 1 2 2 0 0 1 1-1h7v14h-7a2 2 0 0 0-1 1 2 2 0 0 0-1-1H4z"/><path d="M12 6v13"/>',prevention:'<path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/><path d="M8.500 12l2.500 2.500 4.500-5"/>',signalement:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h4"/>',admin:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>'};
-const APPS={navigateur:{t:'Navigateur',c:'linear-gradient(135deg,#4d91a6,#28516d)'},messagerie:{t:'Messagerie',c:'linear-gradient(135deg,#4b83a6,#28516d)'},word:{t:'Word',c:'linear-gradient(135deg,#3979b9,#174879)'},excel:{t:'Excel',c:'linear-gradient(135deg,#438b63,#20583b)'},archives:{t:'Archives documentaires',c:'linear-gradient(135deg,#9a805e,#635039)'},annonces:{t:'Annonces internes',c:'linear-gradient(135deg,#b18a55,#74552e)'},agenda:{t:'Agenda institutionnel',c:'linear-gradient(135deg,#6f8a9b,#3d596d)'},demandes:{t:'Centre des demandes',c:'linear-gradient(135deg,#9b765b,#684936)'},profil:{t:'Mon profil',c:'linear-gradient(135deg,#758b72,#40573e)'},notes:{t:'Bloc-notes',c:'linear-gradient(135deg,#6588a5,#34516b)'},calculatrice:{t:'Calculatrice',c:'linear-gradient(135deg,#778b70,#40563a)'},calendrier:{t:'Calendrier',c:'linear-gradient(135deg,#b65a50,#813c35)'},gestionnaire:{t:'Gestionnaire des tâches',c:'linear-gradient(135deg,#64717c,#39434d)'},peinture:{t:'Paint',c:'linear-gradient(135deg,#d27a68,#a34c42)'},corbeille:{t:'Corbeille',c:'linear-gradient(135deg,#858585,#4d4d4d)'},accueil:{t:'Vue d’ensemble',c:'linear-gradient(135deg,#4d5f42,#2e3a29)'},code:{t:'Code éthique',c:'linear-gradient(135deg,#d9a36b,#a8733b)'},prevention:{t:'Prévention',c:'linear-gradient(135deg,#6f8a5e,#3f5535)'},signalement:{t:'Signalement',c:'linear-gradient(135deg,#c76e4f,#8e3b34)'},admin:{t:'Administration PCE',c:'linear-gradient(135deg,#56606a,#2b323a)'}};
+const APPS={store:{t:'Store',c:'linear-gradient(135deg,#9b8254,#65502e)'},navigateur:{t:'Navigateur',c:'linear-gradient(135deg,#4d91a6,#28516d)'},messagerie:{t:'Messagerie',c:'linear-gradient(135deg,#4b83a6,#28516d)'},word:{t:'Word',c:'linear-gradient(135deg,#3979b9,#174879)'},excel:{t:'Excel',c:'linear-gradient(135deg,#438b63,#20583b)'},archives:{t:'Archives documentaires',c:'linear-gradient(135deg,#9a805e,#635039)'},annonces:{t:'Annonces internes',c:'linear-gradient(135deg,#b18a55,#74552e)'},agenda:{t:'Agenda institutionnel',c:'linear-gradient(135deg,#6f8a9b,#3d596d)'},demandes:{t:'Centre des demandes',c:'linear-gradient(135deg,#9b765b,#684936)'},profil:{t:'Mon profil',c:'linear-gradient(135deg,#758b72,#40573e)'},notes:{t:'Bloc-notes',c:'linear-gradient(135deg,#6588a5,#34516b)'},calculatrice:{t:'Calculatrice',c:'linear-gradient(135deg,#778b70,#40563a)'},calendrier:{t:'Calendrier',c:'linear-gradient(135deg,#b65a50,#813c35)'},gestionnaire:{t:'Gestionnaire des tâches',c:'linear-gradient(135deg,#64717c,#39434d)'},peinture:{t:'Paint',c:'linear-gradient(135deg,#d27a68,#a34c42)'},corbeille:{t:'Corbeille',c:'linear-gradient(135deg,#858585,#4d4d4d)'},accueil:{t:'Vue d’ensemble',c:'linear-gradient(135deg,#4d5f42,#2e3a29)'},code:{t:'Code éthique',c:'linear-gradient(135deg,#d9a36b,#a8733b)'},prevention:{t:'Prévention',c:'linear-gradient(135deg,#6f8a5e,#3f5535)'},signalement:{t:'Signalement',c:'linear-gradient(135deg,#c76e4f,#8e3b34)'},admin:{t:'Administration PCE',c:'linear-gradient(135deg,#56606a,#2b323a)'}};
+
+// Store et mini-applications installables
+const EXTRA_APPS={
+ timer:{t:'Minuteur',c:'linear-gradient(135deg,#598a83,#315b55)',desc:'Un minuteur simple pour organiser vos sessions.',icon:'◷'},
+ quickcalc:{t:'Calcul rapide',c:'linear-gradient(135deg,#778b70,#40563a)',desc:'Une calculatrice compacte pour les opérations courantes.',icon:'＋'},
+ scratchpad:{t:'Carnet rapide',c:'linear-gradient(135deg,#6588a5,#34516b)',desc:'Un espace de notes personnel enregistré dans ce navigateur.',icon:'▤'}
+};
+const INSTALLED_KEY='site73-installed-apps-v1';
+function installedApps(){try{return JSON.parse(localStorage.getItem(INSTALLED_KEY)||'["store"]')}catch(e){return ['store']}}
+function saveInstalled(a){localStorage.setItem(INSTALLED_KEY,JSON.stringify([...new Set(a)]))}
+function ensureExtraWindow(id){
+ if(win(id))return;
+ const d=EXTRA_APPS[id];if(!d)return;
+ const el=document.createElement('div');el.className='win';el.id='win-'+id;el.innerHTML='<div class="wbar"><i class="wico"></i><span class="wtitle">'+d.t+'</span><div class="wctl"><button data-act="min">−</button><button data-act="max">□</button><button data-act="close" class="x">×</button></div></div><div class="wbody" id="extra-'+id+'"></div>';
+ $('desktop').append(el);
+ const body=el.querySelector('.wbody');
+ if(id==='timer')body.innerHTML='<div class="miniapp"><h2>Minuteur</h2><p>Définissez une durée en minutes.</p><input id="timerMinutes" type="number" min="1" max="999" value="5"><div class="timer-read" id="timerRead">05:00</div><div class="workspace-actions"><button class="btn gold" id="timerStart">Démarrer</button><button class="btn" id="timerReset">Réinitialiser</button></div></div>';
+ if(id==='quickcalc')body.innerHTML='<div class="miniapp"><h2>Calcul rapide</h2><input id="quickCalcInput" placeholder="Ex. (24+8)*3"><button class="btn gold" id="quickCalcRun">Calculer</button><p class="mini-result" id="quickCalcResult">Résultat : —</p></div>';
+ if(id==='scratchpad')body.innerHTML='<div class="miniapp"><h2>Carnet rapide</h2><p>Notes enregistrées automatiquement sur cet appareil.</p><textarea id="scratchText" rows="14" placeholder="Écrire une note…"></textarea><small id="scratchSaved">Enregistrement local</small></div>';
+ el.querySelector('[data-act=min]').onclick=()=>minApp(id);el.querySelector('[data-act=max]').onclick=()=>el.classList.toggle('max');el.querySelector('[data-act=close]').onclick=()=>closeApp(id);
+ el.addEventListener('pointerdown',()=>focusApp(id),true);
+ el.querySelector('.wbar').addEventListener('pointerdown',e=>{if(e.target.closest('button')||el.classList.contains('max')||innerWidth<=700)return;const r=el.getBoundingClientRect(),dx=e.clientX-r.left,dy=e.clientY-r.top;const mv=ev=>{el.style.left=Math.max(0,Math.min(innerWidth-120,ev.clientX-dx))+'px';el.style.top=Math.max(36,Math.min(innerHeight-100,ev.clientY-dy))+'px'};const up=()=>{removeEventListener('pointermove',mv);removeEventListener('pointerup',up)};addEventListener('pointermove',mv);addEventListener('pointerup',up)});
+ if(id==='timer'){
+  let remaining=300,interval=null;const read=()=>{body.querySelector('#timerRead').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0')};
+  body.querySelector('#timerMinutes').onchange=e=>{remaining=Math.max(1,Math.min(999,Number(e.target.value)||1))*60;read()};
+  body.querySelector('#timerStart').onclick=()=>{if(interval){clearInterval(interval);interval=null;body.querySelector('#timerStart').textContent='Reprendre';return}body.querySelector('#timerStart').textContent='Pause';interval=setInterval(()=>{remaining=Math.max(0,remaining-1);read();if(!remaining){clearInterval(interval);interval=null;body.querySelector('#timerStart').textContent='Terminé';toast('Minuteur terminé.')}},1000)};
+  body.querySelector('#timerReset').onclick=()=>{clearInterval(interval);interval=null;remaining=(Number(body.querySelector('#timerMinutes').value)||5)*60;read();body.querySelector('#timerStart').textContent='Démarrer'};
+ }
+ if(id==='quickcalc')body.querySelector('#quickCalcRun').onclick=()=>{const v=body.querySelector('#quickCalcInput').value.trim();if(!/^[0-9+*/().% -]+$/.test(v))return toast('Expression non valide.');try{const result=Function('"use strict";return ('+v+')')();body.querySelector('#quickCalcResult').textContent='Résultat : '+(Number.isFinite(result)?result:'non défini')}catch(e){body.querySelector('#quickCalcResult').textContent='Expression incorrecte'}};
+ if(id==='scratchpad'){const area=body.querySelector('#scratchText'),key='site73-scratchpad-v1';area.value=localStorage.getItem(key)||'';area.oninput=()=>{localStorage.setItem(key,area.value);body.querySelector('#scratchSaved').textContent='Enregistré · '+new Date().toLocaleTimeString('fr-FR')}}
+}
+function addAppToShell(id){
+ if(document.querySelector('.dicon[data-app="'+id+'"]'))return;
+ const a=EXTRA_APPS[id]||APPS[id];if(!a)return;
+ const d=mk('dicon','',()=>openApp(id));d.dataset.app=id;d.innerHTML='<span class="ico" style="background:'+a.c+'"><span class="store-glyph">'+(a.icon||'▦')+'</span></span>'+a.t;icons.append(d);
+ const p=mk('pin','',()=>openApp(id));p.dataset.app=id;p.innerHTML=d.innerHTML;pins.append(p);
+ const t=mk('tb','<span class="store-glyph">'+(a.icon||'▦')+'</span>',()=>toggleApp(id));t.dataset.app=id;t.title=a.t;task.append(t);
+}
+function removeAppFromShell(id){document.querySelectorAll('[data-app="'+id+'"]').forEach(e=>e.remove());if(win(id))closeApp(id);syncTask()}
+function renderStore(tab='catalogue'){
+ const grid=$('storeGrid');if(!grid)return;grid.replaceChildren();const installed=installedApps();
+ const ids=Object.keys(EXTRA_APPS).filter(id=>tab==='installed'?installed.includes(id):true);
+ if(!ids.length){grid.innerHTML='<div class="workspace-empty">Aucune application installée depuis le Store.</div>';return}
+ ids.forEach(id=>{const a=EXTRA_APPS[id],yes=installed.includes(id),card=document.createElement('article');card.className='store-card';card.innerHTML='<div class="store-appicon">'+a.icon+'</div><div class="store-copy"><h3>'+a.t+'</h3><p>'+a.desc+'</p><small>Application locale · Site 73</small></div><button class="btn '+(yes?'':'gold')+'">'+(yes?'Désinstaller':'Installer')+'</button>';card.querySelector('button').onclick=()=>{let next=installedApps();if(yes){next=next.filter(x=>x!==id);saveInstalled(next);removeAppFromShell(id);toast(a.t+' désinstallé.')}else{next.push(id);saveInstalled(next);ensureExtraWindow(id);addAppToShell(id);toast(a.t+' installé.')}renderStore(tab)};grid.append(card)});
+}
+function openStore(){openApp('store');renderStore(document.querySelector('[data-store-tab].selected')?.dataset.storeTab||'catalogue')}
+document.querySelectorAll('[data-store-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-store-tab]').forEach(x=>x.classList.toggle('selected',x===b));renderStore(b.dataset.storeTab)});
+Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtraWindow(id);addAppToShell(id)}});
 const ico=(id,sm)=>`<span class="ico${sm?' sm':''}" style="background:${APPS[id].c}"><svg viewBox="0 0 24 24">${ICONS[id]}</svg></span>`;
 const win=id=>document.getElementById('win-'+id);let zTop=20,openN=0;
 function mk(cls,html,fn,id){const b=document.createElement('button');b.className=cls;b.innerHTML=html;b.onclick=fn;if(id)b.id=id;return b}
 const isPce=()=>profile?.role==='PCE';
-function openApp(id){if(id==='admin'&&!isPce())return toast('Accès réservé à la Présidence du Comité.');const w=win(id);if(!w.dataset.placed){const n=openN++%6;w.style.left=Math.max(8,(innerWidth-Math.min(920,innerWidth*.94))/2+(n-2)*26)+'px';w.style.top=(52+n*24)+'px';w.dataset.placed=1}w.classList.add('on');w.classList.remove('min');focusApp(id);closeStart()}
+function openApp(id){if(id==='admin'&&!isPce())return toast('Accès réservé à la Présidence du Comité.');if(id!=='store'&&!APPS[id]&&!EXTRA_APPS[id])return; if(EXTRA_APPS[id])ensureExtraWindow(id); const w=win(id);if(!w)return; if(!w.dataset.placed){const n=openN++%6;w.style.left=Math.max(8,(innerWidth-Math.min(920,innerWidth*.94))/2+(n-2)*26)+'px';w.style.top=(52+n*24)+'px';w.dataset.placed=1}w.classList.add('on');w.classList.remove('min');focusApp(id);closeStart()}
 function focusApp(id){document.querySelectorAll('.win').forEach(w=>w.classList.remove('act'));const w=win(id);w.style.zIndex=++zTop;w.classList.add('act');syncTask()}
 function toggleApp(id){const w=win(id);if(!w.classList.contains('on')||w.classList.contains('min'))return openApp(id);if(w.classList.contains('act'))return minApp(id);focusApp(id)}
 function minApp(id){const w=win(id);w.classList.add('min');w.classList.remove('act');syncTask()}
 function closeApp(id){const w=win(id);w.classList.remove('on','min','act','max');syncTask()}
 function syncTask(){document.querySelectorAll('.tb[data-app]').forEach(b=>{const w=win(b.dataset.app);b.classList.toggle('run',w.classList.contains('on'));b.classList.toggle('act',w.classList.contains('act'))})}
+
+// Menu contextuel complet du bureau (clic droit)
+(()=>{
+ let menu=null;
+ const close=()=>{if(menu){menu.remove();menu=null}};
+ const add=(label,fn,disabled=false)=>{const b=document.createElement('button');b.textContent=label;b.disabled=disabled;b.onclick=()=>{close();fn()};menu.append(b)};
+ function show(x,y,target){
+  close();menu=document.createElement('div');menu.className='desktop-context desktop-context-full';menu.style.left=Math.max(8,Math.min(x,innerWidth-248))+'px';menu.style.top=Math.max(8,Math.min(y,innerHeight-330))+'px';
+  const title=document.createElement('div');title.className='ctxhint';title.textContent=target?'APPLICATION · '+(APPS[target.dataset.app]?.t||EXTRA_APPS[target.dataset.app]?.t||target.dataset.app):'BUREAU · SITE 73';menu.append(title);
+  if(target){add('Ouvrir',()=>openApp(target.dataset.app));add('Ouvrir le Store',openStore);menu.append(document.createElement('hr'))}
+  add('Actualiser le bureau',()=>{close();syncTask();toast('Bureau actualisé.')});
+  add('Trier les icônes par nom',()=>{const nodes=[...icons.querySelectorAll('.dicon')].sort((a,b)=>a.textContent.localeCompare(b.textContent,'fr'));nodes.forEach(n=>{n.style.position='';n.style.left='';n.style.top='';n.dataset.moved='';icons.append(n)});localStorage.removeItem('site73-desktop-layout-v1')});
+  add('Personnaliser le bureau',()=>{document.body.classList.toggle('desk-compact');toast('Affichage du bureau modifié.')});
+  add('Paramètres',()=>openApp('profil'));
+  add('Centre d’applications · Store',openStore);
+  menu.append(document.createElement('hr'));
+  add('Fermer toutes les fenêtres',()=>{document.querySelectorAll('.win.on').forEach(w=>closeApp(w.id.replace('win-','')));});
+  add('Réinitialiser la disposition',()=>{localStorage.removeItem('site73-desktop-layout-v1');icons.querySelectorAll('.dicon').forEach(n=>{n.style.position='';n.style.left='';n.style.top='';n.dataset.moved=''});toast('Disposition réinitialisée.')});
+  document.body.append(menu);
+ }
+ $('desktop').addEventListener('contextmenu',e=>{if(e.target.closest('.win,.task,.start,button,input,textarea,select'))return;e.preventDefault();show(e.clientX,e.clientY,e.target.closest('.dicon'))});
+ document.addEventListener('pointerdown',e=>{if(menu&&!menu.contains(e.target))close()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+})();
+
 /* barre des tâches, bureau, démarrer */
 const task=$('task'),icons=$('icons'),pins=$('pins');
 const startBtn=mk('tb','<img src="logo.svg" alt="Démarrer">',()=>toggleStart());startBtn.setAttribute('aria-label','Démarrer');task.append(startBtn);
