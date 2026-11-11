@@ -617,6 +617,7 @@ async function boot(){const id=localStorage.getItem(LOCAL_SESSION_KEY);if(id){co
 boot().catch(e=>toast(e.message));
 </script>
 <script>
+{
 /* ===== Interface bureau ===== */
 let guest=false;
 const ICONS={navigateur:'<circle cx="11" cy="11" r="8"/><path d="M3 11h16M11 3c3 4 3 12 0 16M11 3c-3 4-3 12 0 16"/>',messagerie:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 7 9-7"/>',word:'<path d="M5 3h10l4 4v14H5z"/><path d="M14 3v5h5M8 12l1 5 2-4 2 4 1-5"/>',excel:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 8h16M4 13h16M10 8v13M15 8v13"/>',archives:'<path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/>',annonces:'<path d="M4 5h16v14H4z"/><path d="M7 9h10M7 13h7"/>',agenda:'<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 9h18M8 13h3M8 17h7"/>',demandes:'<path d="M5 3h14v18H5z"/><path d="M8 8h8M8 12h8M8 16h5"/>',profil:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3-7 8-7s8 3 8 7"/>',notes:'<path d="M5 3h14v18H5z"/><path d="M8 8h8M8 12h8M8 16h5"/>',calculatrice:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h2M14 11h2M8 16h2M14 16h2"/>',calendrier:'<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 9h18"/>',gestionnaire:'<path d="M3 4h18v16H3z"/><path d="M7 16v-4M12 16V8M17 16v-6"/>',peinture:'<path d="M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 1-4c-1-1-1-2 0-3h3a4 4 0 0 0 4-4c0-4-4-7-9-7z"/><circle cx="7.5" cy="10" r="1"/><circle cx="11" cy="7" r="1"/><circle cx="16" cy="9" r="1"/>',corbeille:'<path d="M4 7h16M10 11v6M14 11v6M5 7l1 14h12l1-14M9 7V4h6v3"/>',accueil:'<path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/>',code:'<path d="M4 5h7a2 2 0 0 1 1 1 2 2 0 0 1 1-1h7v14h-7a2 2 0 0 0-1 1 2 2 0 0 0-1-1H4z"/><path d="M12 6v13"/>',prevention:'<path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/><path d="M8.500 12l2.500 2.500 4.500-5"/>',signalement:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h4"/>',admin:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>'};
@@ -758,5 +759,8 @@ const _setAuthUI=setAuthUI;window.setAuthUI=function(){_setAuthUI();const who=pr
 const _logout=logout;window.logout=async function(){guest=false;typed=false;$('greet').firstChild.textContent='';await _logout();updateLock()};
 $('closeAuth').onclick=()=>{guest=true;updateLock();toast('Mode consultation : la transmission d’un signalement nécessite une connexion.')};
 ['authFirstName','authLastName','authDepartment'].forEach(i=>$(i).addEventListener('keydown',e=>{if(e.key==='Enter')$('loginBtn').click()}));
+window.loadWorkspaceData=loadWorkspaceData;
+window.setWorkspaceAccess=setWorkspaceAccess;
 setAuthUI();openApp('accueil');
+}
 </script></body></html>
