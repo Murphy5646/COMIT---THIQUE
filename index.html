@@ -837,7 +837,7 @@ function renderStore(tab='catalogue'){
 }
 function openStore(){openApp('store');renderStore(document.querySelector('[data-store-tab].selected')?.dataset.storeTab||'catalogue')}
 document.querySelectorAll('[data-store-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-store-tab]').forEach(x=>x.classList.toggle('selected',x===b));renderStore(b.dataset.storeTab)});
-Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtraWindow(id);addAppToShell(id)}});
+// Les applications supplémentaires sont initialisées après la création de la barre des tâches.
 const ico=(id,sm)=>`<span class="ico${sm?' sm':''}" style="background:${APPS[id].c}"><svg viewBox="0 0 24 24">${ICONS[id]}</svg></span>`;
 const win=id=>document.getElementById('win-'+id);let zTop=20,openN=0;
 function mk(cls,html,fn,id){const b=document.createElement('button');b.className=cls;b.innerHTML=html;b.onclick=fn;if(id)b.id=id;return b}
@@ -889,7 +889,7 @@ Object.keys(APPS).forEach(id=>{const A=APPS[id];
  w.querySelector('.wbar').addEventListener('pointerdown',e=>{if(e.target.closest('button')||w.classList.contains('max')||innerWidth<=700)return;const r=w.getBoundingClientRect(),dx=e.clientX-r.left,dy=e.clientY-r.top;const mv=ev=>{w.style.left=Math.min(innerWidth-80,Math.max(-r.width+120,ev.clientX-dx))+'px';w.style.top=Math.min(innerHeight-110,Math.max(36,ev.clientY-dy))+'px'};const up=()=>{removeEventListener('pointermove',mv);removeEventListener('pointerup',up)};addEventListener('pointermove',mv);addEventListener('pointerup',up)});
 });
 
-
+Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtraWindow(id);addAppToShell(id)}});
 
 /* ===== Menu clic droit et déplacement des applications ===== */
 (()=>{
