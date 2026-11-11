@@ -868,7 +868,7 @@ function syncTask(){document.querySelectorAll('.tb[data-app]').forEach(b=>{const
   add('Réinitialiser la disposition',()=>{localStorage.removeItem('site73-desktop-layout-v1');icons.querySelectorAll('.dicon').forEach(n=>{n.style.position='';n.style.left='';n.style.top='';n.dataset.moved=''});toast('Disposition réinitialisée.')});
   document.body.append(menu);
  }
- $('desktop').addEventListener('contextmenu',e=>{if(e.target.closest('.win,.task,.start,button,input,textarea,select'))return;e.preventDefault();show(e.clientX,e.clientY,e.target.closest('.dicon'))});
+ $('desktop').addEventListener('contextmenu',e=>{if(e.target.closest('.win,.task,.start,button,input,textarea,select'))return;e.preventDefault();e.stopPropagation();show(e.clientX,e.clientY,e.target.closest('.dicon'))},true);
  document.addEventListener('pointerdown',e=>{if(menu&&!menu.contains(e.target))close()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
 })();
@@ -891,37 +891,7 @@ Object.keys(APPS).forEach(id=>{const A=APPS[id];
 
 Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtraWindow(id);addAppToShell(id)}});
 
-/* ===== Menu clic droit et déplacement des applications ===== */
-(()=>{
- const desk=$('icons');if(!desk)return;
- let menu=null,moving=false,drag=null;
- const key='site73-desktop-layout-v1';
- const banner=document.createElement('div');banner.className='desk-moving-banner';banner.textContent='Mode déplacement activé — glissez les applications';banner.hidden=true;document.body.append(banner);
- function closeMenu(){if(menu){menu.remove();menu=null}}
- function savePositions(){const positions={};desk.querySelectorAll('.dicon').forEach(el=>{const id=el.dataset.app;if(id&&el.dataset.moved==='1')positions[id]={left:el.style.left,top:el.style.top}});try{localStorage.setItem(key,JSON.stringify(positions))}catch(e){}}
- function restorePositions(){try{const positions=JSON.parse(localStorage.getItem(key)||'{}');desk.querySelectorAll('.dicon').forEach(el=>{const p=positions[el.dataset.app];if(p){el.style.position='absolute';el.style.left=p.left;el.style.top=p.top;el.dataset.moved='1'}})}catch(e){}}
- function enableMove(value){moving=value;banner.hidden=!value;desk.querySelectorAll('.dicon').forEach(el=>el.classList.toggle('moving',value));if(!value)savePositions()}
- function reset(){try{localStorage.removeItem(key)}catch(e){}desk.querySelectorAll('.dicon').forEach(el=>{el.style.position='';el.style.left='';el.style.top='';el.dataset.moved=''});enableMove(false);closeMenu();toast('Disposition du bureau réinitialisée.')}
- function showMenu(x,y,target){closeMenu();menu=document.createElement('div');menu.className='desktop-context';menu.style.left=Math.min(x,innerWidth-220)+'px';menu.style.top=Math.min(y,innerHeight-150)+'px';
- const app=target?.dataset?.app, label=app?(APPS[app]?.t||app):'Bureau';
- const head=document.createElement('div');head.className='ctxhint';head.textContent=app?label:'Bureau du Site 73';menu.append(head);
- function item(text,fn){const b=document.createElement('button');b.type='button';b.textContent=text;b.onclick=()=>{closeMenu();fn()};menu.append(b)}
- if(app){item('✥  Déplacer cette application',()=>{enableMove(true);target.focus()});item('Ouvrir l’application',()=>openApp(app));menu.append(document.createElement('hr'))}
- item(moving?'✓  Terminer le déplacement':'✥  Activer le déplacement',()=>enableMove(!moving));
- item('↺  Réinitialiser le bureau',reset);
- document.body.append(menu);
- }
- desk.addEventListener('contextmenu',e=>{e.preventDefault();const target=e.target.closest('.dicon');showMenu(e.clientX,e.clientY,target)});
- document.addEventListener('pointerdown',e=>{if(menu&&!menu.contains(e.target))closeMenu()});
- document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();enableMove(false)}});
- desk.addEventListener('click',e=>{if(moving&&e.target.closest('.dicon')){e.preventDefault();e.stopImmediatePropagation()}},true);
- desk.addEventListener('pointerdown',e=>{if(!moving)return;const el=e.target.closest('.dicon');if(!el)return;e.preventDefault();const r=el.getBoundingClientRect();drag={el,x:e.clientX,y:e.clientY,left:r.left,top:r.top};el.classList.add('dragging');el.setPointerCapture?.(e.pointerId)});
- desk.addEventListener('pointermove',e=>{if(!drag)return;const el=drag.el;const r=desk.getBoundingClientRect();const left=Math.max(0,Math.min(r.width-el.offsetWidth,e.clientX-(drag.x-drag.left)-r.left));const top=Math.max(0,Math.min(r.height-el.offsetHeight,e.clientY-(drag.y-drag.top)-r.top));el.style.position='absolute';el.style.left=left+'px';el.style.top=top+'px';el.dataset.moved='1'});
- desk.addEventListener('pointerup',()=>{if(!drag)return;drag.el.classList.remove('dragging');drag=null;savePositions()});
- desk.addEventListener('pointercancel',()=>{if(drag){drag.el.classList.remove('dragging');drag=null}});
- restorePositions();
-})();
-
+/* Menu contextuel unifié géré au niveau du bureau. */
 /* ===== Applications enregistrées localement ===== */
 function wsCard(title,body,meta,status){const c=document.createElement('article');c.className='workspace-card';const h=document.createElement('h3');h.textContent=title;c.append(h);const p=document.createElement('p');p.textContent=body||'';c.append(p);const m=document.createElement('div');m.className='workspace-meta';m.textContent=meta||'';if(status){const st=document.createElement('span');st.className='workspace-status';st.textContent=status;m.append(st)}c.append(m);return c}
 function wsEmpty(el,msg){el.replaceChildren();const d=document.createElement('div');d.className='workspace-empty';d.textContent=msg;el.append(d)}
