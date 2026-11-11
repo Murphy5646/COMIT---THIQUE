@@ -890,6 +890,19 @@ const LOCAL_DB_KEY='site73-local-database-v1',LOCAL_SESSION_KEY='site73-local-se
 function readLocalDB(){try{return JSON.parse(localStorage.getItem(LOCAL_DB_KEY)||'{}')}catch(e){return {}}}
 function writeLocalDB(db){localStorage.setItem(LOCAL_DB_KEY,JSON.stringify(db))}
 function localRows(table){const db=readLocalDB();return Array.isArray(db[table])?db[table]:[]}
+/* Garantit une seule Présidence dans les profils de CE navigateur. */
+function enforceSinglePce(rows){
+ let kept=false,changed=false;
+ const clean=rows.map(p=>{
+  if(p.role==='PCE'){
+   if(!kept){kept=true;return p}
+   changed=true;return {...p,role:'PERSONNEL'}
+  }
+  return p
+ });
+ if(changed)saveRows('profiles',clean);
+ return clean
+}
 function saveRows(table,rows){const db=readLocalDB();db[table]=rows;writeLocalDB(db)}
 function localQuery(table){
  let filters=[],sorts=[],max=null,operation='select',payload=null,conflict=null;
@@ -912,7 +925,7 @@ function localQuery(table){
  return q
 }
 sb={from:table=>localQuery(table),rpc:async(name,args={})=>{
- const profiles=localRows('profiles');
+ const profiles=enforceSinglePce(localRows('profiles'));
  if(name==='transfer_pce'){const target=profiles.find(x=>x.id===args.target_user);if(!profile||profile.role!=='PCE'||!target)return {error:{message:'Transfert impossible : accès PCE requis.'}};saveRows('profiles',profiles.map(x=>({...x,role:x.id===target.id?'PCE':'PERSONNEL'})));return {error:null}}
  if(name==='set_report_status'){if(!profile||profile.role!=='PCE')return {error:{message:'Accès réservé au PCE.'}};saveRows('reports',localRows('reports').map(x=>x.id===args.target_report?{...x,status:args.new_status}:x));return {error:null}}
  return {error:{message:'Fonction locale inconnue.'}}
@@ -925,7 +938,7 @@ function setAuthUI(){
  $('reportForm').classList.toggle('hidden',!logged);const pce=profile?.role==='PCE';$('administration').classList.toggle('hidden',!pce);$('adminNav').classList.toggle('hidden',!pce);
  if(typeof setWorkspaceAccess==='function')setWorkspaceAccess()
 }
-async function loadProfile(){if(!user){profile=null;setAuthUI();return}profile=localRows('profiles').find(x=>x.id===user.id)||null;if(!profile)throw new Error('Profil local introuvable.');setAuthUI();if(profile.role==='PCE')await loadAdmin();await loadWorkspaceData()}
+async function loadProfile(){if(!user){profile=null;setAuthUI();return}profile=enforceSinglePce(localRows('profiles')).find(x=>x.id===user.id)||null;if(!profile)throw new Error('Profil local introuvable.');setAuthUI();if(profile.role==='PCE')await loadAdmin();await loadWorkspaceData()}
 async function passwordDigest(password,salt){
  const enc=new TextEncoder(),key=await crypto.subtle.importKey('raw',enc.encode(password),'PBKDF2',false,['deriveBits']);
  const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:enc.encode(salt),iterations:120000,hash:'SHA-256'},key,256);
@@ -938,7 +951,7 @@ async function login(){
  const button=$('loginBtn');button.disabled=true;button.innerHTML='<span>OUVERTURE…</span>';
  try{
   const username=first+' '+last,normalized=username.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLocaleLowerCase();
-  const profiles=localRows('profiles');
+  const profiles=enforceSinglePce(localRows('profiles'));
   let found=profiles.find(p=>(p.username||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLocaleLowerCase()===normalized);
   if(found&&found.department!==department)return message('authMsg','Ce compte existe déjà avec un autre département. Vérifiez votre sélection.','error');
   if(found&&found.passwordHash){
@@ -949,7 +962,7 @@ async function login(){
    const hash=await passwordDigest(password,salt);
    if(found){found.passwordSalt=salt;found.passwordHash=hash;saveRows('profiles',profiles)}
    else{
-    found={id:crypto.randomUUID(),email:'',username,department,role:profiles.length===0?'PCE':'PERSONNEL',passwordSalt:salt,passwordHash:hash,created_at:new Date().toISOString()};
+    found={id:crypto.randomUUID(),email:'',username,department,role:profiles.some(p=>p.role==='PCE')?'PERSONNEL':'PCE',passwordSalt:salt,passwordHash:hash,created_at:new Date().toISOString()};
     profiles.push(found);saveRows('profiles',profiles);
    }
   }
