@@ -160,6 +160,17 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}.hidden{display:
 .workspace-title{font:700 20px var(--ui);color:var(--green);margin:0}
 .workspace-sub{font:12px var(--ui);color:var(--muted);margin:5px 0 14px}
 @media(max-width:650px){.workspace-grid{grid-template-columns:1fr}}
+
+/* Menu contextuel du bureau et déplacement des raccourcis */
+.dicon{touch-action:none;user-select:none}
+.dicon.moving{outline:1px dashed #e2c28c;background:#ffffff20;cursor:grab}
+.dicon.dragging{opacity:.55;cursor:grabbing}
+.desktop-context{position:fixed;z-index:99999;min-width:205px;padding:6px;background:#20251fee;border:1px solid #ffffff30;border-radius:9px;box-shadow:0 14px 36px #0008;backdrop-filter:blur(18px);color:#f5f0e5;font:13px var(--ui)}
+.desktop-context button{display:block;width:100%;padding:9px 11px;border:0;border-radius:5px;text-align:left;background:transparent;color:inherit;font:inherit;cursor:pointer}
+.desktop-context button:hover{background:#ffffff20}
+.desktop-context .ctxhint{padding:7px 11px;color:#c6baa1;font-size:11px}
+.desktop-context hr{border:0;border-top:1px solid #ffffff25;margin:4px 0}
+.desk-moving-banner{position:fixed;z-index:9998;top:12px;left:50%;transform:translateX(-50%);padding:9px 15px;border-radius:8px;background:#273622ed;border:1px solid #d7c39e;color:#fff4df;font:12px var(--ui);box-shadow:0 8px 22px #0004;pointer-events:none}
 </style>
 </head>
 <body>
@@ -272,6 +283,37 @@ Object.keys(APPS).forEach(id=>{const A=APPS[id];
  w.querySelector('.wbar').addEventListener('pointerdown',e=>{if(e.target.closest('button')||w.classList.contains('max')||innerWidth<=700)return;const r=w.getBoundingClientRect(),dx=e.clientX-r.left,dy=e.clientY-r.top;const mv=ev=>{w.style.left=Math.min(innerWidth-80,Math.max(-r.width+120,ev.clientX-dx))+'px';w.style.top=Math.min(innerHeight-110,Math.max(36,ev.clientY-dy))+'px'};const up=()=>{removeEventListener('pointermove',mv);removeEventListener('pointerup',up)};addEventListener('pointermove',mv);addEventListener('pointerup',up)});
 });
 
+
+
+/* ===== Menu clic droit et déplacement des applications ===== */
+(()=>{
+ const desk=$('icons');if(!desk)return;
+ let menu=null,moving=false,drag=null;
+ const key='site73-desktop-layout-v1';
+ const banner=document.createElement('div');banner.className='desk-moving-banner';banner.textContent='Mode déplacement activé — glissez les applications';banner.hidden=true;document.body.append(banner);
+ function closeMenu(){if(menu){menu.remove();menu=null}}
+ function savePositions(){const positions={};desk.querySelectorAll('.dicon').forEach(el=>{const id=el.dataset.app;if(id&&el.dataset.moved==='1')positions[id]={left:el.style.left,top:el.style.top}});try{localStorage.setItem(key,JSON.stringify(positions))}catch(e){}}
+ function restorePositions(){try{const positions=JSON.parse(localStorage.getItem(key)||'{}');desk.querySelectorAll('.dicon').forEach(el=>{const p=positions[el.dataset.app];if(p){el.style.position='absolute';el.style.left=p.left;el.style.top=p.top;el.dataset.moved='1'}})}catch(e){}}
+ function enableMove(value){moving=value;banner.hidden=!value;desk.querySelectorAll('.dicon').forEach(el=>el.classList.toggle('moving',value));if(!value)savePositions()}
+ function reset(){try{localStorage.removeItem(key)}catch(e){}desk.querySelectorAll('.dicon').forEach(el=>{el.style.position='';el.style.left='';el.style.top='';el.dataset.moved=''});enableMove(false);closeMenu();toast('Disposition du bureau réinitialisée.')}
+ function showMenu(x,y,target){closeMenu();menu=document.createElement('div');menu.className='desktop-context';menu.style.left=Math.min(x,innerWidth-220)+'px';menu.style.top=Math.min(y,innerHeight-150)+'px';
+ const app=target?.dataset?.app, label=app?(APPS[app]?.t||app):'Bureau';
+ const head=document.createElement('div');head.className='ctxhint';head.textContent=app?label:'Bureau du Site 73';menu.append(head);
+ function item(text,fn){const b=document.createElement('button');b.type='button';b.textContent=text;b.onclick=()=>{closeMenu();fn()};menu.append(b)}
+ if(app){item('✥  Déplacer cette application',()=>{enableMove(true);target.focus()});item('Ouvrir l’application',()=>openApp(app));menu.append(document.createElement('hr'))}
+ item(moving?'✓  Terminer le déplacement':'✥  Activer le déplacement',()=>enableMove(!moving));
+ item('↺  Réinitialiser le bureau',reset);
+ document.body.append(menu);
+ }
+ desk.addEventListener('contextmenu',e=>{e.preventDefault();const target=e.target.closest('.dicon');showMenu(e.clientX,e.clientY,target)});
+ document.addEventListener('pointerdown',e=>{if(menu&&!menu.contains(e.target))closeMenu()});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();enableMove(false)}});
+ desk.addEventListener('pointerdown',e=>{if(!moving)return;const el=e.target.closest('.dicon');if(!el)return;e.preventDefault();const r=el.getBoundingClientRect();drag={el,x:e.clientX,y:e.clientY,left:r.left,top:r.top};el.classList.add('dragging');el.setPointerCapture?.(e.pointerId)});
+ desk.addEventListener('pointermove',e=>{if(!drag)return;const el=drag.el;const r=desk.getBoundingClientRect();const left=Math.max(0,Math.min(r.width-el.offsetWidth,e.clientX-(drag.x-drag.left)-r.left));const top=Math.max(0,Math.min(r.height-el.offsetHeight,e.clientY-(drag.y-drag.top)-r.top));el.style.position='absolute';el.style.left=left+'px';el.style.top=top+'px';el.dataset.moved='1'});
+ desk.addEventListener('pointerup',()=>{if(!drag)return;drag.el.classList.remove('dragging');drag=null;savePositions()});
+ desk.addEventListener('pointercancel',()=>{if(drag){drag.el.classList.remove('dragging');drag=null}});
+ restorePositions();
+})();
 
 /* ===== Applications connectées à Supabase ===== */
 function wsCard(title,body,meta,status){const c=document.createElement('article');c.className='workspace-card';const h=document.createElement('h3');h.textContent=title;c.append(h);const p=document.createElement('p');p.textContent=body||'';c.append(p);const m=document.createElement('div');m.className='workspace-meta';m.textContent=meta||'';if(status){const st=document.createElement('span');st.className='workspace-status';st.textContent=status;m.append(st)}c.append(m);return c}
