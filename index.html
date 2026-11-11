@@ -308,6 +308,7 @@ Object.keys(APPS).forEach(id=>{const A=APPS[id];
  desk.addEventListener('contextmenu',e=>{e.preventDefault();const target=e.target.closest('.dicon');showMenu(e.clientX,e.clientY,target)});
  document.addEventListener('pointerdown',e=>{if(menu&&!menu.contains(e.target))closeMenu()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();enableMove(false)}});
+ desk.addEventListener('click',e=>{if(moving&&e.target.closest('.dicon')){e.preventDefault();e.stopImmediatePropagation()}},true);
  desk.addEventListener('pointerdown',e=>{if(!moving)return;const el=e.target.closest('.dicon');if(!el)return;e.preventDefault();const r=el.getBoundingClientRect();drag={el,x:e.clientX,y:e.clientY,left:r.left,top:r.top};el.classList.add('dragging');el.setPointerCapture?.(e.pointerId)});
  desk.addEventListener('pointermove',e=>{if(!drag)return;const el=drag.el;const r=desk.getBoundingClientRect();const left=Math.max(0,Math.min(r.width-el.offsetWidth,e.clientX-(drag.x-drag.left)-r.left));const top=Math.max(0,Math.min(r.height-el.offsetHeight,e.clientY-(drag.y-drag.top)-r.top));el.style.position='absolute';el.style.left=left+'px';el.style.top=top+'px';el.dataset.moved='1'});
  desk.addEventListener('pointerup',()=>{if(!drag)return;drag.el.classList.remove('dragging');drag=null;savePositions()});
