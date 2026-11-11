@@ -258,3 +258,23 @@ create policy "library_documents_update_pce" on public.library_documents for upd
 drop policy if exists "library_documents_delete_pce" on public.library_documents;
 create policy "library_documents_delete_pce" on public.library_documents for delete to authenticated using ((select public.is_current_user_pce()));
 grant select,insert,update,delete on public.library_documents to authenticated;
+
+
+-- Messagerie interne : chaque compte ne consulte que les messages reçus ou envoyés.
+create table if not exists public.internal_messages (
+ id uuid primary key default gen_random_uuid(),
+ sender_id uuid not null references auth.users(id) on delete cascade,
+ recipient_id uuid not null references auth.users(id) on delete cascade,
+ sender_email text not null,
+ subject text not null,
+ body text not null,
+ created_at timestamptz not null default now()
+);
+alter table public.internal_messages enable row level security;
+drop policy if exists "messages_read_participants" on public.internal_messages;
+create policy "messages_read_participants" on public.internal_messages for select to authenticated using (sender_id=(select auth.uid()) or recipient_id=(select auth.uid()));
+drop policy if exists "messages_send_as_self" on public.internal_messages;
+create policy "messages_send_as_self" on public.internal_messages for insert to authenticated with check (sender_id=(select auth.uid()) and recipient_id<>(select auth.uid()));
+grant select,insert on public.internal_messages to authenticated;
+create index if not exists internal_messages_recipient_created_idx on public.internal_messages(recipient_id,created_at desc);
+create index if not exists internal_messages_sender_created_idx on public.internal_messages(sender_id,created_at desc);
