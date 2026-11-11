@@ -80,6 +80,15 @@ create trigger on_auth_user_created_scp73
   after insert on auth.users
   for each row execute function public.handle_new_user();
 
+-- Si des profils existaient déjà avant cette mise à jour et qu'aucun PCE
+-- n'est encore désigné, le plus ancien compte devient titulaire.
+update public.profiles
+set role = 'PCE'
+where id = (
+  select id from public.profiles order by created_at asc, id asc limit 1
+)
+and not exists (select 1 from public.profiles where role = 'PCE');
+
 create or replace function public.is_current_user_pce()
 returns boolean
 language sql
