@@ -278,3 +278,19 @@ create policy "messages_send_as_self" on public.internal_messages for insert to 
 grant select,insert on public.internal_messages to authenticated;
 create index if not exists internal_messages_recipient_created_idx on public.internal_messages(recipient_id,created_at desc);
 create index if not exists internal_messages_sender_created_idx on public.internal_messages(sender_id,created_at desc);
+
+
+-- Connexion sans mot de passe : profils des utilisateurs anonymes.
+-- Les utilisateurs peuvent modifier uniquement leur nom et leur département.
+drop policy if exists "profiles_insert_own_personnel" on public.profiles;
+create policy "profiles_insert_own_personnel" on public.profiles
+  for insert to authenticated
+  with check (id = (select auth.uid()) and role = 'PERSONNEL');
+
+drop policy if exists "profiles_update_own_personnel" on public.profiles;
+create policy "profiles_update_own_personnel" on public.profiles
+  for update to authenticated
+  using (id = (select auth.uid()))
+  with check (id = (select auth.uid()) and role = 'PERSONNEL');
+
+grant insert, update on public.profiles to authenticated;
