@@ -55,13 +55,20 @@ security definer
 set search_path = ''
 as $$
 begin
+  -- Sérialise les créations afin qu'un seul premier compte obtienne la PCE.
+  perform pg_advisory_xact_lock(hashtext('scp73_first_pce'));
   insert into public.profiles (id,email,username,department,role)
   values (
     new.id,
     coalesce(new.email,''),
     coalesce(nullif(new.raw_user_meta_data->>'username',''),'Personnel'),
     coalesce(nullif(new.raw_user_meta_data->>'department',''),'Personnel'),
-    'PERSONNEL'
+    case
+      when not exists (select 1 from public.profiles where role = 'PCE')
+       and not exists (select 1 from public.profiles)
+      then 'PCE'
+      else 'PERSONNEL'
+    end
   )
   on conflict (id) do update set email = excluded.email;
   return new;
@@ -270,6 +277,10 @@ create table if not exists public.internal_messages (
  body text not null,
  created_at timestamptz not null default now()
 );
+-- Les comptes anonymes Supabase n'ont pas d'adresse e-mail.
+alter table public.internal_messages alter column sender_email drop not null;
+alter table public.internal_messages alter column sender_email set default '';
+
 alter table public.internal_messages enable row level security;
 drop policy if exists "messages_read_participants" on public.internal_messages;
 create policy "messages_read_participants" on public.internal_messages for select to authenticated using (sender_id=(select auth.uid()) or recipient_id=(select auth.uid()));
