@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<rect width="256" height="256" rx="28" fill="#202b1b"/>
+<rect x="12" y="12" width="232" height="232" rx="18" fill="none" stroke="#d9a36b" stroke-width="3"/>
+<circle cx="128" cy="112" r="66" fill="none" stroke="#d9a36b" stroke-width="8"/>
+<path d="M128 62v100M78 112h100M93 77l70 70m0-70-70 70" stroke="#e9ddc4" stroke-width="5" opacity=".85"/>
+<text x="128" y="215" text-anchor="middle" font-family="Georgia,serif" font-size="27" font-weight="bold" fill="#f3e6cf">SCP · 73</text>
+</svg>
