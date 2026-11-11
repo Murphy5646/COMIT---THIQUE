@@ -233,6 +233,72 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}.hidden{display:
 }
 @media(max-height:700px){.lock{overflow:auto}.login-shell{min-height:0}.login-identity{padding-top:22px;padding-bottom:22px}.identity-copy{margin:22px 0}#authBox.authbox{padding-top:25px;padding-bottom:25px}.login-heading{margin-bottom:17px}#authBox .lform .field{margin-bottom:12px}}
 
+
+/* ===== refonte intégrale de l'écran d'accès ===== */
+.lock{display:none;position:fixed;inset:0;z-index:100;flex-direction:column;align-items:stretch;justify-content:stretch;overflow:hidden;padding:0;background:#0b100a;color:#e9e2d2;font-family:var(--ui)}
+.lock.on{display:flex}
+.lock:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.18;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:44px 44px;animation:none}
+.lock:after{display:none}
+.access-top{position:relative;z-index:2;height:72px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(22px,5vw,76px);border-bottom:1px solid #c6a16b2b;background:#0b100a}
+.access-brand{display:flex;align-items:center;gap:13px;color:#e8dfcb;font:700 11px var(--ui);letter-spacing:.16em}
+.access-brand img{width:36px;height:36px;object-fit:contain}
+.access-brand small{display:block;margin-top:4px;color:#8e927f;font:9px var(--mono);letter-spacing:.12em}
+.access-top-right{display:flex;align-items:center;gap:10px;color:#a5a48f;font:9px var(--mono);letter-spacing:.12em}
+.access-top-right i{height:14px;border-left:1px solid #666b57;margin:0 5px}
+.access-top-right #lclock{color:#d0b58a;font-size:10px}
+.access-indicator{width:7px;height:7px;border-radius:50%;background:#80b58a;box-shadow:0 0 10px #80b58a}
+.access-layout{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(420px,.88fr);flex:1;min-height:0;width:100%}
+.access-visual{position:relative;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;padding:clamp(30px,5vw,76px) clamp(28px,7vw,108px);background:radial-gradient(ellipse at 70% 40%,#43523855,transparent 45%),linear-gradient(145deg,#202d1b,#11190f 68%,#17180f);border-right:1px solid #c6a16b33}
+.access-visual:before{content:"";position:absolute;inset:22px;border:1px solid #d0a66c20;pointer-events:none}
+.visual-watermark{position:absolute;right:-2vw;bottom:-9vw;color:#ffffff06;font:700 clamp(280px,42vw,620px)/.8 Georgia,serif;pointer-events:none}
+.visual-content{position:relative;z-index:1;margin:auto 0;max-width:620px}
+.visual-tag{color:#c1a276;font:9px var(--mono);letter-spacing:.17em}
+.visual-tag span{color:#6d795f;padding:0 6px}
+.visual-emblem{width:78px;height:78px;margin:clamp(25px,5vh,52px) 0 24px;padding:9px;border:1px solid #c6a16b5c;background:#ffffff08;box-shadow:0 12px 35px #0004}
+.visual-emblem img{width:100%;height:100%;object-fit:contain}
+.visual-kicker{margin:0 0 12px;color:#cba46e;font:700 9px var(--mono);letter-spacing:.24em}
+.visual-content h1{margin:0;color:#f0e8d8;font:700 clamp(42px,6vw,82px)/.92 Georgia,serif;letter-spacing:-.035em}
+.visual-content h1 span{color:#c7b38f}
+.visual-line{width:64px;height:2px;margin:27px 0 20px;background:#b68b56}
+.visual-description{max-width:410px;margin:0;color:#b8b9a6;font:14px/1.9 var(--ui)}
+.visual-bottom{position:relative;z-index:1;display:flex;justify-content:space-between;gap:12px;color:#858b76;font:8px var(--mono);letter-spacing:.16em}
+.access-panel{position:relative;display:flex;align-items:center;justify-content:center;overflow:auto;background:#f0eee6;color:#283023}
+.panel-inner{width:min(440px,calc(100% - 76px));padding:38px 0}
+.panel-topline{display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid #d5d0c2;color:#7b7e6d;font:9px var(--mono);letter-spacing:.16em}
+.panel-code{color:#a47b4d}
+.panel-heading{margin:35px 0 29px}
+.panel-heading p{margin:0 0 10px;color:#9a754b;font:700 9px var(--mono);letter-spacing:.2em}
+.panel-heading h2{margin:0 0 10px;color:#263222;font:700 clamp(34px,3.5vw,43px)/1 Georgia,serif;letter-spacing:-.035em}
+.panel-heading>span{color:#77796d;font:12px/1.7 var(--ui)}
+#authBox.authbox{display:block!important;position:static;width:100%;max-height:none;overflow:visible;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:#283023}
+#authBox .lform{padding:0}
+#authBox .lform .field{gap:8px;margin:0 0 21px}
+#authBox .lform label{color:#555e4d;font:700 9px var(--ui);letter-spacing:.16em}
+.access-input-wrap{display:flex;align-items:center;min-height:52px;border:1px solid #d1cbbb;background:#faf9f4;transition:border-color .16s,box-shadow .16s}
+.access-input-wrap:focus-within{border-color:#8c7047;box-shadow:0 0 0 3px #a47b4b1c}
+.access-input-wrap>span{display:grid;place-items:center;align-self:stretch;width:42px;flex:none;border-right:1px solid #e0dbcf;color:#a28a68;font:10px var(--mono)}
+#authBox .lform input,#authBox .lform select{width:100%;height:50px;min-height:50px;padding:0 13px;border:0;border-radius:0;outline:0;background:transparent;color:#2d3628;font:13px var(--ui);box-shadow:none}
+#authBox .lform input::placeholder{color:#aaa696}
+#authBox .lform select{cursor:pointer}
+#authBox .lbtn{display:flex;align-items:center;justify-content:space-between;width:100%;height:54px;min-height:54px;margin-top:8px;padding:0 18px;border:1px solid #283722;border-radius:2px;background:#283722;color:#f4eddf;font:700 10px var(--ui);letter-spacing:.17em;transition:background .18s}
+#authBox .lbtn:hover{background:#3b4b32;filter:none}
+#authBox .lbtn b{color:#d2ad78;font:22px var(--ui);font-weight:400}
+#authBox .lbtn:disabled{opacity:.6;cursor:wait}
+#authBox #authMsg{margin-top:12px;font:11px/1.5 var(--ui)}
+#authBox #authMsg.error{background:#f7e7e2;border:1px solid #d6aaa0;color:#853c32}
+#authBox #authMsg.ok{background:#e5eddf;border:1px solid #b6c8a8;color:#36552d}
+.panel-security{display:flex;gap:12px;margin-top:26px;padding:14px 15px;border:1px solid #ddd7c9;background:#e9e7dd}
+.security-symbol{display:grid;place-items:center;width:20px;height:20px;flex:none;border:1px solid #aa8b5e;border-radius:50%;color:#8b7048;font:700 11px Georgia,serif}
+.panel-security p{margin:0;color:#77796d;font:10px/1.65 var(--ui)}
+.panel-security b{color:#49513f;font-size:10px}
+.panel-footer{display:flex;justify-content:space-between;gap:12px;margin-top:29px;padding-top:14px;border-top:1px solid #d5d0c2;color:#969384;font:8px var(--mono);letter-spacing:.11em}
+.panel-side-label{position:absolute;right:12px;top:50%;writing-mode:vertical-rl;transform:translateY(-50%);color:#aaa796;font:8px var(--mono);letter-spacing:.18em}
+.access-footer{position:relative;z-index:2;display:flex;justify-content:space-between;gap:12px;align-items:center;min-height:40px;flex:none;padding:0 clamp(22px,5vw,76px);background:#0b100a;border-top:1px solid #c6a16b26;color:#777d6a;font:8px var(--mono);letter-spacing:.12em}
+.access-footer i{padding:0 5px;color:#c29a65;font-style:normal}
+@media(max-width:900px){.access-layout{grid-template-columns:minmax(0,1fr) minmax(360px,.95fr)}.access-visual{padding:35px 42px}.visual-content h1{font-size:clamp(38px,5.4vw,62px)}.panel-inner{width:calc(100% - 65px)}}
+@media(max-width:700px){.lock{overflow:auto}.access-top{height:58px;padding:0 17px}.access-brand{font-size:9px}.access-brand img{width:30px;height:30px}.access-top-right{font-size:8px;gap:6px}.access-layout{display:flex;flex-direction:column;flex:none;min-height:0}.access-visual{min-height:220px;padding:22px 25px;border-right:0;border-bottom:1px solid #c6a16b33}.access-visual:before{inset:10px}.visual-content{margin:0}.visual-tag{font-size:7px}.visual-emblem{display:none}.visual-kicker{margin:18px 0 7px;font-size:8px}.visual-content h1{font-size:36px}.visual-line{margin:12px 0}.visual-description{font-size:11px;line-height:1.5}.visual-bottom{margin-top:20px;font-size:7px}.visual-watermark{font-size:240px;right:0;bottom:-36px}.access-panel{overflow:visible;min-height:0;padding:0 0 20px}.panel-inner{width:min(440px,calc(100% - 52px));padding:29px 0}.panel-heading{margin:24px 0 22px}.panel-heading h2{font-size:32px}.panel-side-label{display:none}.access-footer{min-height:38px;padding:8px 14px;font-size:7px}.access-footer span:nth-child(2){display:none}}
+@media(max-height:720px) and (min-width:701px){.access-top{height:54px}.access-visual{padding-top:25px;padding-bottom:25px}.visual-emblem{width:58px;height:58px;margin:16px 0}.visual-content h1{font-size:clamp(36px,4.5vw,60px)}.visual-line{margin:15px 0}.panel-inner{padding:20px 0}.panel-heading{margin:18px 0}.panel-heading h2{font-size:32px}#authBox .lform .field{margin-bottom:13px}.panel-security{margin-top:16px;padding:10px}.panel-footer{margin-top:16px}}
+
 </style>
 </head>
 <body>
@@ -260,27 +326,43 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}.hidden{display:
 <nav class="task" id="task" aria-label="Barre des tâches"></nav>
 </div>
 <div class="lock on" id="lock">
- <div class="lbar"><span class="lbar-brand">FONDATION S.C.P. <i>/</i> SITE 73</span><span id="lclock"></span></div>
- <main class="login-shell">
-  <section class="login-identity">
-   <div class="identity-top"><img src="logo.svg" alt="Emblème du Comité d’Éthique"><span>RÉSEAU INTERNE<br><b>ACCÈS RÉGLEMENTÉ</b></span></div>
-   <div class="identity-copy"><div class="identity-kicker">FONDATION · SITE 73</div><h1>COMITÉ<br>D’ÉTHIQUE</h1><div class="identity-rule"></div><p>Portail de travail et de consultation des services du Comité d’Éthique.</p></div>
-   <div class="identity-bottom"><span class="status-light"></span> SYSTÈME LOCAL DISPONIBLE <span class="identity-version">TERMINAL 73.04</span></div>
-  </section>
-  <section id="authBox" class="authbox">
-   <div class="login-heading"><div class="login-overline">AUTHENTIFICATION DU PERSONNEL</div><h2>Ouvrir une session</h2><p>Veuillez renseigner vos informations de service pour accéder au réseau interne.</p></div>
-   <div class="lform">
-    <div class="field"><label for="authFirstName">PRÉNOM</label><input id="authFirstName" maxlength="40" autocomplete="given-name" placeholder="Votre prénom"></div>
-    <div class="field"><label for="authLastName">NOM</label><input id="authLastName" maxlength="50" autocomplete="family-name" placeholder="Votre nom"></div>
-    <div class="field"><label for="authDepartment">DÉPARTEMENT D’AFFECTATION</label><select id="authDepartment"><option value="">Choisir votre département</option><option>Présidence</option><option>Juridique</option><option>Scientifique</option><option>Médical</option><option>Sécurité</option><option>Ressources humaines</option><option>Logistique</option><option>Administration</option><option>Autre</option></select></div>
-    <button class="lbtn" id="loginBtn"><span>ACCÉDER AU PORTAIL</span><b>→</b></button>
-    <div id="authMsg" class="msg"></div>
-    <div class="login-disclaimer"><span>ⓘ</span><p>Connexion locale sans mot de passe. Les informations saisies ne sont pas vérifiées et le profil est enregistré uniquement dans ce navigateur.</p></div>
+ <header class="access-top">
+  <div class="access-brand"><img src="logo.svg" alt=""><span>FONDATION S.C.P.<small>INSTALLATION · SITE 73</small></span></div>
+  <div class="access-top-right"><span class="access-indicator"></span> RÉSEAU INTERNE <i></i><span id="lclock"></span></div>
+ </header>
+ <main class="access-layout">
+  <section class="access-visual">
+   <div class="visual-watermark">73</div>
+   <div class="visual-content">
+    <div class="visual-tag">DIRECTION DES AFFAIRES INTERNES <span>—</span> 073/CE</div>
+    <div class="visual-emblem"><img src="logo.svg" alt="Emblème du Comité d’Éthique"></div>
+    <p class="visual-kicker">PORTAIL INSTITUTIONNEL</p>
+    <h1>COMITÉ<br><span>D’ÉTHIQUE</span></h1>
+    <div class="visual-line"></div>
+    <p class="visual-description">Espace de travail, de consultation et de coordination du Comité d’Éthique de la Fondation S.C.P.</p>
    </div>
-   <div class="login-foot"><span>COMITÉ D’ÉTHIQUE · SITE 73</span><span>ACCÈS INTERNE</span></div>
+   <div class="visual-bottom"><span>CONFIDENTIALITÉ INTERNE</span><span>FRANCE · SITE 73</span></div>
+  </section>
+  <section class="access-panel">
+   <div class="panel-inner">
+    <div class="panel-topline"><span>ESPACE PERSONNEL</span><span class="panel-code">AUTH. / 01</span></div>
+    <div class="panel-heading"><p>ACCÈS AU SYSTÈME</p><h2>Bienvenue.</h2><span>Identifiez votre profil pour ouvrir votre session de travail.</span></div>
+    <div id="authBox" class="authbox">
+     <div class="lform">
+      <div class="field"><label for="authFirstName">PRÉNOM</label><div class="access-input-wrap"><span>01</span><input id="authFirstName" maxlength="40" autocomplete="given-name" placeholder="Saisir votre prénom"></div></div>
+      <div class="field"><label for="authLastName">NOM</label><div class="access-input-wrap"><span>02</span><input id="authLastName" maxlength="50" autocomplete="family-name" placeholder="Saisir votre nom"></div></div>
+      <div class="field"><label for="authDepartment">DÉPARTEMENT DE RATTACHEMENT</label><div class="access-input-wrap select-wrap"><span>03</span><select id="authDepartment"><option value="">Sélectionner un département</option><option>Présidence</option><option>Juridique</option><option>Scientifique</option><option>Médical</option><option>Sécurité</option><option>Ressources humaines</option><option>Logistique</option><option>Administration</option><option>Autre</option></select></div></div>
+      <button class="lbtn" id="loginBtn"><span>OUVRIR MA SESSION</span><b>↗</b></button>
+      <div id="authMsg" class="msg"></div>
+     </div>
+    </div>
+    <div class="panel-security"><div class="security-symbol">i</div><p><b>À propos de cette connexion</b><br>Ce portail utilise une session locale sans mot de passe. Les informations déclarées ne sont pas vérifiées et restent enregistrées dans le navigateur utilisé.</p></div>
+    <div class="panel-footer"><span>COMITÉ D’ÉTHIQUE · SITE 73</span><span>VERSION 04.11</span></div>
+   </div>
+   <div class="panel-side-label">FONDATION S.C.P. / ACCÈS PERSONNEL</div>
   </section>
  </main>
- <div class="lock-footer"><span>FONDATION S.C.P. — DOCUMENTATION INTERNE</span><span>TOUTE CONNEXION EST ENREGISTRÉE LOCALEMENT</span></div>
+ <footer class="access-footer"><span>© FONDATION S.C.P. — DOCUMENT INTERNE</span><span>PORTAIL DU COMITÉ D’ÉTHIQUE <i>•</i> SITE 73</span><span>TERMINAL 073-CE</span></footer>
 </div>
 <div id="toast" class="toast"></div>
 
