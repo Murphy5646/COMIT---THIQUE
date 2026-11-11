@@ -512,13 +512,14 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden}body{background:#0a100
   <section class="access-panel">
    <div class="panel-inner">
     <div class="panel-topline"><span>ESPACE PERSONNEL</span><span class="panel-code">AUTH. / 01</span></div>
-    <div class="panel-heading"><p>ACCÈS AU SYSTÈME</p><h2>Bienvenue.</h2><span>Identifiez votre profil pour ouvrir votre session de travail.</span></div>
+    <div class="panel-heading"><p>ACCÈS AU SYSTÈME</p><h2 id="greet">Bienvenue.</h2><span>Identifiez votre profil pour ouvrir votre session de travail.</span></div>
     <div id="authBox" class="authbox">
      <div class="lform">
       <div class="field"><label for="authFirstName">PRÉNOM</label><div class="access-input-wrap"><span>01</span><input id="authFirstName" maxlength="40" autocomplete="given-name" placeholder="Saisir votre prénom"></div></div>
       <div class="field"><label for="authLastName">NOM</label><div class="access-input-wrap"><span>02</span><input id="authLastName" maxlength="50" autocomplete="family-name" placeholder="Saisir votre nom"></div></div>
       <div class="field"><label for="authDepartment">DÉPARTEMENT DE RATTACHEMENT</label><div class="access-input-wrap select-wrap"><span>03</span><select id="authDepartment"><option value="">Sélectionner un département</option><option>Présidence</option><option>Juridique</option><option>Scientifique</option><option>Médical</option><option>Sécurité</option><option>Ressources humaines</option><option>Logistique</option><option>Administration</option><option>Autre</option></select></div></div>
       <button class="lbtn" id="loginBtn"><span>OUVRIR MA SESSION</span><b>↗</b></button>
+      <button class="llink" id="closeAuth" type="button" style="display:block;margin:14px auto 0">Continuer en mode consultation</button>
       <div id="authMsg" class="msg"></div>
      </div>
     </div>
