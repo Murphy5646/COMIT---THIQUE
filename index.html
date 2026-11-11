@@ -518,6 +518,52 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden}body{background:#0a100
  .panel-footer{margin-top:9px!important;padding-top:8px!important}
  .access-footer{flex-basis:30px;min-height:30px}
 }
+
+/* ===== CORRECTION STABLE DE L'ECRAN DE CONNEXION ===== */
+#lock.lock{
+ position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;
+ min-height:0!important;padding:0!important;margin:0!important;display:none;flex-direction:column!important;
+ overflow:auto!important;z-index:99999!important;background:#090e08!important;
+}
+#lock.lock.on{display:flex!important}
+#lock .access-top{flex:0 0 64px!important;min-height:64px!important;width:100%!important;padding:0 clamp(18px,4vw,64px)!important}
+#lock .access-layout{
+ flex:1 0 auto!important;min-height:0!important;width:100%!important;
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(390px, min(46vw,560px))!important;
+ align-items:stretch!important;overflow:visible!important;
+}
+#lock .access-visual{min-width:0!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:clamp(24px,5vw,76px)!important}
+#lock .visual-content{width:100%!important;max-width:650px!important;margin:auto!important}
+#lock .access-panel{min-width:0!important;width:100%!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:30px 0!important;overflow:visible!important}
+#lock .panel-inner{width:min(440px,calc(100% - 56px))!important;max-width:440px!important;margin:auto!important;padding:24px 0!important}
+#lock #authBox.authbox{display:block!important;width:100%!important;max-height:none!important;overflow:visible!important}
+#lock #authBox .lform{display:flex!important;flex-direction:column!important;gap:12px!important}
+#lock #authBox .lform .field{width:100%!important;margin:0!important}
+#lock #authBox .access-input-wrap{width:100%!important;min-width:0!important}
+#lock #authBox input,#lock #authBox select{width:100%!important;min-width:0!important;height:46px!important}
+#lock #authBox .lbtn{width:100%!important;min-height:50px!important;margin:5px 0 0!important}
+#lock .panel-security,#lock .panel-footer{width:100%!important}
+@media(max-width:760px){
+ #lock.lock{overflow-y:auto!important}
+ #lock .access-top{flex-basis:56px!important;min-height:56px!important}
+ #lock .access-layout{display:flex!important;flex-direction:column!important;flex:1 0 auto!important}
+ #lock .access-visual{display:block!important;flex:none!important;padding:18px 24px!important}
+ #lock .visual-content{margin:0 auto!important}
+ #lock .access-panel{flex:none!important;padding:0 0 18px!important}
+ #lock .panel-inner{width:min(440px,calc(100% - 40px))!important;padding:18px 0!important}
+ #lock .access-footer{flex:none!important;min-height:34px!important}
+}
+@media(max-height:720px) and (min-width:761px){
+ #lock .access-top{flex-basis:52px!important;min-height:52px!important}
+ #lock .access-visual{padding:20px 38px!important}
+ #lock .visual-content h1{font-size:clamp(34px,4vw,54px)!important}
+ #lock .panel-inner{padding:12px 0!important}
+ #lock .panel-heading{margin:10px 0!important}
+ #lock #authBox .lform{gap:8px!important}
+ #lock .panel-security{margin-top:8px!important;padding:7px 10px!important}
+ #lock .panel-footer{margin-top:8px!important;padding-top:7px!important}
+}
+
 </style>
 </head>
 <body><div class="desktop" id="desktop">
@@ -579,6 +625,7 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden}body{background:#0a100
       <div class="field"><label for="authFirstName">PRÉNOM</label><div class="access-input-wrap"><span>01</span><input id="authFirstName" maxlength="40" autocomplete="given-name" placeholder="Saisir votre prénom"></div></div>
       <div class="field"><label for="authLastName">NOM</label><div class="access-input-wrap"><span>02</span><input id="authLastName" maxlength="50" autocomplete="family-name" placeholder="Saisir votre nom"></div></div>
       <div class="field"><label for="authDepartment">DÉPARTEMENT DE RATTACHEMENT</label><div class="access-input-wrap select-wrap"><span>03</span><select id="authDepartment"><option value="">Sélectionner un département</option><option>Présidence</option><option>Juridique</option><option>Scientifique</option><option>Médical</option><option>Sécurité</option><option>Ressources humaines</option><option>Logistique</option><option>Administration</option><option>Autre</option></select></div></div>
+      <div class="field"><label for="authPassword">MOT DE PASSE</label><div class="access-input-wrap"><span>04</span><input id="authPassword" type="password" minlength="8" maxlength="128" autocomplete="current-password" placeholder="8 caractères minimum" required></div><small class="hint">Utilisé pour retrouver votre compte sur ce navigateur.</small></div>
       <button class="lbtn" id="loginBtn"><span>OUVRIR MA SESSION</span><b>↗</b></button>
       <button class="llink" id="closeAuth" type="button" style="display:block;margin:14px auto 0">Continuer en mode consultation</button>
       <div id="authMsg" class="msg"></div>
@@ -648,18 +695,37 @@ function setAuthUI(){
  if(typeof setWorkspaceAccess==='function')setWorkspaceAccess()
 }
 async function loadProfile(){if(!user){profile=null;setAuthUI();return}profile=localRows('profiles').find(x=>x.id===user.id)||null;if(!profile)throw new Error('Profil local introuvable.');setAuthUI();if(profile.role==='PCE')await loadAdmin();await loadWorkspaceData()}
+async function passwordDigest(password,salt){
+ const enc=new TextEncoder(),key=await crypto.subtle.importKey('raw',enc.encode(password),'PBKDF2',false,['deriveBits']);
+ const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:enc.encode(salt),iterations:120000,hash:'SHA-256'},key,256);
+ return Array.from(new Uint8Array(bits)).map(x=>x.toString(16).padStart(2,'0')).join('');
+}
 async function login(){
- const first=$('authFirstName').value.trim(),last=$('authLastName').value.trim(),department=$('authDepartment').value;
+ const first=$('authFirstName').value.trim(),last=$('authLastName').value.trim(),department=$('authDepartment').value,password=$('authPassword').value;
  if(!first||!last||!department)return message('authMsg','Renseignez votre prénom, votre nom et votre département.','error');
- const button=$('loginBtn');button.disabled=true;button.textContent='OUVERTURE…';
+ if(password.length<8)return message('authMsg','Le mot de passe doit contenir au moins 8 caractères.','error');
+ const button=$('loginBtn');button.disabled=true;button.innerHTML='<span>OUVERTURE…</span>';
  try{
-  const username=first+' '+last;let profiles=localRows('profiles');
-  let found=profiles.find(p=>p.username.toLocaleLowerCase()===username.toLocaleLowerCase()&&p.department===department);
-  if(!found){found={id:crypto.randomUUID(),email:'',username,department,role:profiles.length===0?'PCE':'PERSONNEL',created_at:new Date().toISOString()};profiles.push(found);saveRows('profiles',profiles)}
+  const username=first+' '+last,normalized=username.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLocaleLowerCase();
+  const profiles=localRows('profiles');
+  let found=profiles.find(p=>(p.username||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLocaleLowerCase()===normalized);
+  if(found&&found.department!==department)return message('authMsg','Ce compte existe déjà avec un autre département. Vérifiez votre sélection.','error');
+  if(found&&found.passwordHash){
+   const digest=await passwordDigest(password,found.passwordSalt);
+   if(digest!==found.passwordHash)return message('authMsg','Mot de passe incorrect.','error');
+  }else{
+   const salt=Array.from(crypto.getRandomValues(new Uint8Array(16))).map(x=>x.toString(16).padStart(2,'0')).join('');
+   const hash=await passwordDigest(password,salt);
+   if(found){found.passwordSalt=salt;found.passwordHash=hash;saveRows('profiles',profiles)}
+   else{
+    found={id:crypto.randomUUID(),email:'',username,department,role:profiles.length===0?'PCE':'PERSONNEL',passwordSalt:salt,passwordHash:hash,created_at:new Date().toISOString()};
+    profiles.push(found);saveRows('profiles',profiles);
+   }
+  }
   user={id:found.id,email:'',created_at:found.created_at};profile=found;localStorage.setItem(LOCAL_SESSION_KEY,user.id);
-  await loadProfile();showAuth(false);toast('Session locale ouverte · '+username)
- }catch(error){message('authMsg','Impossible d’ouvrir la session : '+(error.message||'stockage local indisponible.'),'error')}
- finally{button.disabled=false;button.textContent='ENTRER SUR LE RÉSEAU'}
+  await loadProfile();guest=false;updateLock();toast('Session ouverte · '+username);
+ }catch(error){message('authMsg','Connexion impossible : '+(error.message||'stockage local indisponible.'),'error')}
+ finally{button.disabled=false;button.innerHTML='<span>OUVRIR MA SESSION</span><b>↗</b>'}
 }
 async function logout(){guest=false;localStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;setAuthUI();updateLock();toast('Session locale fermée.')}
 $('loginBtn').onclick=login;
@@ -820,7 +886,7 @@ window.showAuth=function(v=true){if(v)guest=false;updateLock();if(v&&!user)$('au
 const _setAuthUI=setAuthUI;window.setAuthUI=function(){_setAuthUI();const who=profile?.username||user?.email;$('whoLabel').textContent=user?`${who} · ${profile?.role||'PERSONNEL'}`:'Invité';$('whoStart').textContent=user?who:'Invité (consultation)';$('powerLabel').textContent=user?'Fermer la session':'Écran de connexion';const pce=isPce();document.querySelectorAll('[data-app=admin]').forEach(e=>e.classList.toggle('hidden',!pce));$('adminNav').classList.toggle('hidden',!pce);if(!pce)closeApp('admin');updateLock()};
 const _logout=logout;window.logout=async function(){guest=false;typed=false;$('greet').firstChild.textContent='';await _logout();updateLock()};
 $('closeAuth').onclick=()=>{guest=true;updateLock();toast('Mode consultation : la transmission d’un signalement nécessite une connexion.')};
-['authFirstName','authLastName','authDepartment'].forEach(i=>$(i).addEventListener('keydown',e=>{if(e.key==='Enter')$('loginBtn').click()}));
+['authFirstName','authLastName','authDepartment','authPassword'].forEach(i=>$(i).addEventListener('keydown',e=>{if(e.key==='Enter')$('loginBtn').click()}));
 window.loadWorkspaceData=loadWorkspaceData;
 window.setWorkspaceAccess=setWorkspaceAccess;
 setAuthUI();openApp('accueil');
