@@ -795,7 +795,7 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#eee9dc}
 }
 
 
-/* ===== ASIA DESKTOP — VERSION 4.0.1 ===== */
+/* ===== ASIA DESKTOP — VERSION 4.0.2 ===== */
 .app-rail{display:none!important}
 .work-area{left:0!important;top:58px!important;right:0!important;bottom:0!important;padding-bottom:90px!important;overflow:auto!important}
 .workspace-heading{position:relative!important;min-height:178px!important;padding:48px 42px 24px!important;margin:0!important}
@@ -946,7 +946,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 @media(max-width:560px){.clock-suite{padding:13px!important}.alarm-form{grid-template-columns:1fr}.clock-suite-head{flex-direction:column}.timer-fields{gap:8px}}
 
 
-/* ASIA 4.0.1 — zones interactives strictement limitées
+/* ASIA 4.0.2 — zones interactives strictement limitées
    Le fond, les titres et les widgets informatifs ne capturent aucun clic.
    Seuls les boutons d'application et les actions rapides restent actifs. */
 .work-area{pointer-events:none!important}
@@ -1145,6 +1145,18 @@ body{font-family:"Segoe UI Variable","Segoe UI",system-ui,sans-serif}
 }
 @media(prefers-reduced-motion:reduce){.start.on{animation:none!important}}
 
+
+/* ASIA 4.0.2 — écriture animée et autocorrection */
+.auth-typing{
+ display:inline-block!important;min-height:1.6em;color:#788578!important;
+ font:500 12px/1.6 "SFMono-Regular",Consolas,monospace!important;
+ letter-spacing:.015em!important;
+}
+.auth-typing:after{content:"";display:inline-block;width:1px;height:1em;margin-left:3px;
+ vertical-align:-2px;background:#c49a5a;animation:asiaCaret .8s steps(1,end) infinite}
+@keyframes asiaCaret{50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.auth-typing:after{animation:none}}
+
 </style>
 </head>
 <body><div class="desktop" id="desktop">
@@ -1201,7 +1213,7 @@ body{font-family:"Segoe UI Variable","Segoe UI",system-ui,sans-serif}
   <section class="access-panel">
    <div class="panel-inner">
     <div class="panel-topline"><span>ESPACE PERSONNEL</span><span class="panel-code">AUTH. / 01</span></div>
-    <div class="panel-heading"><p>ACCÈS AU SYSTÈME</p><h2 id="greet">Bienvenue.</h2><span>Identifiez votre profil pour ouvrir votre session de travail.</span></div>
+    <div class="panel-heading"><p>ACCÈS AU SYSTÈME</p><h2 id="greet">Bienvenue.</h2><span id="authTyping" class="auth-typing" aria-live="polite">Initialisation du terminal ASIA…</span></div>
     <div id="authBox" class="authbox">
      <div class="lform">
       <div class="field"><label for="authFirstName">PRÉNOM</label><div class="access-input-wrap"><span>01</span><input id="authFirstName" maxlength="40" autocomplete="given-name" placeholder="Saisir votre prénom"></div></div>
@@ -1608,7 +1620,7 @@ Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtr
  const time=tile('HEURE LOCALE','<div class="asia-clock" id="asiaClock">--:--:--</div><div class="asia-date" id="asiaDate">Chargement de la date…</div><div class="aw-status"><i></i> Système prêt</div>');
  const session=tile('SESSION ACTIVE','<div class="asia-user" id="asiaUser"></div><div class="asia-user-sub" id="asiaRole"></div><div class="aw-note">Les données locales restent enregistrées dans ce navigateur.</div>');
  const quick=tile('ACCÈS DIRECT','<div class="asia-user" style="font-size:16px">Actions rapides</div><div class="asia-actions"><button class="asia-action" data-asia-open="code">Code éthique</button><button class="asia-action" data-asia-open="signalement">Nouveau signalement</button><button class="asia-action" data-asia-open="agenda">Agenda</button></div>');
- const store=tile('ENVIRONNEMENT ASIA','<div class="aw-number">4.0.1</div><span class="aw-label">Créé par ASIA · Installation 73</span><div class="aw-note">Bureau personnalisé · Applications accessibles par icônes · Menu contextuel</div>');
+ const store=tile('ENVIRONNEMENT ASIA','<div class="aw-number">4.0.2</div><span class="aw-label">Créé par ASIA · Installation 73</span><div class="aw-note">Bureau personnalisé · Applications accessibles par icônes · Menu contextuel</div>');
  panel.append(time,session,quick,store);
  const hint=host.querySelector('.desktop-hint');if(hint)host.insertBefore(panel,hint);else host.append(panel);
  const update=()=>{const now=new Date(),c=panel.querySelector('#asiaClock'),d=panel.querySelector('#asiaDate');if(c)c.textContent=now.toLocaleTimeString('fr-FR');if(d)d.textContent=now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});};
@@ -1620,7 +1632,7 @@ Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtr
 })();
 
 /* Signature et numéro de version de cette publication. */
-(()=>{const v='4.0.1';const tag=document.createElement('div');tag.className='asia-build';tag.innerHTML='CRÉÉ PAR <b>ASIA</b> · VERSION '+v;document.body.append(tag);document.documentElement.dataset.asiaVersion=v})();
+(()=>{const v='4.0.2';const tag=document.createElement('div');tag.className='asia-build';tag.innerHTML='CRÉÉ PAR <b>ASIA</b> · VERSION '+v;document.body.append(tag);document.documentElement.dataset.asiaVersion=v})();
 
 /* Menu contextuel unifié géré au niveau du bureau. */
 /* ===== Applications enregistrées localement ===== */
@@ -1697,7 +1709,28 @@ $('authToggle').addEventListener('click',()=>{if(user){logout()}else{guest=false
 function tick(){const d=new Date(),p=n=>String(n).padStart(2,'0');const date=`${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()}`;$('clock').textContent=`${d.toLocaleDateString('fr-FR',{weekday:'short'})} ${date}  ${p(d.getHours())}:${p(d.getMinutes())}`;$('lclock').textContent=`${date} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`}tick();setInterval(tick,1000);
 /* verrouillage / connexion */
 function updateLock(){const locked=!user&&!guest;$('lock').classList.toggle('on',locked);$('desktop').inert=locked;if(locked)startType()}
-let typed=false;function startType(){if(typed)return;typed=true;const t='Bienvenue sur le Système Terminal du Comité d’Éthique ',el=$('greet');let i=0;const iv=setInterval(()=>{el.firstChild.textContent=t.slice(0,++i);if(i>=t.length)clearInterval(iv)},matchMedia('(prefers-reduced-motion:reduce)').matches?0:38)}
+let typed=false;function startType(){
+ if(typed)return;typed=true;
+ const el=$('authTyping');if(!el)return;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const steps=[
+  {wrong:'Connexion au sytsème ASIA…',right:'Connexion au système ASIA…'},
+  {wrong:'Vérification de votre identitée…',right:'Vérification de votre identité…'},
+  {wrong:'Préparation de votre espase de travail…',right:'Préparation de votre espace de travail…'}
+ ];
+ if(reduced){el.textContent=steps[steps.length-1].right;return}
+ let step=0,pos=0,correcting=false;
+ const speed=42;
+ function tick(){
+  if(step>=steps.length){setTimeout(()=>{step=0;pos=0;correcting=false;el.textContent='';tick()},1800);return}
+  const item=steps[step],target=correcting?item.right:item.wrong;
+  if(pos<target.length){el.textContent=target.slice(0,++pos);setTimeout(tick,speed);return}
+  if(!correcting){setTimeout(()=>{correcting=true;const common=[...item.wrong].findIndex((c,i)=>c!==item.right[i]);pos=common<0?item.wrong.length:common;el.textContent=item.wrong.slice(0,pos);erase()},650);return}
+  setTimeout(()=>{step++;pos=0;correcting=false;tick()},950);
+ }
+ function erase(){if(pos>0){el.textContent=steps[step].wrong.slice(0,--pos);setTimeout(erase,24)}else{setTimeout(tick,100)}}
+ tick();
+}
 window.showAuth=function(v=true){if(v)guest=false;updateLock();if(v&&!user)$('authFirstName').focus()};
 const _setAuthUI=setAuthUI;window.setAuthUI=function(){_setAuthUI();const who=profile?.username||user?.email;$('whoLabel').textContent=user?`${who} · ${profile?.role||'PERSONNEL'}`:'Invité';$('whoStart').textContent=user?who:'Invité (consultation)';$('powerLabel').textContent=user?'Fermer la session':'Écran de connexion';const pce=isPce();document.querySelectorAll('[data-app=admin]').forEach(e=>e.classList.toggle('hidden',!pce));$('adminNav').classList.toggle('hidden',!pce);if(!pce)closeApp('admin');updateLock()};
 const _logout=logout;window.logout=async function(){guest=false;typed=false;$('greet').firstChild.textContent='';await _logout();updateLock()};
