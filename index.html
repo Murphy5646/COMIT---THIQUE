@@ -795,7 +795,7 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#eee9dc}
 }
 
 
-/* ===== ASIA DESKTOP — VERSION 3.3.0 ===== */
+/* ===== ASIA DESKTOP — VERSION 3.4.0 ===== */
 .app-rail{display:none!important}
 .work-area{left:0!important;top:58px!important;right:0!important;bottom:0!important;padding-bottom:90px!important;overflow:auto!important}
 .workspace-heading{position:relative!important;min-height:178px!important;padding:48px 42px 24px!important;margin:0!important}
@@ -859,11 +859,72 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#eee9dc}
 #administration .btn.danger:hover{background:rgba(151,52,42,.42)!important}
 @media(max-width:700px){.win{border-radius:8px!important}#task{left:8px!important;right:8px!important;bottom:6px!important;width:auto!important;overflow-x:auto!important;justify-content:flex-start!important}}
 
+
+/* ===== ASIA 3.4 — bureau système, ergonomie et interactions ===== */
+:root{--asia-ink:#172319;--asia-panel:#202c22;--asia-gold:#d6ad72;--asia-muted:#aeb9a8}
+html,body{width:100%;height:100%;overflow:hidden!important}
+#desktop{background:
+ radial-gradient(ellipse at 72% 14%,rgba(90,111,75,.24),transparent 38%),
+ radial-gradient(ellipse at 18% 86%,rgba(180,137,77,.12),transparent 36%),
+ linear-gradient(135deg,#101a13 0%,#17251a 52%,#0c140f 100%)!important}
+#desktop:before{content:"ASIA";position:fixed;right:5vw;bottom:13vh;z-index:0;pointer-events:none;color:rgba(225,207,169,.035);font:900 clamp(100px,20vw,270px)/1 Arial,sans-serif;letter-spacing:.12em}
+.topbar{height:54px!important;min-height:54px!important;background:rgba(9,16,11,.88)!important;border-bottom:1px solid rgba(214,173,114,.28)!important;backdrop-filter:blur(18px)!important;padding:0 22px!important}
+.top-brand{gap:12px!important}
+.top-brand img{width:35px!important;height:35px!important;object-fit:contain!important;border-radius:9px!important}
+.top-brand>span{font-size:15px!important;letter-spacing:.16em!important}
+.top-brand small{font-size:8px!important;letter-spacing:.18em!important}
+.top-center{font-size:9px!important;letter-spacing:.18em!important}
+.topbar .r{gap:12px!important}
+.tbtn{border-radius:8px!important;padding:9px 15px!important;border:1px solid rgba(214,173,114,.48)!important;background:rgba(214,173,114,.1)!important}
+.work-area{top:54px!important;left:0!important;right:0!important;bottom:0!important;padding:0 0 100px!important;overflow:auto!important}
+.workspace-heading{min-height:164px!important;padding:34px 40px 20px!important;margin:0!important}
+.workspace-heading h1{font-size:clamp(30px,4vw,48px)!important;letter-spacing:-.045em!important}
+.workspace-heading p{font-size:13px!important;color:#b7c3b1!important}
+.workspace-kicker{font-size:9px!important;letter-spacing:.2em!important;color:#d8b27b!important}
+.workspace-date{border:1px solid rgba(214,173,114,.26)!important;border-radius:12px!important;background:rgba(18,29,20,.75)!important;padding:15px 18px!important}
+.icons.desktop-icons{display:grid!important;position:relative!important;inset:auto!important;grid-template-columns:repeat(auto-fill,minmax(94px,112px))!important;grid-auto-rows:112px!important;gap:8px!important;width:calc(100% - 64px)!important;max-width:none!important;margin:8px 32px 36px!important;padding:18px!important;align-content:start!important;justify-content:start!important;border:0!important;border-radius:0!important;background:transparent!important}
+.icons.desktop-icons .dicon{width:100%!important;min-width:0!important;height:102px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:8px!important;padding:9px 5px!important;border:1px solid transparent!important;border-radius:10px!important;background:transparent!important;color:#f0eee4!important;font-size:11px!important;text-align:center!important;text-shadow:0 1px 5px #000!important;cursor:default!important;transition:background .15s,border-color .15s!important}
+.icons.desktop-icons .dicon:hover{background:rgba(230,224,204,.11)!important;border-color:rgba(225,210,176,.2)!important}
+.icons.desktop-icons .dicon:focus-visible{outline:1px solid #e1bb7e!important;background:rgba(230,224,204,.16)!important}
+.ico{width:46px!important;height:46px!important;display:grid!important;place-items:center!important;border:1px solid rgba(255,255,255,.24)!important;border-radius:12px!important;box-shadow:0 6px 16px #0004,inset 0 1px 0 #ffffff30!important}
+.ico svg{width:25px!important;height:25px!important;fill:none!important;stroke:#fff4df!important;stroke-width:1.65!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+.ico.sm{width:30px!important;height:30px!important;border-radius:8px!important}
+.ico.sm svg{width:17px!important;height:17px!important}
+#task{position:fixed!important;z-index:9000!important;left:50%!important;right:auto!important;bottom:10px!important;transform:translateX(-50%)!important;width:max-content!important;max-width:calc(100vw - 24px)!important;min-height:58px!important;height:58px!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;padding:7px 12px!important;border:1px solid rgba(224,194,144,.3)!important;border-radius:15px!important;background:rgba(12,19,14,.9)!important;backdrop-filter:blur(22px) saturate(1.3)!important;box-shadow:0 12px 40px #0008!important;overflow-x:auto!important;scrollbar-width:none!important}
+#task::-webkit-scrollbar{display:none}
+#task .tb{width:42px!important;height:42px!important;min-width:42px!important;display:grid!important;place-items:center!important;border-radius:10px!important;background:transparent!important;transition:background .15s,transform .15s!important}
+#task .tb:hover{background:rgba(236,225,202,.13)!important;transform:translateY(-2px)!important}
+#task .tb.run{background:rgba(218,185,129,.16)!important}
+#task .tb.run:after{bottom:1px!important;height:3px!important;border-radius:5px!important;background:#dfbd83!important}
+#task .tb .ico{width:34px!important;height:34px!important;border-radius:9px!important}
+#task .tb .ico svg{width:19px!important;height:19px!important}
+#task .tb:first-child{background:rgba(207,174,119,.12)!important;border:1px solid rgba(214,173,114,.35)!important}
+#task .tb:first-child .ico{width:32px!important;height:32px!important}
+.win{border:1px solid rgba(216,181,125,.45)!important;border-radius:12px!important;overflow:hidden!important;background:#f0eee7!important;box-shadow:0 24px 90px #000a,0 0 0 1px #ffffff0a!important}
+.wbar{height:44px!important;min-height:44px!important;background:linear-gradient(180deg,#263429,#19241b)!important;border-bottom:1px solid rgba(214,173,114,.34)!important;padding:0 10px 0 13px!important;cursor:grab!important}
+.wbar:active{cursor:grabbing!important}
+.wtitle{font-size:12px!important;font-weight:650!important;letter-spacing:.025em!important;color:#f0ecdf!important}
+.wctl button{width:36px!important;height:30px!important;border-radius:6px!important;color:#eee9dc!important}
+.wctl button:hover{background:#ffffff1a!important}
+.wctl button.x:hover{background:#b7473e!important}
+.wbody{background:#f1f0e9!important;color:#27342a!important}
+.desktop-context-full{z-index:12000!important;min-width:245px!important;padding:7px!important;border:1px solid rgba(214,173,114,.45)!important;border-radius:11px!important;background:rgba(20,30,22,.97)!important;box-shadow:0 20px 60px #000a!important;backdrop-filter:blur(20px)!important}
+.desktop-context-full button{width:100%!important;padding:10px 12px!important;text-align:left!important;border-radius:7px!important;color:#f0ecdf!important;font-size:12px!important}
+.desktop-context-full button:hover{background:rgba(214,173,114,.16)!important}
+.desktop-context-full .ctxhint{padding:8px 10px!important;color:#d5b47f!important;font-size:9px!important;letter-spacing:.16em!important}
+.start{z-index:9500!important;border:1px solid rgba(214,173,114,.38)!important;border-radius:15px!important;background:rgba(17,26,19,.97)!important;box-shadow:0 24px 80px #000b!important;backdrop-filter:blur(24px)!important}
+.lock{z-index:20000!important}
+.access-brand img,.visual-emblem img,.herologo{object-fit:contain!important}
+.topbar button,.task button,.start button,.wctl button,.desktop-context-full button,.dicon{cursor:pointer!important}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #d8b477!important;outline-offset:2px!important}
+@media(max-width:850px){.top-center{display:none!important}.workspace-heading{padding:28px 22px 18px!important}.icons.desktop-icons{width:calc(100% - 24px)!important;margin:6px 12px 28px!important;grid-template-columns:repeat(auto-fill,minmax(84px,1fr))!important;grid-auto-rows:102px!important;padding:8px!important}.icons.desktop-icons .dicon{height:96px!important}.ico{width:42px!important;height:42px!important}#task{bottom:6px!important;max-width:calc(100vw - 12px)!important;gap:2px!important;padding:6px!important}.topbar{padding:0 12px!important}}
+@media(max-width:560px){.topbar{height:50px!important;min-height:50px!important}.top-brand>span{font-size:12px!important}.top-brand small{font-size:7px!important}.top-clock{display:none!important}.work-area{top:50px!important}.workspace-heading{min-height:140px!important}.workspace-date{display:none!important}#task{justify-content:flex-start!important;left:6px!important;right:6px!important;transform:none!important;width:auto!important}}
+
 </style>
 </head>
 <body><div class="desktop" id="desktop">
 <header class="topbar">
- <div class="top-brand"><img src="logo.svg" alt=""><span>FONDATION S.C.P.<small>ENVIRONNEMENT DE TRAVAIL · SITE 73</small></span></div>
+ <div class="top-brand"><img src="logo.svg" alt=""><span>ASIA <small>ENVIRONNEMENT DE TRAVAIL · FONDATION S.C.P. · SITE 73</small></span></div>
  <div class="top-center"><span class="network-dot"></span> RÉSEAU INTERNE <span class="top-divider">/</span> COMITÉ D’ÉTHIQUE</div>
  <div class="r"><span class="hide-s" id="whoLabel">Invité</span><button class="tbtn" id="authToggle">Connexion</button><span class="top-clock" id="clock"></span></div>
 </header>
@@ -1183,9 +1244,9 @@ function ensureExtraWindow(id){
 function addAppToShell(id){
  if(document.querySelector('.dicon[data-app="'+id+'"]'))return;
  const a=EXTRA_APPS[id]||APPS[id];if(!a)return;
- const d=mk('dicon','',()=>openApp(id));d.dataset.app=id;d.innerHTML='<span class="ico" style="background:'+a.c+'"><span class="store-glyph">'+(a.icon||'▦')+'</span></span>'+a.t;icons.append(d);
- const p=mk('pin','',()=>openApp(id));p.dataset.app=id;p.innerHTML=d.innerHTML;pins.append(p);
- const t=mk('tb','<span class="store-glyph">'+(a.icon||'▦')+'</span>',()=>toggleApp(id));t.dataset.app=id;t.title=a.t;task.append(t);
+ const d=mk('dicon','',()=>openApp(id));d.dataset.app=id;d.innerHTML=ico(id)+a.t;icons.append(d);
+ const p=mk('pin','',()=>openApp(id));p.dataset.app=id;p.innerHTML=ico(id,1)+a.t;pins.append(p);
+ const t=mk('tb',ico(id,1),()=>toggleApp(id));t.dataset.app=id;t.title=a.t;task.append(t);
 }
 function removeAppFromShell(id){document.querySelectorAll('[data-app="'+id+'"]').forEach(e=>e.remove());if(win(id))closeApp(id);syncTask()}
 function renderStore(tab='catalogue'){
@@ -1197,7 +1258,10 @@ function renderStore(tab='catalogue'){
 function openStore(){openApp('store');renderStore(document.querySelector('[data-store-tab].selected')?.dataset.storeTab||'catalogue')}
 document.querySelectorAll('[data-store-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-store-tab]').forEach(x=>x.classList.toggle('selected',x===b));renderStore(b.dataset.storeTab)});
 // Les applications supplémentaires sont initialisées après la création de la barre des tâches.
-const ico=(id,sm)=>`<span class="ico${sm?' sm':''}" style="background:${APPS[id].c}"><svg viewBox="0 0 24 24">${ICONS[id]}</svg></span>`;
+ICONS.store='<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5m8-5v5M8 13h8M8 16h5"/>';
+ICONS.navigateur='<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c4 4 4 14 0 18M12 3c-4 4-4 14 0 18"/>';
+const EXTRA_ICONS={timer:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6M12 2v3"/>',quickcalc:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h2m4 0h2M8 16h2m4 0h2"/>',scratchpad:'<path d="M5 3h11l3 3v15H5z"/><path d="M8 10h8M8 14h8M8 18h5M15 3v4h4"/>'};
+const ico=(id,sm)=>{const a=APPS[id]||EXTRA_APPS[id]||{c:'linear-gradient(135deg,#8b7753,#4b4938)'};const path=ICONS[id]||EXTRA_ICONS[id]||'<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12h8"/>';return `<span class="ico${sm?' sm':''}" style="background:${a.c}"><svg viewBox="0 0 24 24" aria-hidden="true">${path}</svg></span>`};
 const win=id=>document.getElementById('win-'+id);let zTop=20,openN=0;
 function mk(cls,html,fn,id){const b=document.createElement('button');b.className=cls;b.innerHTML=html;b.onclick=fn;if(id)b.id=id;return b}
 const isPce=()=>profile?.role==='PCE';
@@ -1284,7 +1348,7 @@ Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtr
  const time=tile('HEURE LOCALE','<div class="asia-clock" id="asiaClock">--:--:--</div><div class="asia-date" id="asiaDate">Chargement de la date…</div><div class="aw-status"><i></i> Système prêt</div>');
  const session=tile('SESSION ACTIVE','<div class="asia-user" id="asiaUser"></div><div class="asia-user-sub" id="asiaRole"></div><div class="aw-note">Les données locales restent enregistrées dans ce navigateur.</div>');
  const quick=tile('ACCÈS DIRECT','<div class="asia-user" style="font-size:16px">Actions rapides</div><div class="asia-actions"><button class="asia-action" data-asia-open="code">Code éthique</button><button class="asia-action" data-asia-open="signalement">Nouveau signalement</button><button class="asia-action" data-asia-open="agenda">Agenda</button></div>');
- const store=tile('ENVIRONNEMENT ASIA','<div class="aw-number">3.3.0</div><span class="aw-label">Créé par ASIA · Installation 73</span><div class="aw-note">Bureau personnalisé · Applications accessibles par icônes · Menu contextuel</div>');
+ const store=tile('ENVIRONNEMENT ASIA','<div class="aw-number">3.4.0</div><span class="aw-label">Créé par ASIA · Installation 73</span><div class="aw-note">Bureau personnalisé · Applications accessibles par icônes · Menu contextuel</div>');
  panel.append(time,session,quick,store);
  const hint=host.querySelector('.desktop-hint');if(hint)host.insertBefore(panel,hint);else host.append(panel);
  const update=()=>{const now=new Date(),c=panel.querySelector('#asiaClock'),d=panel.querySelector('#asiaDate');if(c)c.textContent=now.toLocaleTimeString('fr-FR');if(d)d.textContent=now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});};
@@ -1296,7 +1360,7 @@ Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtr
 })();
 
 /* Signature et numéro de version de cette publication. */
-(()=>{const v='3.3.0';const tag=document.createElement('div');tag.className='asia-build';tag.innerHTML='CRÉÉ PAR <b>ASIA</b> · VERSION '+v;document.body.append(tag);document.documentElement.dataset.asiaVersion=v})();
+(()=>{const v='3.4.0';const tag=document.createElement('div');tag.className='asia-build';tag.innerHTML='CRÉÉ PAR <b>ASIA</b> · VERSION '+v;document.body.append(tag);document.documentElement.dataset.asiaVersion=v})();
 
 /* Menu contextuel unifié géré au niveau du bureau. */
 /* ===== Applications enregistrées localement ===== */
@@ -1367,6 +1431,8 @@ document.addEventListener('pointerdown',e=>{if(!e.target.closest('#start')&&!e.t
 addEventListener('keydown',e=>{if(e.key==='Escape')closeStart()});
 $('powerBtn').onclick=()=>{closeStart();if(user)logout();else{guest=false;updateLock()}};
 $('profileBtn').onclick=()=>{closeStart();openApp('signalement')};
+/* Commandes de session du bandeau ASIA */
+$('authToggle').addEventListener('click',()=>{if(user){logout()}else{guest=false;updateLock();$('authFirstName').focus()}});
 /* horloge */
 function tick(){const d=new Date(),p=n=>String(n).padStart(2,'0');const date=`${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()}`;$('clock').textContent=`${d.toLocaleDateString('fr-FR',{weekday:'short'})} ${date}  ${p(d.getHours())}:${p(d.getMinutes())}`;$('lclock').textContent=`${date} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`}tick();setInterval(tick,1000);
 /* verrouillage / connexion */
