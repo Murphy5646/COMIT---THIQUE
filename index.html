@@ -795,7 +795,7 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#eee9dc}
 }
 
 
-/* ===== ASIA DESKTOP — VERSION 3.4.0 ===== */
+/* ===== ASIA DESKTOP — VERSION 3.5.0 ===== */
 .app-rail{display:none!important}
 .work-area{left:0!important;top:58px!important;right:0!important;bottom:0!important;padding-bottom:90px!important;overflow:auto!important}
 .workspace-heading{position:relative!important;min-height:178px!important;padding:48px 42px 24px!important;margin:0!important}
@@ -919,6 +919,31 @@ html,body{width:100%;height:100%;overflow:hidden!important}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #d8b477!important;outline-offset:2px!important}
 @media(max-width:850px){.top-center{display:none!important}.workspace-heading{padding:28px 22px 18px!important}.icons.desktop-icons{width:calc(100% - 24px)!important;margin:6px 12px 28px!important;grid-template-columns:repeat(auto-fill,minmax(84px,1fr))!important;grid-auto-rows:102px!important;padding:8px!important}.icons.desktop-icons .dicon{height:96px!important}.ico{width:42px!important;height:42px!important}#task{bottom:6px!important;max-width:calc(100vw - 12px)!important;gap:2px!important;padding:6px!important}.topbar{padding:0 12px!important}}
 @media(max-width:560px){.topbar{height:50px!important;min-height:50px!important}.top-brand>span{font-size:12px!important}.top-brand small{font-size:7px!important}.top-clock{display:none!important}.work-area{top:50px!important}.workspace-heading{min-height:140px!important}.workspace-date{display:none!important}#task{justify-content:flex-start!important;left:6px!important;right:6px!important;transform:none!important;width:auto!important}}
+
+
+/* ASIA 3.5 — horloge, minuteur et réveils */
+.clock-suite{max-width:760px!important;background:#f8f6ef!important;padding:22px!important}
+.clock-suite-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:18px}
+.clock-live{font:700 9px var(--mono);letter-spacing:.14em;color:#456b43;background:#e8efe2;border:1px solid #cbd8c4;border-radius:20px;padding:7px 10px;white-space:nowrap}
+.clock-panel{padding:17px;margin:14px 0;border:1px solid #d8d0bf;border-radius:12px;background:#fffefa}
+.clock-panel h3{margin:0 0 5px;color:#29372b;font-size:17px}
+.clock-panel>p{margin:0 0 13px;color:#72766b;font-size:12px;line-height:1.5}
+.timer-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.timer-fields label,.alarm-form>label:not(.alarm-repeat){display:flex;flex-direction:column;gap:6px;color:#4c594a;font-size:12px;font-weight:650}
+.timer-fields input,.alarm-form input:not([type=checkbox]){width:100%;padding:10px;border:1px solid #cfc7b5;border-radius:7px;background:#fff;color:#263326;font:14px var(--ui)}
+.clock-suite .timer-read{padding:15px 8px 20px;color:#2e4933;font:750 clamp(46px,8vw,72px) var(--mono);letter-spacing:.04em}
+.clock-suite .workspace-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.alarm-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end}
+.alarm-repeat{display:flex;align-items:center;gap:8px;color:#53604e;font-size:12px;min-height:40px}
+.alarm-repeat input{width:16px;height:16px;accent-color:#55754c}
+.alarm-form button{min-height:40px}
+.alarm-list{display:grid;gap:8px;margin-top:14px}
+.alarm-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 12px;border:1px solid #e0d9ca;border-radius:9px;background:#f8f6ef}
+.alarm-row>div{display:grid;gap:3px}
+.alarm-row strong{font:700 23px var(--mono);color:#2e4933}
+.alarm-row small,.alarm-empty{font-size:11px;color:#77796d}
+.clock-note{font-size:11px!important;color:#7b786e!important;line-height:1.5!important}
+@media(max-width:560px){.clock-suite{padding:13px!important}.alarm-form{grid-template-columns:1fr}.clock-suite-head{flex-direction:column}.timer-fields{gap:8px}}
 
 </style>
 </head>
@@ -1226,17 +1251,42 @@ function ensureExtraWindow(id){
  const el=document.createElement('div');el.className='win';el.id='win-'+id;el.innerHTML='<div class="wbar"><i class="wico"></i><span class="wtitle">'+d.t+'</span><div class="wctl"><button data-act="min">−</button><button data-act="max">□</button><button data-act="close" class="x">×</button></div></div><div class="wbody" id="extra-'+id+'"></div>';
  $('desktop').append(el);
  const body=el.querySelector('.wbody');
- if(id==='timer')body.innerHTML='<div class="miniapp"><h2>Minuteur</h2><p>Définissez une durée en minutes.</p><input id="timerMinutes" type="number" min="1" max="999" value="5"><div class="timer-read" id="timerRead">05:00</div><div class="workspace-actions"><button class="btn gold" id="timerStart">Démarrer</button><button class="btn" id="timerReset">Réinitialiser</button></div></div>';
+ if(id==='timer')body.innerHTML=`<div class="miniapp clock-suite">
+ <div class="clock-suite-head"><div><h2>Horloge ASIA</h2><p>Minuteur et réveils personnels de l'Installation 73.</p></div><span class="clock-live">● LOCAL</span></div>
+ <section class="clock-panel"><h3>Minuteur</h3><p>Choisissez une durée, puis démarrez le compte à rebours.</p>
+ <div class="timer-fields"><label>Minutes<input id="timerMinutes" type="number" min="1" max="999" value="5"></label><label>Secondes<input id="timerSeconds" type="number" min="0" max="59" value="0"></label></div>
+ <div class="timer-read" id="timerRead">05:00</div>
+ <div class="workspace-actions"><button class="btn gold" id="timerStart">Démarrer</button><button class="btn" id="timerReset">Réinitialiser</button><button class="btn" id="timerTestSound">Tester la sonnerie</button></div>
+ </section>
+ <section class="clock-panel alarm-panel"><h3>Réveil</h3><p>Programmez une alarme. L'onglet du portail doit rester ouvert pour qu'elle puisse sonner.</p>
+ <form id="alarmForm" class="alarm-form"><label>Heure du réveil<input id="alarmTime" type="time" required></label><label>Nom du réveil<input id="alarmLabel" maxlength="48" placeholder="Ex. Réveil du matin"></label><label class="alarm-repeat"><input id="alarmRepeat" type="checkbox"> Répéter chaque jour</label><button class="btn gold" type="submit">＋ Ajouter le réveil</button></form>
+ <div id="alarmList" class="alarm-list"></div>
+ </section><p class="clock-note">Les réveils sont enregistrés dans ce navigateur. Le son nécessite que le navigateur autorise la lecture audio.</p>
+ </div>`;
  if(id==='quickcalc')body.innerHTML='<div class="miniapp"><h2>Calcul rapide</h2><input id="quickCalcInput" placeholder="Ex. (24+8)*3"><button class="btn gold" id="quickCalcRun">Calculer</button><p class="mini-result" id="quickCalcResult">Résultat : —</p></div>';
  if(id==='scratchpad')body.innerHTML='<div class="miniapp"><h2>Carnet rapide</h2><p>Notes enregistrées automatiquement sur cet appareil.</p><textarea id="scratchText" rows="14" placeholder="Écrire une note…"></textarea><small id="scratchSaved">Enregistrement local</small></div>';
  el.querySelector('[data-act=min]').onclick=()=>minApp(id);el.querySelector('[data-act=max]').onclick=()=>el.classList.toggle('max');el.querySelector('[data-act=close]').onclick=()=>closeApp(id);
  el.addEventListener('pointerdown',()=>focusApp(id),true);
  el.querySelector('.wbar').addEventListener('pointerdown',e=>{if(e.target.closest('button')||el.classList.contains('max')||innerWidth<=700)return;const r=el.getBoundingClientRect(),dx=e.clientX-r.left,dy=e.clientY-r.top;const mv=ev=>{el.style.left=Math.max(0,Math.min(innerWidth-120,ev.clientX-dx))+'px';el.style.top=Math.max(36,Math.min(innerHeight-100,ev.clientY-dy))+'px'};const up=()=>{removeEventListener('pointermove',mv);removeEventListener('pointerup',up)};addEventListener('pointermove',mv);addEventListener('pointerup',up)});
  if(id==='timer'){
-  let remaining=300,interval=null;const read=()=>{body.querySelector('#timerRead').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0')};
-  body.querySelector('#timerMinutes').onchange=e=>{remaining=Math.max(1,Math.min(999,Number(e.target.value)||1))*60;read()};
-  body.querySelector('#timerStart').onclick=()=>{if(interval){clearInterval(interval);interval=null;body.querySelector('#timerStart').textContent='Reprendre';return}body.querySelector('#timerStart').textContent='Pause';interval=setInterval(()=>{remaining=Math.max(0,remaining-1);read();if(!remaining){clearInterval(interval);interval=null;body.querySelector('#timerStart').textContent='Terminé';toast('Minuteur terminé.')}},1000)};
-  body.querySelector('#timerReset').onclick=()=>{clearInterval(interval);interval=null;remaining=(Number(body.querySelector('#timerMinutes').value)||5)*60;read();body.querySelector('#timerStart').textContent='Démarrer'};
+  const q=sel=>body.querySelector(sel),alarmKey='asia-site73-alarms-v1';
+  let remaining=300,timerInterval=null,alarmInterval=null,audioCtx=null,lastAlarmMinute='';
+  const read=()=>{q('#timerRead').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0')};
+  const unlockAudio=()=>{try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;if(!audioCtx)audioCtx=new C();if(audioCtx.state==='suspended')audioCtx.resume();return audioCtx}catch(e){return null}};
+  const beep=(count=4)=>{const ctx=unlockAudio();if(!ctx){toast('Son indisponible : vérifiez les réglages audio du navigateur.');return}const start=ctx.currentTime;for(let i=0;i<count;i++){const osc=ctx.createOscillator(),gain=ctx.createGain(),at=start+i*.42;osc.type='sine';osc.frequency.setValueAtTime(i%2?740:880,at);gain.gain.setValueAtTime(.0001,at);gain.gain.exponentialRampToValueAtTime(.22,at+.025);gain.gain.exponentialRampToValueAtTime(.0001,at+.30);osc.connect(gain);gain.connect(ctx.destination);osc.start(at);osc.stop(at+.32)}};
+  const readAlarms=()=>{try{return JSON.parse(localStorage.getItem(alarmKey)||'[]')}catch(e){return []}};
+  const saveAlarms=list=>localStorage.setItem(alarmKey,JSON.stringify(list));
+  const renderAlarms=()=>{const list=q('#alarmList');list.replaceChildren();const alarms=readAlarms();if(!alarms.length){const empty=document.createElement('p');empty.className='alarm-empty';empty.textContent='Aucun réveil programmé.';list.append(empty);return}alarms.sort((a,b)=>a.time.localeCompare(b.time)).forEach(a=>{const row=document.createElement('div');row.className='alarm-row';const info=document.createElement('div');const time=document.createElement('strong');time.textContent=a.time;const label=document.createElement('small');label.textContent=(a.label||'Réveil')+(a.repeat?' · Tous les jours':' · Une seule fois');info.append(time,label);const del=document.createElement('button');del.className='btn';del.textContent='Supprimer';del.onclick=()=>{saveAlarms(readAlarms().filter(x=>x.id!==a.id));renderAlarms();toast('Réveil supprimé.')};row.append(info,del);list.append(row)})};
+  const nowParts=()=>{const d=new Date();return {time:d.toTimeString().slice(0,5),date:d.toISOString().slice(0,10),minute:d.toISOString().slice(0,16)}};
+  const checkAlarms=()=>{const now=nowParts();if(now.minute===lastAlarmMinute)return;lastAlarmMinute=now.minute;let changed=false;const list=readAlarms().filter(a=>{if(a.time!==now.time)return true;if(a.repeat){if(a.lastFired===now.date)return true;a.lastFired=now.date;changed=true;beep(8);toast('Réveil : '+(a.label||'Il est l’heure !'));return true}beep(8);toast('Réveil : '+(a.label||'Il est l’heure !'));changed=true;return false});if(changed){saveAlarms(list);renderAlarms()}};
+  const syncDuration=()=>{remaining=Math.max(1,Math.min(999,Number(q('#timerMinutes').value)||0))*60+Math.max(0,Math.min(59,Number(q('#timerSeconds').value)||0));read()};
+  const stopTimer=()=>{if(timerInterval)clearInterval(timerInterval);timerInterval=null};
+  q('#timerMinutes').onchange=syncDuration;q('#timerSeconds').onchange=syncDuration;
+  q('#timerStart').onclick=()=>{unlockAudio();if(timerInterval){stopTimer();q('#timerStart').textContent='Reprendre';return}if(remaining<=0)syncDuration();q('#timerStart').textContent='Pause';timerInterval=setInterval(()=>{remaining=Math.max(0,remaining-1);read();if(remaining===0){stopTimer();q('#timerStart').textContent='Terminé';beep(8);toast('Minuteur terminé !')}},1000)};
+  q('#timerReset').onclick=()=>{stopTimer();syncDuration();q('#timerStart').textContent='Démarrer'};
+  q('#timerTestSound').onclick=()=>{unlockAudio();beep(4);toast('Test de sonnerie lancé.')};
+  q('#alarmForm').onsubmit=e=>{e.preventDefault();unlockAudio();const time=q('#alarmTime').value;if(!time)return toast('Choisissez une heure.');const alarms=readAlarms();alarms.push({id:(window.crypto?.randomUUID?.()||String(Date.now())+Math.random()),time,label:q('#alarmLabel').value.trim()||'Réveil',repeat:q('#alarmRepeat').checked,lastFired:''});saveAlarms(alarms);q('#alarmLabel').value='';renderAlarms();if(!alarmInterval)alarmInterval=setInterval(checkAlarms,1000);toast('Réveil enregistré dans ce navigateur.')};
+  renderAlarms();if(!alarmInterval)alarmInterval=setInterval(checkAlarms,1000);
  }
  if(id==='quickcalc')body.querySelector('#quickCalcRun').onclick=()=>{const v=body.querySelector('#quickCalcInput').value.trim();if(!/^[0-9+*/().% -]+$/.test(v))return toast('Expression non valide.');try{const result=Function('"use strict";return ('+v+')')();body.querySelector('#quickCalcResult').textContent='Résultat : '+(Number.isFinite(result)?result:'non défini')}catch(e){body.querySelector('#quickCalcResult').textContent='Expression incorrecte'}};
  if(id==='scratchpad'){const area=body.querySelector('#scratchText'),key='site73-scratchpad-v1';area.value=localStorage.getItem(key)||'';area.oninput=()=>{localStorage.setItem(key,area.value);body.querySelector('#scratchSaved').textContent='Enregistré · '+new Date().toLocaleTimeString('fr-FR')}}
@@ -1348,7 +1398,7 @@ Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtr
  const time=tile('HEURE LOCALE','<div class="asia-clock" id="asiaClock">--:--:--</div><div class="asia-date" id="asiaDate">Chargement de la date…</div><div class="aw-status"><i></i> Système prêt</div>');
  const session=tile('SESSION ACTIVE','<div class="asia-user" id="asiaUser"></div><div class="asia-user-sub" id="asiaRole"></div><div class="aw-note">Les données locales restent enregistrées dans ce navigateur.</div>');
  const quick=tile('ACCÈS DIRECT','<div class="asia-user" style="font-size:16px">Actions rapides</div><div class="asia-actions"><button class="asia-action" data-asia-open="code">Code éthique</button><button class="asia-action" data-asia-open="signalement">Nouveau signalement</button><button class="asia-action" data-asia-open="agenda">Agenda</button></div>');
- const store=tile('ENVIRONNEMENT ASIA','<div class="aw-number">3.4.0</div><span class="aw-label">Créé par ASIA · Installation 73</span><div class="aw-note">Bureau personnalisé · Applications accessibles par icônes · Menu contextuel</div>');
+ const store=tile('ENVIRONNEMENT ASIA','<div class="aw-number">3.5.0</div><span class="aw-label">Créé par ASIA · Installation 73</span><div class="aw-note">Bureau personnalisé · Applications accessibles par icônes · Menu contextuel</div>');
  panel.append(time,session,quick,store);
  const hint=host.querySelector('.desktop-hint');if(hint)host.insertBefore(panel,hint);else host.append(panel);
  const update=()=>{const now=new Date(),c=panel.querySelector('#asiaClock'),d=panel.querySelector('#asiaDate');if(c)c.textContent=now.toLocaleTimeString('fr-FR');if(d)d.textContent=now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});};
@@ -1360,7 +1410,7 @@ Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtr
 })();
 
 /* Signature et numéro de version de cette publication. */
-(()=>{const v='3.4.0';const tag=document.createElement('div');tag.className='asia-build';tag.innerHTML='CRÉÉ PAR <b>ASIA</b> · VERSION '+v;document.body.append(tag);document.documentElement.dataset.asiaVersion=v})();
+(()=>{const v='3.5.0';const tag=document.createElement('div');tag.className='asia-build';tag.innerHTML='CRÉÉ PAR <b>ASIA</b> · VERSION '+v;document.body.append(tag);document.documentElement.dataset.asiaVersion=v})();
 
 /* Menu contextuel unifié géré au niveau du bureau. */
 /* ===== Applications enregistrées localement ===== */
