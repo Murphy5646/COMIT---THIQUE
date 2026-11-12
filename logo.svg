@@ -1,7 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-<rect width="256" height="256" rx="28" fill="#202b1b"/>
-<rect x="12" y="12" width="232" height="232" rx="18" fill="none" stroke="#d9a36b" stroke-width="3"/>
-<circle cx="128" cy="112" r="66" fill="none" stroke="#d9a36b" stroke-width="8"/>
-<path d="M128 62v100M78 112h100M93 77l70 70m0-70-70 70" stroke="#e9ddc4" stroke-width="5" opacity=".85"/>
-<text x="128" y="215" text-anchor="middle" font-family="Georgia,serif" font-size="27" font-weight="bold" fill="#f3e6cf">SCP · 73</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 521" role="img" aria-labelledby="title desc">
+<title id="title">Emblème du Comité d’Éthique — Site 73</title><desc id="desc">Sceau circulaire vert et or représentant une balance de justice au-dessus d'un livre ouvert, entouré de branches de laurier.</desc>
+<defs>
+ <path id="upper" d="M 69 256 A 187 187 0 0 1 443 256"/>
+ <path id="lower" d="M 70 258 A 186 186 0 0 0 442 258"/>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#edc28c"/><stop offset="1" stop-color="#c18b50"/></linearGradient>
+</defs>
+<circle cx="256" cy="260" r="253" fill="#303b2b" stroke="url(#gold)" stroke-width="7"/>
+<circle cx="256" cy="260" r="238" fill="#d8a66f" stroke="#293529" stroke-width="5"/>
+<circle cx="256" cy="260" r="188" fill="#34402e" stroke="#293529" stroke-width="7"/>
+<circle cx="256" cy="260" r="154" fill="#34402e" stroke="#d9aa73" stroke-width="5"/>
+<circle cx="256" cy="260" r="148" fill="none" stroke="#c9955e" stroke-width="2"/>
+<text fill="#28352a" font-family="Georgia,serif" font-size="28" letter-spacing="1.1"><textPath href="#upper" startOffset="50%" text-anchor="middle">COMITÉ D’ÉTHIQUE</textPath></text>
+<text fill="#28352a" font-family="Georgia,serif" font-size="26" letter-spacing="1.2"><textPath href="#lower" startOffset="50%" text-anchor="middle">DÉPARTEMENT · SITE 73</textPath></text>
+<circle cx="41" cy="260" r="6" fill="#35402e"/><circle cx="471" cy="260" r="6" fill="#35402e"/>
+<!-- balance -->
+<g fill="none" stroke="#d9a66f" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M176 186H336" stroke-width="8"/><path d="M184 190H328" stroke="#f0d0a0" stroke-width="2"/>
+ <path d="M256 157V307" stroke-width="8"/><path d="M246 166H266" stroke-width="7"/>
+ <circle cx="256" cy="151" r="9" fill="#d9a66f" stroke="none"/>
+ <circle cx="256" cy="186" r="4" fill="#34402e" stroke-width="2"/>
+ <path d="M182 190L151 246M182 190L214 246M330 190L298 246M330 190L362 246" stroke-width="2.5"/>
+ <path d="M151 246Q182 272 214 246Z M298 246Q330 272 362 246Z" fill="#d9a66f" stroke-width="2"/>
+ <path d="M156 251Q182 267 209 251M303 251Q330 267 357 251" stroke="#34402e" stroke-width="2"/>
+ <path d="M244 307L256 292L268 307M238 315H274M232 321H280" stroke-width="7"/>
+</g>
+<!-- open book -->
+<g stroke="#d9a66f" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M169 318Q211 304 256 326Q301 304 343 318L343 354Q300 343 256 365Q212 343 169 354Z" fill="#d9a66f" stroke-width="3"/>
+ <path d="M177 324Q217 313 253 333V357Q214 338 177 346Z M335 324Q295 313 259 333V357Q298 338 335 346Z" fill="#34402e" stroke-width="2"/>
+ <path d="M256 328V363M185 331Q218 326 244 339M185 340Q218 335 244 348M268 339Q294 326 327 331M268 348Q294 335 327 340" fill="none" stroke-width="2"/>
+</g>
+<!-- laurel branches -->
+<g fill="#d9a66f" stroke="#d9a66f" stroke-width="2" stroke-linecap="round">
+ <path d="M160 353Q137 326 143 285M352 353Q375 326 369 285" fill="none"/>
+ <path d="M146 318Q130 307 137 296Q149 301 146 318ZM150 332Q131 326 133 314Q148 315 150 332ZM155 344Q137 342 139 330Q153 328 155 344ZM147 303Q132 290 142 280Q153 289 147 303ZM366 318Q382 307 375 296Q363 301 366 318ZM362 332Q381 326 379 314Q364 315 362 332ZM357 344Q375 342 373 330Q359 328 357 344ZM365 303Q380 290 370 280Q359 289 365 303Z" stroke="none"/>
+</g>
 </svg>
