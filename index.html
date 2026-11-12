@@ -794,6 +794,21 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#eee9dc}
  #desktop>.win.on>.wbar{flex-basis:42px!important;height:42px!important;min-height:42px!important}
 }
 
+
+/* ===== ASIA DESKTOP — VERSION 3.1.0 ===== */
+.app-rail{display:none!important}
+.work-area{left:0!important;top:58px!important;right:0!important;bottom:0!important;padding-bottom:90px!important;overflow:auto!important}
+.workspace-heading{position:relative!important;min-height:178px!important;padding:48px 42px 24px!important;margin:0!important}
+.workspace-heading h1{margin-top:12px!important}
+.icons.desktop-icons{position:relative!important;inset:auto!important;display:grid!important;grid-template-columns:repeat(auto-fill,minmax(104px,1fr))!important;grid-auto-rows:112px!important;gap:10px!important;width:calc(100% - 64px)!important;max-width:1500px!important;margin:8px 32px 28px!important;padding:24px!important;align-content:start!important;justify-content:start!important;border:1px solid rgba(196,161,106,.15)!important;border-radius:18px!important;background:rgba(9,17,11,.24)!important}
+.icons.desktop-icons .dicon{display:flex!important;position:relative!important;width:100%!important;min-width:0!important;min-height:98px!important;height:auto!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:9px!important;padding:10px 6px!important;border:1px solid transparent!important;border-radius:12px!important;background:transparent!important;color:#e8e5d9!important;font-size:11px!important;line-height:1.25!important;text-align:center!important;white-space:normal!important;overflow-wrap:anywhere!important}
+.icons.desktop-icons .dicon:hover,.icons.desktop-icons .dicon:focus-visible{background:rgba(196,161,106,.12)!important;border-color:rgba(196,161,106,.38)!important;outline:none!important;transform:translateY(-2px)}
+.icons.desktop-icons .dicon .ico{width:48px!important;height:48px!important;min-width:48px!important;border-radius:13px!important;box-shadow:0 5px 16px #0005!important}
+.desktop-hint{margin:12px 36px 100px!important;max-width:540px!important}
+.asia-build{position:fixed!important;left:18px!important;bottom:12px!important;z-index:75!important;color:#929887!important;font:9px var(--mono,monospace)!important;letter-spacing:.12em!important;padding:7px 10px!important;border:1px solid rgba(196,161,106,.2)!important;border-radius:8px!important;background:rgba(8,14,9,.78)!important;pointer-events:none!important}
+.asia-build b{color:#d5b77f!important;font-weight:700!important}
+@media(max-width:760px){.workspace-heading{min-height:170px!important;padding:28px 18px 18px!important}.icons.desktop-icons{width:calc(100% - 24px)!important;margin:8px 12px 24px!important;padding:12px!important;grid-template-columns:repeat(auto-fill,minmax(82px,1fr))!important;grid-auto-rows:96px!important;gap:5px!important}.icons.desktop-icons .dicon{min-height:88px!important;font-size:10px!important}.icons.desktop-icons .dicon .ico{width:40px!important;height:40px!important;min-width:40px!important}.desktop-hint{margin:12px 12px 90px!important}.asia-build{left:8px!important;bottom:7px!important;font-size:8px!important}}
+
 </style>
 </head>
 <body><div class="desktop" id="desktop">
@@ -1120,6 +1135,10 @@ function syncTask(){document.querySelectorAll('.tb[data-app]').forEach(b=>{const
 
 /* barre des tâches, bureau, démarrer */
 const task=$('task'),icons=$('icons'),pins=$('pins');
+/* Le catalogue d'applications est affiché sur le bureau. */
+const workArea=document.querySelector('.work-area'),desktopHint=document.querySelector('.desktop-hint');
+if(workArea&&icons&&desktopHint){icons.classList.add('desktop-icons');workArea.insertBefore(icons,desktopHint);}
+
 const startBtn=mk('tb','<img src="logo.svg" alt="Démarrer">',()=>toggleStart());startBtn.setAttribute('aria-label','Démarrer');task.append(startBtn);
 const sBtn=mk('tb','<svg class="s" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg>',()=>{toggleStart(true);$('ssearch').focus()});task.append(sBtn);
 Object.keys(APPS).forEach(id=>{const A=APPS[id];
@@ -1135,6 +1154,8 @@ Object.keys(APPS).forEach(id=>{const A=APPS[id];
 });
 
 Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtraWindow(id);addAppToShell(id)}});
+/* Signature et numéro de version de cette publication. */
+(()=>{const v='3.1.0';const tag=document.createElement('div');tag.className='asia-build';tag.innerHTML='CRÉÉ PAR <b>ASIA</b> · VERSION '+v;document.body.append(tag);document.documentElement.dataset.asiaVersion=v})();
 
 /* Menu contextuel unifié géré au niveau du bureau. */
 /* ===== Applications enregistrées localement ===== */
@@ -1180,7 +1201,7 @@ $('msgRefresh').onclick=()=>loadMessages();$('msgSend').onclick=async()=>{if(!sb
 /* Navigateur avec favoris latéraux */
 (()=>{const url=$('browserUrl'),frame=$('browserFrame'),fav=$('browserFavorites');if(!url||!frame)return;const history=[],favorites=[['Google','https://www.google.com'],['Wikipédia','https://fr.wikipedia.org'],['OpenStreetMap','https://www.openstreetmap.org'],['GitHub','https://github.com'],['CNRS','https://www.cnrs.fr']];let pos=-1;function go(value,add=true){let v=value.trim();if(!v)return;if(!/^https?:\/\//i.test(v))v='https://'+v;try{const u=new URL(v);if(!['http:','https:'].includes(u.protocol))throw 0;v=u.href}catch(e){return toast('Adresse web invalide.')}url.value=v;frame.src=v;if(add){history.splice(pos+1);history.push(v);pos=history.length-1}}function buttons(){fav.replaceChildren();favorites.forEach(([name,href])=>{const b=document.createElement('button');b.textContent=name;b.onclick=()=>go(href);fav.append(b)})}buttons();$('browserGo').onclick=()=>go(url.value);url.addEventListener('keydown',e=>{if(e.key==='Enter')go(url.value)});$('browserReload').onclick=()=>{try{frame.contentWindow.location.reload()}catch(e){frame.src=url.value}};$('browserBack').onclick=()=>{if(pos>0){pos--;url.value=history[pos];frame.src=history[pos]}};$('browserForward').onclick=()=>{if(pos<history.length-1){pos++;url.value=history[pos];frame.src=history[pos]}};})();
 
-/* ===== outils Windows ===== */
+/* ===== Outils du bureau ASIA ===== */
 const notesText=$('notesText');
 try{notesText.value=''}catch(e){}
 /* Les notes sont enregistrées localement dans le navigateur. */
