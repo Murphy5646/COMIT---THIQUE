@@ -795,7 +795,7 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#eee9dc}
 }
 
 
-/* ===== ASIA DESKTOP — VERSION 3.2.0 ===== */
+/* ===== ASIA DESKTOP — VERSION 3.3.0 ===== */
 .app-rail{display:none!important}
 .work-area{left:0!important;top:58px!important;right:0!important;bottom:0!important;padding-bottom:90px!important;overflow:auto!important}
 .workspace-heading{position:relative!important;min-height:178px!important;padding:48px 42px 24px!important;margin:0!important}
@@ -832,6 +832,33 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#eee9dc}
 @media(max-width:1000px){.asia-dashboard{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:650px){.asia-dashboard{grid-template-columns:1fr!important;width:calc(100% - 24px)!important;margin:0 12px 24px!important;gap:9px!important}.asia-widget{min-height:105px!important;padding:15px!important}.asia-clock{font-size:32px!important}.desktop-hint{margin:8px 12px 90px!important;flex-direction:column!important;align-items:flex-start!important}}
 
+
+/* ASIA 3.3 — interface bureau façon système Windows */
+:root{color-scheme:dark}
+.win{border:1px solid rgba(204,177,128,.55)!important;border-radius:12px!important;overflow:hidden!important;box-shadow:0 22px 70px #0009,0 3px 12px #0005!important}
+.wbar{min-height:42px!important;background:linear-gradient(180deg,#202a20,#151e17)!important;border-bottom:1px solid rgba(208,177,123,.3)!important;cursor:grab!important}
+.wbar:active{cursor:grabbing!important}
+.wtitle{font-weight:650!important;letter-spacing:.02em!important}
+.wctl button{min-width:38px!important;height:30px!important;border-radius:6px!important}
+.wctl button:hover{background:rgba(255,255,255,.12)!important}
+.wctl button.x:hover{background:#a83e37!important}
+.wbody{scrollbar-width:thin!important;scrollbar-color:#69745e #172019!important}
+#task{height:62px!important;bottom:10px!important;padding:7px 12px!important;border:1px solid rgba(205,174,124,.35)!important;border-radius:16px!important;background:rgba(12,20,14,.91)!important;backdrop-filter:blur(18px)!important;box-shadow:0 12px 38px #0007!important}
+#task .tb{border-radius:9px!important;transition:background .15s,transform .15s!important}
+#task .tb:hover{background:rgba(222,207,175,.15)!important;transform:translateY(-2px)!important}
+#task .tb.run:after{height:3px!important;border-radius:4px!important}
+.desktop-context-full{border:1px solid rgba(206,175,123,.45)!important;border-radius:12px!important;background:rgba(17,26,19,.97)!important;box-shadow:0 18px 50px #0009!important;backdrop-filter:blur(18px)!important;padding:7px!important;min-width:230px!important}
+.desktop-context-full button{border-radius:7px!important;padding:10px 12px!important;text-align:left!important}
+.desktop-context-full button:hover{background:rgba(203,171,117,.16)!important}
+#administration .card{border:1px solid rgba(193,164,117,.22)!important;border-radius:13px!important;background:rgba(15,24,17,.82)!important;padding:18px!important}
+#administration .data-table{min-width:760px!important}
+#administration .data-table th{position:sticky!important;top:0!important;background:#1b281d!important;z-index:1!important}
+#administration .status-select{min-width:125px!important;max-width:180px!important}
+#administration .btn{white-space:nowrap!important}
+#administration .btn.danger{border-color:#9d5146!important;color:#ffd7ce!important;background:rgba(131,48,39,.2)!important}
+#administration .btn.danger:hover{background:rgba(151,52,42,.42)!important}
+@media(max-width:700px){.win{border-radius:8px!important}#task{left:8px!important;right:8px!important;bottom:6px!important;width:auto!important;overflow-x:auto!important;justify-content:flex-start!important}}
+
 </style>
 </head>
 <body><div class="desktop" id="desktop">
@@ -844,7 +871,7 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#eee9dc}
 <main class="work-area"><div class="workspace-heading"><div><span class="workspace-kicker">INSTALLATION 73 · ENVIRONNEMENT SÉCURISÉ</span><h1>Centre de travail</h1><p>Portail opérationnel du Comité d’Éthique</p></div><div class="workspace-date"><span>STATUT DU RÉSEAU</span><b><i></i> OPÉRATIONNEL</b></div></div>
 <div class="desktop-hint"><span>ACCÈS RAPIDE</span><span>Sélectionnez une application dans la barre latérale ou le menu principal.</span></div>
 </main>
-<div class="win" id="win-accueil" role="dialog" aria-label="Vue d’ensemble — Comité d’Éthique"><div class="wbar"><i class="wico"></i><span class="wtitle">Vue d’ensemble — Comité d’Éthique</span><div class="wctl"><button data-act="min" aria-label="Réduire">&#8211;</button><button data-act="max" class="mx" aria-label="Agrandir">&#9633;</button><button data-act="close" class="x" aria-label="Fermer">&#10005;</button></div></div><div class="wbody"><section class="hero" id="accueil"><div><div class="eyebrow">Fondation S.C.P. · Installation 73</div><h1>Comité d’Éthique</h1><p>Portail institutionnel de consultation du Code éthique, de transmission des signalements et de suivi des dossiers relevant du Comité.</p><div class="motto">« La Fondation S.C.P. est froide, pas cruelle. »</div><div class="meta"><span class="chip">Création : 23/10/2026 à 20:11</span><span class="chip">Autorité : Présidence du Comité d’Éthique</span><span class="chip">Classification : Document interne</span><span class="chip">Mise en application : Oui · Version en vigueur</span></div></div><img class="herologo" src="logo.svg" alt=""></section><div class="notice"><strong>État documentaire —</strong> Version en vigueur pour le Site 73. Cette décision relève du environnement de démonstration et </div><div class="stats"><div class="stat"><b id="articleTotal">82</b><span>Articles du code</span></div><div class="stat"><b id="chapterTotal">11</b><span>Chapitres transmis</span></div><div class="stat"><b>73</b><span>Site concerné</span></div></div><footer class="footer"><span><b>COMITÉ D’ÉTHIQUE — SITE 73</b><br>Préserver l’ordre. Encadrer nos décisions. Assumer nos responsabilités.</span><span>Document interne · Fondation S.C.P.<br>Portail interne — environnement de démonstration</span></footer></div></div><div class="win" id="win-code" role="dialog" aria-label="Code éthique"><div class="wbar"><i class="wico"></i><span class="wtitle">Code éthique</span><div class="wctl"><button data-act="min" aria-label="Réduire">&#8211;</button><button data-act="max" class="mx" aria-label="Agrandir">&#9633;</button><button data-act="close" class="x" aria-label="Fermer">&#10005;</button></div></div><div class="wbody"><section id="code"><div class="section-head"><div><h2>Code éthique</h2><p>Version consolidée du Code éthique — 483 articles, organisée en 31 chapitres.</p></div></div><div class="tools"><input id="search" class="search" type="search" placeholder="Rechercher un article, un mot, une notion…"><select id="chapterFilter" class="select"><option value="all">Tous les chapitres</option></select><button class="btn" id="expand">Tout ouvrir</button><button class="btn" id="collapse">Tout fermer</button></div><div id="chapters"></div><div id="empty" class="empty">Aucun article ne correspond à cette recherche.</div></section></div></div><div class="win" id="win-prevention" role="dialog" aria-label="Prévention"><div class="wbar"><i class="wico"></i><span class="wtitle">Prévention</span><div class="wctl"><button data-act="min" aria-label="Réduire">&#8211;</button><button data-act="max" class="mx" aria-label="Agrandir">&#9633;</button><button data-act="close" class="x" aria-label="Fermer">&#10005;</button></div></div><div class="wbody"><section class="panel" id="prevention"><div class="section-head"><div><h2>Prévention</h2><p>Rappels figurant dans le document source.</p></div></div><div class="cards"><div class="card"><h3>Connaissance du Code</h3><p>Tout membre du personnel doit connaître les articles essentiels du présent Code éthique.</p></div><div class="card"><h3>Confidentialité</h3><p>Il est interdit de divulguer des informations confidentielles concernant les membres du personnel, les anomalies, les installations ou les opérations de la Fondation, y compris dans les échanges hors rôleplay.</p></div><div class="card"><h3>Signalement</h3><p>Le personnel doit signaler toute situation susceptible de constituer une violation du Code.</p></div><div class="card"><h3>Principe institutionnel</h3><p>Préserver l’ordre. Encadrer nos décisions. Assumer nos responsabilités.</p></div></div></section></div></div><div class="win" id="win-signalement" role="dialog" aria-label="Transmettre un signalement"><div class="wbar"><i class="wico"></i><span class="wtitle">Transmettre un signalement</span><div class="wctl"><button data-act="min" aria-label="Réduire">&#8211;</button><button data-act="max" class="mx" aria-label="Agrandir">&#9633;</button><button data-act="close" class="x" aria-label="Fermer">&#10005;</button></div></div><div class="wbody"><section class="panel" id="signalement"><div class="section-head"><div><h2>Transmission d’un signalement</h2><p>La transmission nécessite un compte personnel connecté.</p></div></div><div id="authState" class="auth-state"><span class="muted">Vous n’êtes pas connecté.</span><button class="btn gold" id="openAuth">Se connecter</button></div><form id="reportForm" class="form-card hidden"><div class="form-grid"><div class="field"><label for="rDepartment">Département</label><input id="rDepartment" maxlength="80" placeholder="Département / service"></div><div class="field"><label for="rDate">Date des faits</label><input id="rDate" type="date"></div><div class="field"><label for="rLocation">Lieu</label><input id="rLocation" maxlength="160" placeholder="Lieu ou secteur concerné"></div><div class="field"><label for="rSubject">Objet du signalement *</label><input id="rSubject" required maxlength="180" placeholder="Objet synthétique"></div><div class="field full"><label for="rFacts">Exposé des faits *</label><textarea id="rFacts" required maxlength="12000" placeholder="Décrivez les faits connus de manière précise et chronologique."></textarea></div><div class="field full"><label for="rEvidence">Éléments complémentaires</label><textarea id="rEvidence" maxlength="6000" placeholder="Références de documents, témoins ou éléments utiles. N’ajoutez pas de données personnelles inutiles."></textarea></div></div><div class="actions"><button class="btn gold" type="submit">Transmettre au Comité</button></div><div id="reportMsg" class="msg"></div><p class="hint">Les signalements sont visibles par la Présidence du Comité (PCE). N’utilisez pas ce formulaire pour une urgence opérationnelle.</p></form></section></div></div><div class="win" id="win-admin" role="dialog" aria-label="Administration — Présidence du Comité"><div class="wbar"><i class="wico"></i><span class="wtitle">Administration — Présidence du Comité</span><div class="wctl"><button data-act="min" aria-label="Réduire">&#8211;</button><button data-act="max" class="mx" aria-label="Agrandir">&#9633;</button><button data-act="close" class="x" aria-label="Fermer">&#10005;</button></div></div><div class="wbody"><section class="panel hidden" id="administration"><div class="section-head"><div><h2>Administration — Présidence du Comité</h2><p>Accès réservé au compte disposant du rôle PCE.</p></div><button class="btn" id="refreshAdmin">Actualiser</button></div><div class="card"><h3>Comptes du portail</h3><p>Le PCE est unique. Il peut nommer plusieurs membres à la Présidence ou transférer sa fonction à un autre compte.</p><div class="tablewrap"><table class="data-table"><thead><tr><th>Identifiant</th><th>Adresse</th><th>Département</th><th>Rôle</th><th>Fonction à la Présidence</th><th>Action</th></tr></thead><tbody id="usersBody"><tr><td colspan="5">Chargement…</td></tr></tbody></table></div></div><div class="card" style="margin-top:13px"><h3>Signalements reçus</h3><div class="tablewrap"><table class="data-table"><thead><tr><th>Date</th><th>Émetteur</th><th>Objet / faits</th><th>État</th></tr></thead><tbody id="reportsBody"><tr><td colspan="4">Chargement…</td></tr></tbody></table></div></div></section></div></div>
+<div class="win" id="win-accueil" role="dialog" aria-label="Vue d’ensemble — Comité d’Éthique"><div class="wbar"><i class="wico"></i><span class="wtitle">Vue d’ensemble — Comité d’Éthique</span><div class="wctl"><button data-act="min" aria-label="Réduire">&#8211;</button><button data-act="max" class="mx" aria-label="Agrandir">&#9633;</button><button data-act="close" class="x" aria-label="Fermer">&#10005;</button></div></div><div class="wbody"><section class="hero" id="accueil"><div><div class="eyebrow">Fondation S.C.P. · Installation 73</div><h1>Comité d’Éthique</h1><p>Portail institutionnel de consultation du Code éthique, de transmission des signalements et de suivi des dossiers relevant du Comité.</p><div class="motto">« La Fondation S.C.P. est froide, pas cruelle. »</div><div class="meta"><span class="chip">Création : 23/10/2026 à 20:11</span><span class="chip">Autorité : Présidence du Comité d’Éthique</span><span class="chip">Classification : Document interne</span><span class="chip">Mise en application : Oui · Version en vigueur</span></div></div><img class="herologo" src="logo.svg" alt=""></section><div class="notice"><strong>État documentaire —</strong> Version en vigueur pour le Site 73. Cette décision relève du environnement de démonstration et </div><div class="stats"><div class="stat"><b id="articleTotal">82</b><span>Articles du code</span></div><div class="stat"><b id="chapterTotal">11</b><span>Chapitres transmis</span></div><div class="stat"><b>73</b><span>Site concerné</span></div></div><footer class="footer"><span><b>COMITÉ D’ÉTHIQUE — SITE 73</b><br>Préserver l’ordre. Encadrer nos décisions. Assumer nos responsabilités.</span><span>Document interne · Fondation S.C.P.<br>Portail interne — environnement de démonstration</span></footer></div></div><div class="win" id="win-code" role="dialog" aria-label="Code éthique"><div class="wbar"><i class="wico"></i><span class="wtitle">Code éthique</span><div class="wctl"><button data-act="min" aria-label="Réduire">&#8211;</button><button data-act="max" class="mx" aria-label="Agrandir">&#9633;</button><button data-act="close" class="x" aria-label="Fermer">&#10005;</button></div></div><div class="wbody"><section id="code"><div class="section-head"><div><h2>Code éthique</h2><p>Version consolidée du Code éthique — 483 articles, organisée en 31 chapitres.</p></div></div><div class="tools"><input id="search" class="search" type="search" placeholder="Rechercher un article, un mot, une notion…"><select id="chapterFilter" class="select"><option value="all">Tous les chapitres</option></select><button class="btn" id="expand">Tout ouvrir</button><button class="btn" id="collapse">Tout fermer</button></div><div id="chapters"></div><div id="empty" class="empty">Aucun article ne correspond à cette recherche.</div></section></div></div><div class="win" id="win-prevention" role="dialog" aria-label="Prévention"><div class="wbar"><i class="wico"></i><span class="wtitle">Prévention</span><div class="wctl"><button data-act="min" aria-label="Réduire">&#8211;</button><button data-act="max" class="mx" aria-label="Agrandir">&#9633;</button><button data-act="close" class="x" aria-label="Fermer">&#10005;</button></div></div><div class="wbody"><section class="panel" id="prevention"><div class="section-head"><div><h2>Prévention</h2><p>Rappels figurant dans le document source.</p></div></div><div class="cards"><div class="card"><h3>Connaissance du Code</h3><p>Tout membre du personnel doit connaître les articles essentiels du présent Code éthique.</p></div><div class="card"><h3>Confidentialité</h3><p>Il est interdit de divulguer des informations confidentielles concernant les membres du personnel, les anomalies, les installations ou les opérations de la Fondation, y compris dans les échanges hors rôleplay.</p></div><div class="card"><h3>Signalement</h3><p>Le personnel doit signaler toute situation susceptible de constituer une violation du Code.</p></div><div class="card"><h3>Principe institutionnel</h3><p>Préserver l’ordre. Encadrer nos décisions. Assumer nos responsabilités.</p></div></div></section></div></div><div class="win" id="win-signalement" role="dialog" aria-label="Transmettre un signalement"><div class="wbar"><i class="wico"></i><span class="wtitle">Transmettre un signalement</span><div class="wctl"><button data-act="min" aria-label="Réduire">&#8211;</button><button data-act="max" class="mx" aria-label="Agrandir">&#9633;</button><button data-act="close" class="x" aria-label="Fermer">&#10005;</button></div></div><div class="wbody"><section class="panel" id="signalement"><div class="section-head"><div><h2>Transmission d’un signalement</h2><p>La transmission nécessite un compte personnel connecté.</p></div></div><div id="authState" class="auth-state"><span class="muted">Vous n’êtes pas connecté.</span><button class="btn gold" id="openAuth">Se connecter</button></div><form id="reportForm" class="form-card hidden"><div class="form-grid"><div class="field"><label for="rDepartment">Département</label><input id="rDepartment" maxlength="80" placeholder="Département / service"></div><div class="field"><label for="rDate">Date des faits</label><input id="rDate" type="date"></div><div class="field"><label for="rLocation">Lieu</label><input id="rLocation" maxlength="160" placeholder="Lieu ou secteur concerné"></div><div class="field"><label for="rSubject">Objet du signalement *</label><input id="rSubject" required maxlength="180" placeholder="Objet synthétique"></div><div class="field full"><label for="rFacts">Exposé des faits *</label><textarea id="rFacts" required maxlength="12000" placeholder="Décrivez les faits connus de manière précise et chronologique."></textarea></div><div class="field full"><label for="rEvidence">Éléments complémentaires</label><textarea id="rEvidence" maxlength="6000" placeholder="Références de documents, témoins ou éléments utiles. N’ajoutez pas de données personnelles inutiles."></textarea></div></div><div class="actions"><button class="btn gold" type="submit">Transmettre au Comité</button></div><div id="reportMsg" class="msg"></div><p class="hint">Les signalements sont visibles par la Présidence du Comité (PCE). N’utilisez pas ce formulaire pour une urgence opérationnelle.</p></form></section></div></div><div class="win" id="win-admin" role="dialog" aria-label="Administration — Présidence du Comité"><div class="wbar"><i class="wico"></i><span class="wtitle">Administration — Présidence du Comité</span><div class="wctl"><button data-act="min" aria-label="Réduire">&#8211;</button><button data-act="max" class="mx" aria-label="Agrandir">&#9633;</button><button data-act="close" class="x" aria-label="Fermer">&#10005;</button></div></div><div class="wbody"><section class="panel hidden" id="administration"><div class="section-head"><div><h2>Administration — Présidence du Comité</h2><p>Accès réservé au compte disposant du rôle PCE.</p></div><button class="btn" id="refreshAdmin">Actualiser</button></div><div class="card"><h3>Gestion des comptes</h3><p>Le PCE est l'unique compte disposant de la fonction présidentielle. Il attribue les rôles des autres membres et peut supprimer leurs comptes.</p><div class="tablewrap"><table class="data-table"><thead><tr><th>Identifiant</th><th>Adresse</th><th>Département</th><th>Rôle attribué par le PCE</th><th>Action</th></tr></thead><tbody id="usersBody"><tr><td colspan="5">Chargement…</td></tr></tbody></table></div></div><div class="card" style="margin-top:13px"><div class="section-head"><div><h3>Registre des signalements et rapports</h3><p>Suivi, notes internes, décisions et export de rapports.</p></div></div><div class="tablewrap"><table class="data-table"><thead><tr><th>Date</th><th>Émetteur</th><th>Objet / faits</th><th>État du dossier</th><th>Rapport</th></tr></thead><tbody id="reportsBody"><tr><td colspan="5">Chargement…</td></tr></tbody></table></div></div></section></div></div>
 
 <div class="win" id="win-navigateur" role="dialog" aria-label="Navigateur"><div class="wbar"><i class="wico"></i><span class="wtitle">Navigateur interne</span><div class="wctl"><button data-act="min" aria-label="Réduire">−</button><button data-act="max" class="mx" aria-label="Agrandir">□</button><button data-act="close" class="x" aria-label="Fermer">×</button></div></div><div class="wbody" style="padding:0;font-family:var(--ui)"><div style="display:flex;gap:6px;align-items:center;padding:10px;background:#e9e4d8;border-bottom:1px solid #c8bb9d"><button class="btn" id="browserBack">←</button><button class="btn" id="browserForward">→</button><button class="btn" id="browserReload">↻</button><input id="browserUrl" style="flex:1;min-width:0;padding:9px;border:1px solid #c8bb9d;border-radius:5px" value="https://www.google.com" aria-label="Adresse web"><button class="btn gold" id="browserGo">Ouvrir</button></div><div style="display:grid;grid-template-columns:150px 1fr;min-height:480px;height:calc(100% - 55px)"><aside style="padding:12px;background:#eee8d9;border-right:1px solid #c8bb9d"><b style="color:#293522">Favoris</b><div style="display:grid;gap:7px;margin-top:10px" id="browserFavorites"></div><p style="font-size:10px;color:#6d7461">Certains sites refusent l’affichage intégré. Utilisez « Ouvrir » puis, si nécessaire, ouvrez le site dans un nouvel onglet.</p></aside><iframe id="browserFrame" title="Page web" src="https://www.google.com" style="border:0;width:100%;height:100%;min-height:480px;background:white"></iframe></div></div></div>
 <div class="win" id="win-messagerie" role="dialog" aria-label="Messagerie interne"><div class="wbar"><i class="wico"></i><span class="wtitle">Messagerie interne</span><div class="wctl"><button data-act="min" aria-label="Réduire">−</button><button data-act="max" class="mx" aria-label="Agrandir">□</button><button data-act="close" class="x" aria-label="Fermer">×</button></div></div><div class="wbody"><div class="section-head"><div><h2>Messagerie interne</h2><p>Échanges entre les comptes du réseau interne.</p></div><button class="btn" id="msgRefresh">Actualiser</button></div><div class="auth-state"><span id="msgStatus">Session locale requise pour envoyer et consulter les messages.</span></div><div class="msg-layout"><div class="msg-compose"><div class="field"><label>Destinataire (nom du compte local)</label><input id="msgTo" placeholder="Prénom Nom"></div><div class="field"><label>Objet</label><input id="msgSubject" placeholder="Objet du message"></div><div class="field"><label>Message</label><textarea id="msgBody" placeholder="Rédigez votre message…"></textarea></div><button class="btn gold" id="msgSend">Envoyer</button></div><div><h3>Boîte de réception</h3><div id="msgInbox" class="workspace-list"></div><h3>Messages envoyés</h3><div id="msgSent" class="workspace-list"></div></div></div></div></div>
@@ -965,8 +992,10 @@ function localQuery(table){
 sb={from:table=>localQuery(table),rpc:async(name,args={})=>{
  const profiles=enforceSinglePce(localRows('profiles'));
  if(name==='transfer_pce'){const target=profiles.find(x=>x.id===args.target_user);if(!profile||profile.role!=='PCE'||!target)return {error:{message:'Transfert impossible : accès PCE requis.'}};saveRows('profiles',profiles.map(x=>({...x,role:x.id===target.id?'PCE':'PERSONNEL'})));return {error:null}}
- if(name==='set_report_status'){if(!profile||profile.role!=='PCE')return {error:{message:'Accès réservé au PCE.'}};saveRows('reports',localRows('reports').map(x=>x.id===args.target_report?{...x,status:args.new_status}:x));return {error:null}}
- if(name==='set_presidence_member'){if(!profile||profile.role!=='PCE')return {error:{message:'Seul le PCE peut nommer les membres de la Présidence.'}};const target=profiles.find(x=>x.id===args.target_user);if(!target||target.role==='PCE')return {error:{message:'Compte introuvable ou déjà titulaire de la PCE.'}};saveRows('profiles',profiles.map(x=>x.id===target.id?{...x,presidence:!!args.enabled}:x));return {error:null}}
+ if(name==='set_report_status'){if(!profile||profile.role!=='PCE')return {error:{message:'Accès réservé au PCE.'}};saveRows('reports',localRows('reports').map(x=>x.id===args.target_report?{...x,status:args.new_status,updated_at:new Date().toISOString()}:x));return {error:null}}
+ if(name==='set_user_role'){if(!profile||profile.role!=='PCE')return {error:{message:'Seul le PCE peut attribuer les rôles.'}};const target=profiles.find(x=>x.id===args.target_user);const allowed=['PERSONNEL','MEMBRE_PRÉSIDENCE','SECRÉTAIRE','RAPPORTEUR','OBSERVATEUR'];if(!target||target.role==='PCE'||!allowed.includes(args.new_role))return {error:{message:'Compte ou rôle invalide.'}};saveRows('profiles',profiles.map(x=>x.id===target.id?{...x,role:args.new_role,presidence:args.new_role==='MEMBRE_PRÉSIDENCE'}:x));return {error:null}}
+ if(name==='delete_user'){if(!profile||profile.role!=='PCE')return {error:{message:'Seul le PCE peut supprimer les comptes.'}};const target=profiles.find(x=>x.id===args.target_user);if(!target||target.role==='PCE'||target.id===profile.id)return {error:{message:'Impossible de supprimer ce compte.'}};saveRows('profiles',profiles.filter(x=>x.id!==target.id));saveRows('reports',localRows('reports').map(x=>x.reporter_id===target.id?{...x,reporter:'Compte supprimé',reporter_id:null}:x));return {error:null}}
+ if(name==='update_report_record'){if(!profile||profile.role!=='PCE')return {error:{message:'Accès réservé au PCE.'}};saveRows('reports',localRows('reports').map(x=>x.id===args.target_report?{...x,...args.changes,updated_at:new Date().toISOString()}:x));return {error:null}}
  return {error:{message:'Fonction locale inconnue.'}}
 }};
 function setAuthUI(){
@@ -1016,32 +1045,100 @@ async function submitReport(e){e.preventDefault();if(!user)return;const payload=
 $('reportForm').addEventListener('submit',submitReport);
 async function loadAdmin(){
  if(profile?.role!=='PCE')return;
- const [u,r]=await Promise.all([sb.from('profiles').select('id,email,username,department,role,presidence,created_at').order('created_at'),sb.from('reports').select('id,reporter,department,incident_date,location,subject,facts,evidence,status,created_at').order('created_at',{ascending:false}).limit(100)]);
+ const [u,r]=await Promise.all([
+  sb.from('profiles').select('id,email,username,department,role,presidence,created_at').order('created_at'),
+  sb.from('reports').select('id,reporter,reporter_id,department,incident_date,location,subject,facts,evidence,status,internal_note,decision,assigned_to,created_at,updated_at').order('created_at',{ascending:false}).limit(200)
+ ]);
  const ub=$('usersBody');ub.replaceChildren();
+ const roles=[['PERSONNEL','Personnel'],['MEMBRE_PRÉSIDENCE','Membre de la Présidence'],['SECRÉTAIRE','Secrétaire'],['RAPPORTEUR','Rapporteur'],['OBSERVATEUR','Observateur']];
  u.data.forEach(p=>{
   const tr=document.createElement('tr');
-  [p.username,p.email,p.department,p.role].forEach(v=>{const td=document.createElement('td');td.textContent=v||'—';tr.append(td)});
-  const team=document.createElement('td');team.textContent=p.role==='PCE'?'Président du Comité':p.presidence?'Membre nommé':'Personnel';tr.append(team);
-  const actions=document.createElement('td');
-  if(p.role==='PCE'){actions.textContent='Compte actuel'}
+  [p.username,p.email,p.department].forEach(v=>{const td=document.createElement('td');td.textContent=v||'—';tr.append(td)});
+  const roleCell=document.createElement('td');
+  if(p.role==='PCE'){const strong=document.createElement('strong');strong.textContent='PCE · Président';roleCell.append(strong)}
   else{
-   const appoint=document.createElement('button');appoint.className='btn';appoint.textContent=p.presidence?'Retirer de la Présidence':'Nommer à la Présidence';appoint.onclick=()=>setPresidenceMember(p.id,p.username||p.email,!p.presidence);actions.append(appoint);
-   const transfer=document.createElement('button');transfer.className='btn';transfer.style.marginLeft='6px';transfer.textContent='Transférer la PCE';transfer.onclick=()=>transferPce(p.id,p.username||p.email);actions.append(transfer)
+   const sel=document.createElement('select');sel.className='status-select';sel.setAttribute('aria-label','Rôle de '+(p.username||'ce compte'));
+   roles.forEach(([value,label])=>{const o=document.createElement('option');o.value=value;o.textContent=label;sel.append(o)});
+   sel.value=roles.some(x=>x[0]===p.role)?p.role:'PERSONNEL';
+   sel.onchange=()=>assignUserRole(p.id,p.username||p.email,sel.value);roleCell.append(sel)
+  }
+  tr.append(roleCell);
+  const actions=document.createElement('td');
+  if(p.role==='PCE'){actions.textContent='Compte protégé · PCE unique'}
+  else{
+   const del=document.createElement('button');del.className='btn danger';del.textContent='Supprimer';del.onclick=()=>deletePortalUser(p.id,p.username||p.email);actions.append(del)
   }
   tr.append(actions);ub.append(tr)
  });
- const rb=$('reportsBody');rb.replaceChildren();r.data.forEach(rep=>{const tr=document.createElement('tr');const date=document.createElement('td');date.textContent=new Date(rep.created_at).toLocaleString('fr-FR');const who=document.createElement('td');who.textContent=rep.reporter+' · '+(rep.department||'—');const details=document.createElement('td');const strong=document.createElement('strong');strong.textContent=rep.subject;const p=document.createElement('p');p.textContent=rep.facts;details.append(strong,p);if(rep.evidence){const small=document.createElement('small');small.textContent='Compléments : '+rep.evidence;details.append(small)}const status=document.createElement('td');const sel=document.createElement('select');sel.className='status-select';['Nouveau','En examen','Clos'].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;sel.append(o)});sel.value=rep.status||'Nouveau';sel.onchange=()=>changeStatus(rep.id,sel.value);status.append(sel);tr.append(date,who,details,status);rb.append(tr)});
- if(!r.data.length)rb.innerHTML='<tr><td colspan="4">Aucun signalement enregistré.</td></tr>'
+ if(!u.data.length)ub.innerHTML='<tr><td colspan="5">Aucun compte enregistré.</td></tr>';
+ const rb=$('reportsBody');rb.replaceChildren();
+ const makeCell=(tr,value)=>{const td=document.createElement('td');td.textContent=value||'—';tr.append(td);return td};
+ r.data.forEach(rep=>{
+  const tr=document.createElement('tr');
+  makeCell(tr,new Date(rep.created_at).toLocaleString('fr-FR'));
+  makeCell(tr,(rep.reporter||'Compte supprimé')+' · '+(rep.department||'—'));
+  const details=makeCell(tr,'');const strong=document.createElement('strong');strong.textContent=rep.subject||'Sans objet';const p=document.createElement('p');p.textContent=rep.facts||'';details.append(strong,p);
+  if(rep.location){const small=document.createElement('small');small.textContent='Lieu : '+rep.location;details.append(small)}
+  if(rep.evidence){const small=document.createElement('small');small.textContent='Éléments : '+rep.evidence;details.append(small)}
+  const status=makeCell(tr,'');const sel=document.createElement('select');sel.className='status-select';['Nouveau','En examen','En attente','Clos','Classé sans suite'].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;sel.append(o)});sel.value=rep.status||'Nouveau';sel.onchange=()=>changeStatus(rep.id,sel.value);status.append(sel);
+  const follow=makeCell(tr,'');const note=document.createElement('button');note.className='btn';note.textContent='Note / décision';note.onclick=()=>editReportRecord(rep);follow.append(note);
+  const exportBtn=document.createElement('button');exportBtn.className='btn';exportBtn.style.marginLeft='5px';exportBtn.textContent='Exporter le rapport';exportBtn.onclick=()=>exportReport(rep);follow.append(exportBtn);
+  rb.append(tr)
+ });
+ if(!r.data.length)rb.innerHTML='<tr><td colspan="5">Aucun signalement enregistré.</td></tr>';
 }
-async function setPresidenceMember(id,name,enabled){
- const action=enabled?'nommer à la Présidence':'retirer de la Présidence';
- if(!confirm('Confirmer : '+action+' '+name+' ?'))return;
- const {error}=await sb.rpc('set_presidence_member',{target_user:id,enabled});
+async function assignUserRole(id,name,role){
+ if(!confirm('Attribuer le rôle « '+role+' » à '+name+' ?')){await loadAdmin();return}
+ const {error}=await sb.rpc('set_user_role',{target_user:id,new_role:role});
+ if(error){toast(error.message);await loadAdmin();return}
+ toast('Rôle attribué à '+name+'.');await loadAdmin()
+}
+async function deletePortalUser(id,name){
+ if(!confirm('Supprimer définitivement le compte local de '+name+' ? Les signalements déjà transmis seront conservés et anonymisés.'))return;
+ const {error}=await sb.rpc('delete_user',{target_user:id});
  if(error)return toast(error.message);
- await loadAdmin();toast(enabled?'Membre nommé à la Présidence.':'Membre retiré de la Présidence.')
+ toast('Compte supprimé.');await loadAdmin()
 }
-async function transferPce(id,name){if(!confirm('Transférer la Présidence du Comité à '+name+' ?'))return;const {error}=await sb.rpc('transfer_pce',{target_user:id});if(error)return toast(error.message);await loadProfile();toast('Transfert de la Présidence effectué.')}
-async function changeStatus(id,status){const {error}=await sb.rpc('set_report_status',{target_report:id,new_status:status});if(error){toast(error.message);await loadAdmin()}else toast('État du signalement mis à jour.')}
+async function editReportRecord(rep){
+ const note=prompt('Note interne de suivi :',rep.internal_note||'');if(note===null)return;
+ const decision=prompt('Décision / conclusion du Comité :',rep.decision||'');if(decision===null)return;
+ const assigned=prompt('Responsable du suivi (nom du compte, facultatif) :',rep.assigned_to||'');if(assigned===null)return;
+ const {error}=await sb.rpc('update_report_record',{target_report:rep.id,changes:{internal_note:note.trim(),decision:decision.trim(),assigned_to:assigned.trim()}});
+ if(error)return toast(error.message);toast('Rapport de suivi enregistré.');await loadAdmin()
+}
+function exportReport(rep){
+ const content=[
+  'FONDATION S.C.P. — COMITÉ D’ÉTHIQUE — SITE 73',
+  'RAPPORT DE TRAITEMENT D’UN SIGNALEMENT',
+  '',
+  'Référence : '+rep.id,
+  'Date de transmission : '+new Date(rep.created_at).toLocaleString('fr-FR'),
+  'Émetteur : '+(rep.reporter||'Compte supprimé'),
+  'Département : '+(rep.department||'—'),
+  'Date des faits : '+(rep.incident_date||'—'),
+  'Lieu : '+(rep.location||'—'),
+  'Objet : '+(rep.subject||'—'),
+  '',
+  'EXPOSÉ DES FAITS',
+  rep.facts||'—',
+  '',
+  'ÉLÉMENTS COMPLÉMENTAIRES',
+  rep.evidence||'—',
+  '',
+  'ÉTAT DU DOSSIER : '+(rep.status||'Nouveau'),
+  'RESPONSABLE DU SUIVI : '+(rep.assigned_to||'Non désigné'),
+  '',
+  'NOTE INTERNE',
+  rep.internal_note||'Aucune note enregistrée.',
+  '',
+  'DÉCISION / CONCLUSION',
+  rep.decision||'Aucune décision enregistrée.',
+  '',
+  'Document généré par ASIA · Site 73'
+ ].join('\n');
+ const blob=new Blob([content],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download='rapport-signalement-'+String(rep.id).slice(0,8)+'.txt';document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url)
+}
 $('refreshAdmin').onclick=()=>loadAdmin().catch(e=>toast(e.message));
 async function boot(){const id=localStorage.getItem(LOCAL_SESSION_KEY);if(id){const p=localRows('profiles').find(x=>x.id===id);if(p){user={id:p.id,email:'',created_at:p.created_at};await loadProfile()}}}
 boot().catch(e=>toast(e.message));
@@ -1187,7 +1284,7 @@ Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtr
  const time=tile('HEURE LOCALE','<div class="asia-clock" id="asiaClock">--:--:--</div><div class="asia-date" id="asiaDate">Chargement de la date…</div><div class="aw-status"><i></i> Système prêt</div>');
  const session=tile('SESSION ACTIVE','<div class="asia-user" id="asiaUser"></div><div class="asia-user-sub" id="asiaRole"></div><div class="aw-note">Les données locales restent enregistrées dans ce navigateur.</div>');
  const quick=tile('ACCÈS DIRECT','<div class="asia-user" style="font-size:16px">Actions rapides</div><div class="asia-actions"><button class="asia-action" data-asia-open="code">Code éthique</button><button class="asia-action" data-asia-open="signalement">Nouveau signalement</button><button class="asia-action" data-asia-open="agenda">Agenda</button></div>');
- const store=tile('ENVIRONNEMENT ASIA','<div class="aw-number">3.2.0</div><span class="aw-label">Créé par ASIA · Installation 73</span><div class="aw-note">Bureau personnalisé · Applications accessibles par icônes · Menu contextuel</div>');
+ const store=tile('ENVIRONNEMENT ASIA','<div class="aw-number">3.3.0</div><span class="aw-label">Créé par ASIA · Installation 73</span><div class="aw-note">Bureau personnalisé · Applications accessibles par icônes · Menu contextuel</div>');
  panel.append(time,session,quick,store);
  const hint=host.querySelector('.desktop-hint');if(hint)host.insertBefore(panel,hint);else host.append(panel);
  const update=()=>{const now=new Date(),c=panel.querySelector('#asiaClock'),d=panel.querySelector('#asiaDate');if(c)c.textContent=now.toLocaleTimeString('fr-FR');if(d)d.textContent=now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});};
@@ -1199,7 +1296,7 @@ Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtr
 })();
 
 /* Signature et numéro de version de cette publication. */
-(()=>{const v='3.2.0';const tag=document.createElement('div');tag.className='asia-build';tag.innerHTML='CRÉÉ PAR <b>ASIA</b> · VERSION '+v;document.body.append(tag);document.documentElement.dataset.asiaVersion=v})();
+(()=>{const v='3.3.0';const tag=document.createElement('div');tag.className='asia-build';tag.innerHTML='CRÉÉ PAR <b>ASIA</b> · VERSION '+v;document.body.append(tag);document.documentElement.dataset.asiaVersion=v})();
 
 /* Menu contextuel unifié géré au niveau du bureau. */
 /* ===== Applications enregistrées localement ===== */
