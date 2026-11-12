@@ -795,7 +795,7 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#eee9dc}
 }
 
 
-/* ===== ASIA DESKTOP — VERSION 3.1.0 ===== */
+/* ===== ASIA DESKTOP — VERSION 3.2.0 ===== */
 .app-rail{display:none!important}
 .work-area{left:0!important;top:58px!important;right:0!important;bottom:0!important;padding-bottom:90px!important;overflow:auto!important}
 .workspace-heading{position:relative!important;min-height:178px!important;padding:48px 42px 24px!important;margin:0!important}
@@ -808,6 +808,29 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#eee9dc}
 .asia-build{position:fixed!important;left:18px!important;bottom:12px!important;z-index:75!important;color:#929887!important;font:9px var(--mono,monospace)!important;letter-spacing:.12em!important;padding:7px 10px!important;border:1px solid rgba(196,161,106,.2)!important;border-radius:8px!important;background:rgba(8,14,9,.78)!important;pointer-events:none!important}
 .asia-build b{color:#d5b77f!important;font-weight:700!important}
 @media(max-width:760px){.workspace-heading{min-height:170px!important;padding:28px 18px 18px!important}.icons.desktop-icons{width:calc(100% - 24px)!important;margin:8px 12px 24px!important;padding:12px!important;grid-template-columns:repeat(auto-fill,minmax(82px,1fr))!important;grid-auto-rows:96px!important;gap:5px!important}.icons.desktop-icons .dicon{min-height:88px!important;font-size:10px!important}.icons.desktop-icons .dicon .ico{width:40px!important;height:40px!important;min-width:40px!important}.desktop-hint{margin:12px 12px 90px!important}.asia-build{left:8px!important;bottom:7px!important;font-size:8px!important}}
+
+
+/* ===== ASIA DESKTOP 3.2 — widgets et centre de travail ===== */
+.asia-dashboard{display:grid!important;grid-template-columns:minmax(260px,1.4fr) repeat(3,minmax(150px,.8fr))!important;gap:14px!important;width:calc(100% - 64px)!important;max-width:1500px!important;margin:0 32px 28px!important;align-items:stretch!important}
+.asia-widget{position:relative!important;min-height:132px!important;padding:18px!important;overflow:hidden!important;border:1px solid rgba(191,160,111,.22)!important;border-radius:15px!important;background:linear-gradient(145deg,rgba(25,39,27,.88),rgba(12,21,15,.92))!important;box-shadow:0 12px 32px #0002!important;color:#e9e7db!important}
+.asia-widget:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(#d4b77d,#7e8e67)}
+.asia-widget .aw-kicker{display:block;color:#c6a66e;font:9px var(--mono,monospace);letter-spacing:.16em;margin-bottom:12px}
+.asia-clock{font:clamp(28px,3vw,40px) var(--mono,monospace);font-weight:700;letter-spacing:-.06em}
+.asia-date{margin-top:5px;color:#aeb8a7;font-size:12px;text-transform:capitalize}
+.asia-user{font-size:19px;font-weight:700;line-height:1.3}
+.asia-user-sub{margin-top:8px;color:#aab4a4;font-size:11px}
+.asia-widget .aw-status{display:flex;align-items:center;gap:8px;margin-top:13px;color:#c5d4bd;font-size:11px}
+.asia-widget .aw-status i{width:7px;height:7px;border-radius:50%;background:#8eb78a;box-shadow:0 0 10px #8eb78a}
+.asia-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.asia-action{display:inline-flex!important;align-items:center!important;gap:7px!important;border:1px solid rgba(201,171,121,.25)!important;border-radius:8px!important;padding:8px 10px!important;background:rgba(206,177,126,.08)!important;color:#e9e5d9!important;font-size:11px!important;cursor:pointer!important}
+.asia-action:hover{background:rgba(206,177,126,.18)!important;border-color:#c7a66e!important}
+.asia-widget .aw-number{font-size:26px;font-weight:750;line-height:1.1}
+.asia-widget .aw-label{display:block;color:#aab4a4;font-size:11px;margin-top:8px}
+.asia-widget .aw-note{color:#aab4a4;font-size:10px;line-height:1.5;margin-top:9px}
+.desktop-hint{display:flex!important;align-items:center!important;gap:10px!important}
+.desktop-hint span:first-child{white-space:nowrap!important}
+@media(max-width:1000px){.asia-dashboard{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:650px){.asia-dashboard{grid-template-columns:1fr!important;width:calc(100% - 24px)!important;margin:0 12px 24px!important;gap:9px!important}.asia-widget{min-height:105px!important;padding:15px!important}.asia-clock{font-size:32px!important}.desktop-hint{margin:8px 12px 90px!important;flex-direction:column!important;align-items:flex-start!important}}
 
 </style>
 </head>
@@ -1154,8 +1177,29 @@ Object.keys(APPS).forEach(id=>{const A=APPS[id];
 });
 
 Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtraWindow(id);addAppToShell(id)}});
+
+/* Widgets du bureau ASIA — horloge, session et raccourcis */
+(()=>{
+ const host=document.querySelector('.work-area');if(!host||host.querySelector('.asia-dashboard'))return;
+ const panel=document.createElement('section');panel.className='asia-dashboard';panel.setAttribute('aria-label','Widgets du bureau');
+ const who=()=>profile?.username||profile?.full_name||user?.email||'Session invitée';
+ const tile=(kicker,inner)=>{const e=document.createElement('article');e.className='asia-widget';e.innerHTML='<span class="aw-kicker">'+kicker+'</span>'+inner;return e};
+ const time=tile('HEURE LOCALE','<div class="asia-clock" id="asiaClock">--:--:--</div><div class="asia-date" id="asiaDate">Chargement de la date…</div><div class="aw-status"><i></i> Système prêt</div>');
+ const session=tile('SESSION ACTIVE','<div class="asia-user" id="asiaUser"></div><div class="asia-user-sub" id="asiaRole"></div><div class="aw-note">Les données locales restent enregistrées dans ce navigateur.</div>');
+ const quick=tile('ACCÈS DIRECT','<div class="asia-user" style="font-size:16px">Actions rapides</div><div class="asia-actions"><button class="asia-action" data-asia-open="code">Code éthique</button><button class="asia-action" data-asia-open="signalement">Nouveau signalement</button><button class="asia-action" data-asia-open="agenda">Agenda</button></div>');
+ const store=tile('ENVIRONNEMENT ASIA','<div class="aw-number">3.2.0</div><span class="aw-label">Créé par ASIA · Installation 73</span><div class="aw-note">Bureau personnalisé · Applications accessibles par icônes · Menu contextuel</div>');
+ panel.append(time,session,quick,store);
+ const hint=host.querySelector('.desktop-hint');if(hint)host.insertBefore(panel,hint);else host.append(panel);
+ const update=()=>{const now=new Date(),c=panel.querySelector('#asiaClock'),d=panel.querySelector('#asiaDate');if(c)c.textContent=now.toLocaleTimeString('fr-FR');if(d)d.textContent=now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});};
+ update();setInterval(update,1000);
+ const name=panel.querySelector('#asiaUser'),role=panel.querySelector('#asiaRole');
+ if(name)name.textContent=who();
+ if(role)role.textContent=profile?.role==='PCE'?'Présidence du Comité':profile?.presidence?'Membre de la Présidence':profile?.role||'Accès invité';
+ panel.querySelectorAll('[data-asia-open]').forEach(b=>b.addEventListener('click',()=>openApp(b.dataset.asiaOpen)));
+})();
+
 /* Signature et numéro de version de cette publication. */
-(()=>{const v='3.1.0';const tag=document.createElement('div');tag.className='asia-build';tag.innerHTML='CRÉÉ PAR <b>ASIA</b> · VERSION '+v;document.body.append(tag);document.documentElement.dataset.asiaVersion=v})();
+(()=>{const v='3.2.0';const tag=document.createElement('div');tag.className='asia-build';tag.innerHTML='CRÉÉ PAR <b>ASIA</b> · VERSION '+v;document.body.append(tag);document.documentElement.dataset.asiaVersion=v})();
 
 /* Menu contextuel unifié géré au niveau du bureau. */
 /* ===== Applications enregistrées localement ===== */
