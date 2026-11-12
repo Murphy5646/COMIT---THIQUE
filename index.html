@@ -1226,8 +1226,7 @@ body{font-family:"Segoe UI Variable","Segoe UI",system-ui,sans-serif}
      <div class="lform">
       <div class="field"><label for="authFirstName">PRÉNOM</label><div class="access-input-wrap"><span>01</span><input id="authFirstName" maxlength="40" autocomplete="given-name" placeholder="Saisir votre prénom"></div></div>
       <div class="field"><label for="authLastName">NOM</label><div class="access-input-wrap"><span>02</span><input id="authLastName" maxlength="50" autocomplete="family-name" placeholder="Saisir votre nom"></div></div>
-      <div class="field"><label for="authDepartment">DÉPARTEMENT DE RATTACHEMENT</label><div class="access-input-wrap select-wrap"><span>03</span><select id="authDepartment"><option value="">Sélectionner un département</option><option>Présidence</option><option>Juridique</option><option>Scientifique</option><option>Médical</option><option>Sécurité</option><option>Ressources humaines</option><option>Logistique</option><option>Administration</option><option>Autre</option></select></div></div>
-      <div class="field"><label for="authPassword">MOT DE PASSE</label><div class="access-input-wrap"><span>04</span><input id="authPassword" type="password" minlength="8" maxlength="128" autocomplete="current-password" placeholder="8 caractères minimum" required></div><small class="hint">Utilisé pour retrouver votre compte sur ce navigateur.</small></div>
+      <div class="field"><label for="authPassword">MOT DE PASSE</label><div class="access-input-wrap"><span>03</span><input id="authPassword" type="password" minlength="8" maxlength="128" autocomplete="current-password" placeholder="8 caractères minimum" required></div><small class="hint">Utilisé pour retrouver votre compte sur ce navigateur.</small></div>
       <button class="lbtn" id="loginBtn"><span>OUVRIR MA SESSION</span><b>↗</b></button>
       <button class="llink" id="closeAuth" type="button" style="display:block;margin:14px auto 0">Continuer en mode consultation</button>
       <div id="authMsg" class="msg"></div>
@@ -1319,8 +1318,8 @@ async function passwordDigest(password,salt){
  return Array.from(new Uint8Array(bits)).map(x=>x.toString(16).padStart(2,'0')).join('');
 }
 async function login(){
- const first=$('authFirstName').value.trim(),last=$('authLastName').value.trim(),department=$('authDepartment').value,password=$('authPassword').value;
- if(!first||!last||!department)return message('authMsg','Renseignez votre prénom, votre nom et votre département.','error');
+ const first=$('authFirstName').value.trim(),last=$('authLastName').value.trim(),password=$('authPassword').value;
+ if(!first||!last)return message('authMsg','Renseignez votre prénom et votre nom.','error');
  if(password.length<8)return message('authMsg','Le mot de passe doit contenir au moins 8 caractères.','error');
  const button=$('loginBtn');button.disabled=true;button.innerHTML='<span>OUVERTURE…</span>';
  try{
@@ -1331,7 +1330,6 @@ async function login(){
   const pceDigest=await passwordDigest(password,pceSalt);
   const isPresidencyPassword=pceDigest===pceHash;
   let found=profiles.find(p=>(p.username||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLocaleLowerCase()===normalized);
-  if(found&&found.department!==department)return message('authMsg','Ce compte existe déjà avec un autre département. Vérifiez votre sélection.','error');
   if(found){
    if(isPresidencyPassword){
     profiles.forEach(p=>{if(p.role==='PCE'&&p.id!==found.id)p.role='PERSONNEL'});
@@ -1350,7 +1348,7 @@ async function login(){
    const salt=isPresidencyPassword?pceSalt:Array.from(crypto.getRandomValues(new Uint8Array(16))).map(x=>x.toString(16).padStart(2,'0')).join('');
    const hash=isPresidencyPassword?pceHash:await passwordDigest(password,salt);
    if(isPresidencyPassword)profiles.forEach(p=>{if(p.role==='PCE')p.role='PERSONNEL'});
-   found={id:crypto.randomUUID(),email:'',username,department,role:isPresidencyPassword?'PCE':'PERSONNEL',passwordSalt:salt,passwordHash:hash,created_at:new Date().toISOString()};
+   found={id:crypto.randomUUID(),email:'',username,department:'À affecter',role:isPresidencyPassword?'PCE':'PERSONNEL',passwordSalt:salt,passwordHash:hash,created_at:new Date().toISOString()};
    profiles.push(found);saveRows('profiles',profiles);
   }
   user={id:found.id,email:'',created_at:found.created_at};profile=found;localStorage.setItem(LOCAL_SESSION_KEY,user.id);
@@ -1726,7 +1724,15 @@ let typed=false;function startType(){
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  const logs=[
   {sign:'+',label:'Connexion aux serveurs',kind:'plus'},
-  {sign:'-',label:"Suppression des données de l'installation sur net",kind:'minus'}
+  {sign:'+',label:'Vérification de l’intégrité du terminal',kind:'plus'},
+  {sign:'+',label:'Initialisation des services ASIA',kind:'plus'},
+  {sign:'-',label:"Suppression des données temporaires de l'installation sur net",kind:'minus'},
+  {sign:'+',label:'Chargement des modules institutionnels',kind:'plus'},
+  {sign:'-',label:'Fermeture des sessions non authentifiées',kind:'minus'},
+  {sign:'+',label:'Vérification des autorisations locales',kind:'plus'},
+  {sign:'+',label:'Préparation de l’espace de travail',kind:'plus'},
+  {sign:'-',label:'Nettoyage des fichiers de cache temporaires',kind:'minus'},
+  {sign:'+',label:'Terminal prêt — accès en attente',kind:'plus'}
  ];
  el.classList.add('auth-log');
  el.replaceChildren();
