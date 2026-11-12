@@ -1146,6 +1146,14 @@ body{font-family:"Segoe UI Variable","Segoe UI",system-ui,sans-serif}
 @media(prefers-reduced-motion:reduce){.start.on{animation:none!important}}
 
 
+
+/* ASIA 4.0.5 — journal animé de connexion */
+.auth-typing.auth-log{display:flex!important;flex-direction:column!important;gap:5px!important;min-height:3.4em!important}
+.auth-log-line{display:block!important;white-space:normal!important}
+.auth-log-line b{display:inline-block!important;margin-right:5px!important;font-weight:800!important}
+.auth-log-line.plus{color:#25833b!important}
+.auth-log-line.minus{color:#c33232!important}
+
 /* ASIA 4.0.3 — écriture animée et autocorrection */
 .auth-typing{
  display:inline-block!important;min-height:1.6em;color:#788578!important;
@@ -1716,23 +1724,25 @@ let typed=false;function startType(){
  if(typed)return;typed=true;
  const el=$('authTyping');if(!el)return;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
- const steps=[
-  {wrong:'Connexion au sytsème ASIA…',right:'Connexion au système ASIA…'},
-  {wrong:'Vérification de votre identitée…',right:'Vérification de votre identité…'},
-  {wrong:'Préparation de votre espase de travail…',right:'Préparation de votre espace de travail…'}
+ const logs=[
+  {sign:'+',label:'Connexion aux serveurs',kind:'plus'},
+  {sign:'-',label:"Suppression des données de l'installation sur net",kind:'minus'}
  ];
- if(reduced){el.textContent=steps[steps.length-1].right;return}
- let step=0,pos=0,correcting=false;
- const speed=42;
- function tick(){
-  if(step>=steps.length){setTimeout(()=>{step=0;pos=0;correcting=false;el.textContent='';tick()},1800);return}
-  const item=steps[step],target=correcting?item.right:item.wrong;
-  if(pos<target.length){el.textContent=target.slice(0,++pos);setTimeout(tick,speed);return}
-  if(!correcting){setTimeout(()=>{correcting=true;const common=[...item.wrong].findIndex((c,i)=>c!==item.right[i]);pos=common<0?item.wrong.length:common;el.textContent=item.wrong.slice(0,pos);erase()},650);return}
-  setTimeout(()=>{step++;pos=0;correcting=false;tick()},950);
+ el.classList.add('auth-log');
+ el.replaceChildren();
+ function addLine(item){
+  const line=document.createElement('span');line.className='auth-log-line '+item.kind;
+  const sign=document.createElement('b');sign.textContent=item.sign;
+  const label=document.createElement('span');label.textContent=' '+item.label;
+  line.append(sign,label);el.append(line);
  }
- function erase(){if(pos>0){el.textContent=steps[step].wrong.slice(0,--pos);setTimeout(erase,24)}else{setTimeout(tick,100)}}
- tick();
+ if(reduced){logs.forEach(addLine);return}
+ let index=0;
+ function next(){
+  if(index>=logs.length){setTimeout(()=>{el.replaceChildren();index=0;next()},2200);return}
+  addLine(logs[index++]);setTimeout(next,850);
+ }
+ next();
 }
 window.showAuth=function(v=true){if(v)guest=false;updateLock();if(v&&!user)$('authFirstName').focus()};
 const _setAuthUI=setAuthUI;window.setAuthUI=function(){_setAuthUI();const who=profile?.username||user?.email;$('whoLabel').textContent=user?`${who} · ${profile?.role||'PERSONNEL'}`:'Invité';$('whoStart').textContent=user?who:'Invité (consultation)';$('powerLabel').textContent=user?'Fermer la session':'Écran de connexion';const pce=isPce();document.querySelectorAll('[data-app=admin]').forEach(e=>e.classList.toggle('hidden',!pce));$('adminNav').classList.toggle('hidden',!pce);if(!pce)closeApp('admin');updateLock()};
