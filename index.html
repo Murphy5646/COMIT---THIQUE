@@ -1723,16 +1723,25 @@ let typed=false;function startType(){
  const el=$('authTyping');if(!el)return;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  const logs=[
-  {sign:'+',label:'Connexion aux serveurs',kind:'plus'},
-  {sign:'+',label:'Vérification de l’intégrité du terminal',kind:'plus'},
-  {sign:'+',label:'Initialisation des services ASIA',kind:'plus'},
-  {sign:'-',label:"Suppression des données temporaires de l'installation sur net",kind:'minus'},
-  {sign:'+',label:'Chargement des modules institutionnels',kind:'plus'},
-  {sign:'-',label:'Fermeture des sessions non authentifiées',kind:'minus'},
-  {sign:'+',label:'Vérification des autorisations locales',kind:'plus'},
+  {sign:'+',label:'Démarrage du terminal ASIA',kind:'plus'},
+  {sign:'+',label:'Connexion aux services du Site 73',kind:'plus'},
+  {sign:'+',label:'Vérification de l’intégrité de l’interface',kind:'plus'},
+  {sign:'+',label:'Initialisation des services institutionnels',kind:'plus'},
+  {sign:'+',label:'Chargement des paramètres de session',kind:'plus'},
+  {sign:'-',label:'Fermeture des anciennes sessions locales',kind:'minus'},
+  {sign:'+',label:'Préparation du module d’authentification',kind:'plus'},
+  {sign:'+',label:'Vérification des champs de connexion',kind:'plus'},
+  {sign:'+',label:'Chargement des profils disponibles',kind:'plus'},
+  {sign:'-',label:'Écartement des données temporaires obsolètes',kind:'minus'},
   {sign:'+',label:'Préparation de l’espace de travail',kind:'plus'},
-  {sign:'-',label:'Nettoyage des fichiers de cache temporaires',kind:'minus'},
-  {sign:'+',label:'Terminal prêt — accès en attente',kind:'plus'}
+  {sign:'+',label:'Initialisation de la messagerie interne',kind:'plus'},
+  {sign:'+',label:'Préparation des outils bureautiques',kind:'plus'},
+  {sign:'+',label:'Chargement des raccourcis institutionnels',kind:'plus'},
+  {sign:'+',label:'Vérification des préférences d’affichage',kind:'plus'},
+  {sign:'-',label:'Désactivation des fonctions non nécessaires',kind:'minus'},
+  {sign:'+',label:'Synchronisation des éléments de l’interface',kind:'plus'},
+  {sign:'+',label:'Contrôle final du terminal',kind:'plus'},
+  {sign:'+',label:'Terminal prêt — authentification requise',kind:'plus'}
  ];
  el.classList.add('auth-log');
  el.replaceChildren();
