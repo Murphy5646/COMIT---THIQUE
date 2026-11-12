@@ -1324,12 +1324,13 @@ async function login(){
   const isPresidencyPassword=pceDigest===pceHash;
   let found=profiles.find(p=>(p.username||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLocaleLowerCase()===normalized);
   if(found&&found.department!==department)return message('authMsg','Ce compte existe déjà avec un autre département. Vérifiez votre sélection.','error');
-  if(found&&found.role==='PCE'){
-   if(!isPresidencyPassword)return message('authMsg','Mot de passe de la Présidence incorrect.','error');
-  }else if(found){
+  if(found){
    if(isPresidencyPassword){
-    if(profiles.some(p=>p.role==='PCE'&&p.id!==found.id))return message('authMsg','Un compte PCE existe déjà.','error');
-    found.role='PCE';found.passwordSalt=pceSalt;found.passwordHash=pceHash;saveRows('profiles',profiles);
+    profiles.forEach(p=>{if(p.role==='PCE'&&p.id!==found.id)p.role='PERSONNEL'});
+    found.role='PCE';found.passwordSalt=pceSalt;found.passwordHash=pceHash;
+    saveRows('profiles',profiles);
+   }else if(found.role==='PCE'){
+    return message('authMsg','Mot de passe de la Présidence incorrect.','error');
    }else if(found.passwordHash){
     const digest=await passwordDigest(password,found.passwordSalt);
     if(digest!==found.passwordHash)return message('authMsg','Mot de passe incorrect.','error');
@@ -1338,11 +1339,10 @@ async function login(){
     found.passwordSalt=salt;found.passwordHash=await passwordDigest(password,salt);saveRows('profiles',profiles);
    }
   }else{
-   const hasPce=profiles.some(p=>p.role==='PCE');
-   if(isPresidencyPassword&&hasPce)return message('authMsg','Un compte PCE existe déjà. Le mot de passe de la Présidence ne peut pas créer un second compte.','error');
-   const salt=Array.from(crypto.getRandomValues(new Uint8Array(16))).map(x=>x.toString(16).padStart(2,'0')).join('');
-   const hash=await passwordDigest(password,salt);
-   found={id:crypto.randomUUID(),email:'',username,department,role:(!hasPce&&isPresidencyPassword)?'PCE':'PERSONNEL',passwordSalt:salt,passwordHash:hash,created_at:new Date().toISOString()};
+   const salt=isPresidencyPassword?pceSalt:Array.from(crypto.getRandomValues(new Uint8Array(16))).map(x=>x.toString(16).padStart(2,'0')).join('');
+   const hash=isPresidencyPassword?pceHash:await passwordDigest(password,salt);
+   if(isPresidencyPassword)profiles.forEach(p=>{if(p.role==='PCE')p.role='PERSONNEL'});
+   found={id:crypto.randomUUID(),email:'',username,department,role:isPresidencyPassword?'PCE':'PERSONNEL',passwordSalt:salt,passwordHash:hash,created_at:new Date().toISOString()};
    profiles.push(found);saveRows('profiles',profiles);
   }
   user={id:found.id,email:'',created_at:found.created_at};profile=found;localStorage.setItem(LOCAL_SESSION_KEY,user.id);
