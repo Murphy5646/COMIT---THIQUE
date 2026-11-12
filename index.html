@@ -795,7 +795,7 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#eee9dc}
 }
 
 
-/* ===== ASIA DESKTOP — VERSION 3.5.1 ===== */
+/* ===== ASIA DESKTOP — VERSION 3.5.2 ===== */
 .app-rail{display:none!important}
 .work-area{left:0!important;top:58px!important;right:0!important;bottom:0!important;padding-bottom:90px!important;overflow:auto!important}
 .workspace-heading{position:relative!important;min-height:178px!important;padding:48px 42px 24px!important;margin:0!important}
@@ -946,28 +946,28 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 @media(max-width:560px){.clock-suite{padding:13px!important}.alarm-form{grid-template-columns:1fr}.clock-suite-head{flex-direction:column}.timer-fields{gap:8px}}
 
 
-/* ASIA 3.5.1 — correction clics des icônes du bureau
-   Le conteneur .work-area est volontairement transparent aux clics ;
-   on réactive explicitement les interactions sur les icônes enfants. */
+/* ASIA 3.5.2 — zones interactives strictement limitées
+   Le fond, les titres et les widgets informatifs ne capturent aucun clic.
+   Seuls les boutons d'application et les actions rapides restent actifs. */
 .work-area{pointer-events:none!important}
-.work-area .icons.desktop-icons,
-.work-area .icons.desktop-icons *,
+.work-area .icons.desktop-icons{position:relative!important;z-index:8!important;pointer-events:none!important}
 .work-area .icons.desktop-icons .dicon{
- pointer-events:auto!important;
+ position:relative!important;z-index:9!important;pointer-events:auto!important;
+ cursor:pointer!important;touch-action:manipulation;
 }
-.work-area .icons.desktop-icons{
- position:relative!important;
- z-index:8!important;
+.work-area .icons.desktop-icons .dicon>*{pointer-events:none!important}
+.work-area .asia-dashboard{pointer-events:none!important}
+.work-area .asia-dashboard .asia-actions{pointer-events:none!important}
+.work-area .asia-dashboard .asia-actions button{
+ pointer-events:auto!important;cursor:pointer!important;touch-action:manipulation;
 }
-.work-area .icons.desktop-icons .dicon{
- position:relative!important;
- z-index:9!important;
- cursor:pointer!important;
- touch-action:manipulation;
-}
-.work-area .icons.desktop-icons .dicon:active{
- transform:scale(.97);
-}
+.work-area .asia-dashboard .asia-actions button>*{pointer-events:none!important}
+.work-area .dicon:active{transform:scale(.97)}
+/* Contrôle du curseur : pas de faux éléments cliquables. */
+button:not(:disabled),a[href],[role="button"]{cursor:pointer}
+button:disabled{cursor:not-allowed}
+input:not([type="checkbox"]):not([type="radio"]),textarea{cursor:text}
+select{cursor:pointer}
 
 </style>
 </head>
@@ -1422,7 +1422,7 @@ Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtr
  const time=tile('HEURE LOCALE','<div class="asia-clock" id="asiaClock">--:--:--</div><div class="asia-date" id="asiaDate">Chargement de la date…</div><div class="aw-status"><i></i> Système prêt</div>');
  const session=tile('SESSION ACTIVE','<div class="asia-user" id="asiaUser"></div><div class="asia-user-sub" id="asiaRole"></div><div class="aw-note">Les données locales restent enregistrées dans ce navigateur.</div>');
  const quick=tile('ACCÈS DIRECT','<div class="asia-user" style="font-size:16px">Actions rapides</div><div class="asia-actions"><button class="asia-action" data-asia-open="code">Code éthique</button><button class="asia-action" data-asia-open="signalement">Nouveau signalement</button><button class="asia-action" data-asia-open="agenda">Agenda</button></div>');
- const store=tile('ENVIRONNEMENT ASIA','<div class="aw-number">3.5.1</div><span class="aw-label">Créé par ASIA · Installation 73</span><div class="aw-note">Bureau personnalisé · Applications accessibles par icônes · Menu contextuel</div>');
+ const store=tile('ENVIRONNEMENT ASIA','<div class="aw-number">3.5.2</div><span class="aw-label">Créé par ASIA · Installation 73</span><div class="aw-note">Bureau personnalisé · Applications accessibles par icônes · Menu contextuel</div>');
  panel.append(time,session,quick,store);
  const hint=host.querySelector('.desktop-hint');if(hint)host.insertBefore(panel,hint);else host.append(panel);
  const update=()=>{const now=new Date(),c=panel.querySelector('#asiaClock'),d=panel.querySelector('#asiaDate');if(c)c.textContent=now.toLocaleTimeString('fr-FR');if(d)d.textContent=now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});};
@@ -1434,7 +1434,7 @@ Object.keys(EXTRA_APPS).forEach(id=>{if(installedApps().includes(id)){ensureExtr
 })();
 
 /* Signature et numéro de version de cette publication. */
-(()=>{const v='3.5.1';const tag=document.createElement('div');tag.className='asia-build';tag.innerHTML='CRÉÉ PAR <b>ASIA</b> · VERSION '+v;document.body.append(tag);document.documentElement.dataset.asiaVersion=v})();
+(()=>{const v='3.5.2';const tag=document.createElement('div');tag.className='asia-build';tag.innerHTML='CRÉÉ PAR <b>ASIA</b> · VERSION '+v;document.body.append(tag);document.documentElement.dataset.asiaVersion=v})();
 
 /* Menu contextuel unifié géré au niveau du bureau. */
 /* ===== Applications enregistrées localement ===== */
