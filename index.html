@@ -1232,7 +1232,7 @@ body{font-family:"Segoe UI Variable","Segoe UI",system-ui,sans-serif}
       <div id="authMsg" class="msg"></div>
      </div>
     </div>
-    <div class="panel-security"><div class="security-symbol">i</div><p><b>À propos de cette connexion</b><br>Ce portail utilise une session locale sans mot de passe. Les informations déclarées ne sont pas vérifiées et restent enregistrées dans le navigateur utilisé.</p></div>
+    <div class="panel-security"><div class="security-symbol">i</div><p><b>À propos de cette connexion</b><br>Les comptes et les rôles sont enregistrés dans le navigateur utilisé. Un mot de passe autre que celui de la Présidence ouvre un accès Personnel. Les données ne sont pas synchronisées entre appareils.</p></div>
     <div class="panel-footer"><span>COMITÉ D’ÉTHIQUE · SITE 73</span><span>VERSION 04.11</span></div>
    </div>
    <div class="panel-side-label">FONDATION S.C.P. / ACCÈS PERSONNEL</div>
@@ -1336,7 +1336,13 @@ async function login(){
     found.role='PCE';found.passwordSalt=pceSalt;found.passwordHash=pceHash;
     saveRows('profiles',profiles);
    }else if(found.role==='PCE'){
-    return message('authMsg','Mot de passe de la Présidence incorrect.','error');
+    // Un mot de passe autre que celui de la Présidence ouvre un accès Personnel.
+    // Le compte est rétrogradé et le mot de passe saisi devient son mot de passe Personnel.
+    const personalSalt=Array.from(crypto.getRandomValues(new Uint8Array(16))).map(x=>x.toString(16).padStart(2,'0')).join('');
+    found.role='PERSONNEL';
+    found.passwordSalt=personalSalt;
+    found.passwordHash=await passwordDigest(password,personalSalt);
+    saveRows('profiles',profiles);
    }else if(found.passwordHash){
     const digest=await passwordDigest(password,found.passwordSalt);
     if(digest!==found.passwordHash)return message('authMsg','Mot de passe incorrect.','error');
