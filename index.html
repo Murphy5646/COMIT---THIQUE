@@ -1676,6 +1676,7 @@ body{font-family:"Segoe UI Variable","Segoe UI",system-ui,sans-serif!important;b
       <div class="field"><label for="authFirstName">PRÉNOM</label><div class="access-input-wrap"><span>01</span><input id="authFirstName" maxlength="40" autocomplete="given-name" placeholder="Saisir votre prénom"></div></div>
       <div class="field"><label for="authLastName">NOM</label><div class="access-input-wrap"><span>02</span><input id="authLastName" maxlength="50" autocomplete="family-name" placeholder="Saisir votre nom"></div></div>
       <div class="field"><label for="authPassword">MOT DE PASSE</label><div class="access-input-wrap"><span>03</span><input id="authPassword" type="password" minlength="8" maxlength="128" autocomplete="current-password" placeholder="8 caractères minimum" required></div><small class="hint">Utilisé pour retrouver votre compte sur ce navigateur.</small></div>
+      <label class="stay-signed"><input id="staySigned" type="checkbox" checked> Rester connecté sur cet appareil</label>
       <button class="lbtn" id="loginBtn"><span>OUVRIR MA SESSION</span><b>↗</b></button>
       <button class="llink" id="closeAuth" type="button" style="display:block;margin:14px auto 0">Continuer en mode consultation</button>
       <div id="authMsg" class="msg"></div>
@@ -1806,7 +1807,7 @@ async function login(){
    profiles.push(found);saveRows('profiles',profiles);
   }
   user={id:found.id,email:'',created_at:found.created_at};profile=found;
-  localStorage.setItem(LOCAL_SESSION_KEY,user.id);
+  if($('staySigned')?.checked){localStorage.setItem(LOCAL_SESSION_KEY,user.id);sessionStorage.removeItem(LOCAL_SESSION_KEY)}else{sessionStorage.setItem(LOCAL_SESSION_KEY,user.id);localStorage.removeItem(LOCAL_SESSION_KEY)}
   await loadProfile();guest=false;updateLock();
   $('authPassword').value='';
   toast('Session ouverte · '+username);
@@ -1816,7 +1817,7 @@ async function login(){
   button.disabled=false;button.innerHTML='<span>OUVRIR MA SESSION</span><b>↗</b>';
  }
 }
-async function logout(){guest=false;localStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;setAuthUI();updateLock();toast('Session locale fermée.')}
+async function logout(){guest=false;localStorage.removeItem(LOCAL_SESSION_KEY);sessionStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;setAuthUI();updateLock();toast('Session locale fermée.')}
 $('loginBtn').onclick=login;
 async function submitReport(e){e.preventDefault();if(!user)return;const payload={reporter:profile?.username||'Personnel',reporter_id:user.id,department:$('rDepartment').value.trim()||profile?.department||'Personnel',incident_date:$('rDate').value||null,location:$('rLocation').value.trim()||null,subject:$('rSubject').value.trim(),facts:$('rFacts').value.trim(),evidence:$('rEvidence').value.trim()||null};if(!payload.subject||!payload.facts)return message('reportMsg','Les champs obligatoires doivent être remplis.','error');const {error}=await sb.from('reports').insert(payload);if(error)return message('reportMsg',error.message,'error');$('reportForm').reset();message('reportMsg','Signalement enregistré sur cet appareil.','ok')}
 $('reportForm').addEventListener('submit',submitReport);
@@ -1917,7 +1918,7 @@ function exportReport(rep){
  a.href=url;a.download='rapport-signalement-'+String(rep.id).slice(0,8)+'.txt';document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url)
 }
 $('refreshAdmin').onclick=()=>loadAdmin().catch(e=>toast(e.message));
-async function boot(){const id=localStorage.getItem(LOCAL_SESSION_KEY);if(!id)return;const p=localRows('profiles').find(x=>x.id===id);if(!p){localStorage.removeItem(LOCAL_SESSION_KEY);return}user={id:p.id,email:'',created_at:p.created_at};try{await loadProfile()}catch(error){localStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;setAuthUI();throw error}}
+async function boot(){const id=localStorage.getItem(LOCAL_SESSION_KEY)||sessionStorage.getItem(LOCAL_SESSION_KEY);if(!id)return;const p=localRows('profiles').find(x=>x.id===id);if(!p){localStorage.removeItem(LOCAL_SESSION_KEY);return}user={id:p.id,email:'',created_at:p.created_at};try{await loadProfile()}catch(error){localStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;setAuthUI();throw error}}
 /* La restauration de session est lancée après l'initialisation complète du bureau. */
 </script>
 <script>
@@ -1932,10 +1933,15 @@ const EXTRA_APPS={
  arcade:{t:'CE Arcade',c:'linear-gradient(135deg,#7c5ce7,#3347a8)',desc:'Mini-jeux intégrés : mémoire, Snake, 2048, morpion et réflexes.',icon:'🎮'},
  timer:{t:'Minuteur',c:'linear-gradient(135deg,#598a83,#315b55)',desc:'Un minuteur simple pour organiser vos sessions.',icon:'◷'},
  quickcalc:{t:'Calcul rapide',c:'linear-gradient(135deg,#778b70,#40563a)',desc:'Une calculatrice compacte pour les opérations courantes.',icon:'＋'},
- scratchpad:{t:'Carnet rapide',c:'linear-gradient(135deg,#6588a5,#34516b)',desc:'Un espace de notes personnel enregistré dans ce navigateur.',icon:'▤'}
+ scratchpad:{t:'Carnet rapide',c:'linear-gradient(135deg,#6588a5,#34516b)',desc:'Un espace de notes personnel enregistré dans ce navigateur.',icon:'▤'},
+ files:{t:'Explorateur de fichiers',c:'linear-gradient(135deg,#d2a65e,#8b6735)',desc:'Ouvrir des fichiers depuis votre appareil.',icon:'📁'},
+ settings:{t:'Paramètres',c:'linear-gradient(135deg,#65798c,#35495d)',desc:'Personnaliser le bureau CE OS.',icon:'⚙️'},
+ help:{t:'Centre d’aide',c:'linear-gradient(135deg,#628a78,#365747)',desc:'Guides pour utiliser le poste de travail.',icon:'❔'},
+ pdfreader:{t:'Lecteur PDF',c:'linear-gradient(135deg,#b9685d,#783d38)',desc:'Consulter un document PDF local.',icon:'📄'}
 };
 const INSTALLED_KEY='site73-installed-apps-v1';
-function installedApps(){try{const a=JSON.parse(localStorage.getItem(INSTALLED_KEY)||'["store"]');if(!a.includes('arcade')){a.push('arcade');localStorage.setItem(INSTALLED_KEY,JSON.stringify(a))}return a}catch(e){return ['store','arcade']}}
+const DEFAULT_EXTRA_APPS=['arcade','timer','quickcalc','scratchpad','files','settings','help','pdfreader'];
+function installedApps(){try{const a=JSON.parse(localStorage.getItem(INSTALLED_KEY)||'["store"]');let changed=false;DEFAULT_EXTRA_APPS.forEach(id=>{if(!a.includes(id)){a.push(id);changed=true}});if(changed)localStorage.setItem(INSTALLED_KEY,JSON.stringify(a));return a}catch(e){return ['store',...DEFAULT_EXTRA_APPS]}}
 function saveInstalled(a){localStorage.setItem(INSTALLED_KEY,JSON.stringify([...new Set(a)]))}
 
 function initArcade(body){
@@ -1960,6 +1966,10 @@ function ensureExtraWindow(id){
  const el=document.createElement('div');el.className='win';el.id='win-'+id;el.innerHTML='<div class="wbar"><i class="wico"></i><span class="wtitle">'+d.t+'</span><div class="wctl"><button data-act="min">−</button><button data-act="max">□</button><button data-act="close" class="x">×</button></div></div><div class="wbody" id="extra-'+id+'"></div>';
  $('desktop').append(el);
  const body=el.querySelector('.wbody');
+ if(id==='files')body.innerHTML='<div class="miniapp"><h2>Explorateur de fichiers</h2><p>Choisis des fichiers depuis ton appareil.</p><input id="localFilePick" type="file" multiple><div id="localFileList" style="margin-top:16px">Aucun fichier sélectionné.</div></div>';
+ if(id==='settings')body.innerHTML='<div class="miniapp"><h2>Paramètres du bureau</h2><p>Choisis une ambiance.</p><div class="workspace-actions"><button class="btn" data-wall="default">Bleu nuit</button><button class="btn" data-wall="forest">Vert</button><button class="btn" data-wall="sand">Sable</button></div><p id="wallStatus">Préférences locales.</p></div>';
+ if(id==='help')body.innerHTML='<div class="miniapp"><h2>Centre d’aide CE OS</h2><details open><summary>Ouvrir une application</summary><p>Double-clique sur une icône ou utilise le menu Démarrer.</p></details><details><summary>Enregistrement</summary><p>Les données sont conservées dans le navigateur de cet appareil. Exporte les documents importants.</p></details><details><summary>Connexion</summary><p>La case « Rester connecté » conserve la session dans ce navigateur.</p></details></div>';
+ if(id==='pdfreader')body.innerHTML='<div class="miniapp"><h2>Lecteur PDF</h2><input id="pdfPick" type="file" accept="application/pdf"><div id="pdfPreview" style="height:65vh;margin-top:14px">Aucun PDF ouvert.</div></div>';
  if(id==='arcade')body.innerHTML='<div class="miniapp arcade-app"><div class="arcade-head"><div><span class="eyebrow">ESPACE DÉTENTE · SITE 73</span><h2>CE Arcade</h2><p>Une sélection de mini-jeux accessibles directement depuis le bureau.</p></div><span class="arcade-badge">5 JEUX</span></div><div class="arcade-tabs"><button class="selected" data-game="memory">Memory</button><button data-game="snake">Snake</button><button data-game="game2048">2048</button><button data-game="ttt">Morpion</button><button data-game="reaction">Réflexes</button></div><div class="arcade-status" id="arcadeStatus">Choisis un jeu.</div><div id="arcadeBoard"></div></div>';
  if(id==='timer')body.innerHTML=`<div class="miniapp clock-suite">
  <div class="clock-suite-head"><div><h2>Horloge CE OS</h2><p>Minuteur et réveils personnels de l'Installation 73.</p></div><span class="clock-live">● LOCAL</span></div>
@@ -2000,6 +2010,9 @@ function ensureExtraWindow(id){
  }
  if(id==='quickcalc')body.querySelector('#quickCalcRun').onclick=()=>{const v=body.querySelector('#quickCalcInput').value.trim();if(!/^[0-9+*/().% -]+$/.test(v))return toast('Expression non valide.');try{const result=Function('"use strict";return ('+v+')')();body.querySelector('#quickCalcResult').textContent='Résultat : '+(Number.isFinite(result)?result:'non défini')}catch(e){body.querySelector('#quickCalcResult').textContent='Expression incorrecte'}};
  if(id==='scratchpad'){const area=body.querySelector('#scratchText'),key='site73-scratchpad-v1';area.value=localStorage.getItem(key)||'';area.oninput=()=>{localStorage.setItem(key,area.value);body.querySelector('#scratchSaved').textContent='Enregistré · '+new Date().toLocaleTimeString('fr-FR')}}
+ if(id==='files'){const pick=body.querySelector('#localFilePick'),list=body.querySelector('#localFileList');pick.onchange=()=>{list.replaceChildren();[...pick.files].forEach(f=>{const row=document.createElement('p');row.textContent=f.name+' · '+(f.size/1024).toFixed(1)+' Ko';list.append(row)});if(!pick.files.length)list.textContent='Aucun fichier sélectionné.'}}
+ if(id==='settings'){const key='site73-wallpaper-v1',apply=v=>{const d=$('desktop');d.style.background=v==='forest'?'radial-gradient(ellipse at 25% 20%,#526b52,#17291f 70%)':v==='sand'?'radial-gradient(ellipse at 25% 20%,#8e795e,#29251f 70%)':'radial-gradient(ellipse at 25% 20%,#29466c,#101a2c 70%)';localStorage.setItem(key,v);body.querySelector('#wallStatus').textContent='Thème enregistré.'};body.querySelectorAll('[data-wall]').forEach(b=>b.onclick=()=>apply(b.dataset.wall));apply(localStorage.getItem(key)||'default')}
+ if(id==='pdfreader'){const pick=body.querySelector('#pdfPick'),preview=body.querySelector('#pdfPreview');let old=null;pick.onchange=()=>{if(old)URL.revokeObjectURL(old);const f=pick.files[0];if(!f)return;old=URL.createObjectURL(f);const frame=document.createElement('iframe');frame.src=old;frame.style='width:100%;height:100%;border:0;background:white';preview.replaceChildren(frame)}}
  if(id==='arcade')initArcade(body);
 }
 function addAppToShell(id){
@@ -2021,7 +2034,7 @@ document.querySelectorAll('[data-store-tab]').forEach(b=>b.onclick=()=>{document
 // Les applications supplémentaires sont initialisées après la création de la barre des tâches.
 ICONS.store='<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5m8-5v5M8 13h8M8 16h5"/>';
 ICONS.navigateur='<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c4 4 4 14 0 18M12 3c-4 4-4 14 0 18"/>';
-const EXTRA_ICONS={arcade:'<rect x="3" y="7" width="18" height="12" rx="4"/><path d="M8 10v6m-3-3h6m6-1h.01M18 14h.01"/>',timer:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6M12 2v3"/>',quickcalc:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h2m4 0h2M8 16h2m4 0h2"/>',scratchpad:'<path d="M5 3h11l3 3v15H5z"/><path d="M8 10h8M8 14h8M8 18h5M15 3v4h4"/>'};
+const EXTRA_ICONS={files:'<path d="M3 6h7l2 2h9v11H3z"/>',settings:'<circle cx="12" cy="12" r="3"/><path d="M19 13.5a7 7 0 0 0 0-3l2-1.5-2-3.5-2.4 1a7 7 0 0 0-2.6-1.5L13.5 2h-4L9 5a7 7 0 0 0-2.6 1.5L4 5.5 2 9l2 1.5a7 7 0 0 0 0 3L2 15l2 3.5 2.4-1A7 7 0 0 0 9 19l.5 3h4l.5-3a7 7 0 0 0 2.6-1.5l2.4 1 2-3.5z"/>',help:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4.5 1.5c-1.5 1-2 1.5-2 3M12 17h.01"/>',pdfreader:'<path d="M5 3h10l4 4v14H5z"/><path d="M14 3v5h5M8 13h8M8 17h8"/>',arcade:'<rect x="3" y="7" width="18" height="12" rx="4"/><path d="M8 10v6m-3-3h6m6-1h.01M18 14h.01"/>',timer:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6M12 2v3"/>',quickcalc:'<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h2m4 0h2M8 16h2m4 0h2"/>',scratchpad:'<path d="M5 3h11l3 3v15H5z"/><path d="M8 10h8M8 14h8M8 18h5M15 3v4h4"/>'};
 const ico=(id,sm)=>{const a=APPS[id]||EXTRA_APPS[id]||{c:'linear-gradient(135deg,#8b7753,#4b4938)'};const path=ICONS[id]||EXTRA_ICONS[id]||'<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12h8"/>';return `<span class="ico${sm?' sm':''}" style="background:${a.c}"><svg viewBox="0 0 24 24" aria-hidden="true">${path}</svg></span>`};
 const win=id=>document.getElementById('win-'+id);let zTop=20,openN=0;
 function mk(cls,html,fn,id){const b=document.createElement('button');b.className=cls;b.innerHTML=html;b.onclick=fn;if(id)b.id=id;return b}
