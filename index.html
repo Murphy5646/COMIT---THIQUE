@@ -72,8 +72,8 @@ domains.forEach(domain=>aspects.forEach(aspect=>{
  for(let group=0;group<10;group++)for(let item=0;item<10;item++){
   const subject=subjects[item],duty=duties[group];
   articles.push({n:articleNumber++,title:duty+" : "+subject.charAt(0).toUpperCase()+subject.slice(1),paragraphs:[
-   "Dans le cadre de « "+chapterTitle.toLowerCase()+" », "+subject+" est examiné au regard de la situation, des personnes concernées et des responsabilités du service. Le responsable désigné vérifie que les éléments utiles sont disponibles, compréhensibles et rattachés à une décision identifiable.",
-   "La mesure est consignée dans le dossier ou le registre approprié. Toute information manquante, divergence ou difficulté susceptible d’affecter les garanties prévues est portée à l’attention de l’autorité compétente. L’étape ne peut être considérée comme achevée sans vérification de sa suite."
+   "Dans le cadre de « "+chapterTitle.toLowerCase()+" », la mesure de "+duty.toLowerCase()+" relative à "+subject+" doit être adaptée à la situation et aux personnes concernées. Le responsable désigné précise son objet, vérifie les éléments utiles et s’assure que la décision relève bien de ses attributions.",
+   "Le résultat de cette mesure est consigné dans le dossier ou le registre approprié, avec sa date et l’autorité qui en répond. Toute information manquante, divergence ou difficulté est signalée sans délai ; la suite donnée, y compris un refus ou une suspension, doit pouvoir être vérifiée ultérieurement."
   ]});
  }
  chapters.push({roman:toRoman(chapters.length+1),title:chapterTitle,articles});
