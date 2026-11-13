@@ -1676,7 +1676,6 @@ body{font-family:"Segoe UI Variable","Segoe UI",system-ui,sans-serif!important;b
       <div class="field"><label for="authFirstName">PRÉNOM</label><div class="access-input-wrap"><span>01</span><input id="authFirstName" maxlength="40" autocomplete="given-name" placeholder="Saisir votre prénom"></div></div>
       <div class="field"><label for="authLastName">NOM</label><div class="access-input-wrap"><span>02</span><input id="authLastName" maxlength="50" autocomplete="family-name" placeholder="Saisir votre nom"></div></div>
       <div class="field"><label for="authPassword">MOT DE PASSE</label><div class="access-input-wrap"><span>03</span><input id="authPassword" type="password" minlength="8" maxlength="128" autocomplete="current-password" placeholder="8 caractères minimum" required></div><small class="hint">Utilisé pour retrouver votre compte sur ce navigateur.</small></div>
-      <label class="stay-signed"><input id="staySigned" type="checkbox" checked> Rester connecté sur cet appareil</label>
       <button class="lbtn" id="loginBtn"><span>OUVRIR MA SESSION</span><b>↗</b></button>
       <button class="llink" id="closeAuth" type="button" style="display:block;margin:14px auto 0">Continuer en mode consultation</button>
       <div id="authMsg" class="msg"></div>
@@ -1807,7 +1806,9 @@ async function login(){
    profiles.push(found);saveRows('profiles',profiles);
   }
   user={id:found.id,email:'',created_at:found.created_at};profile=found;
-  if($('staySigned')?.checked){localStorage.setItem(LOCAL_SESSION_KEY,user.id);localStorage.setItem(REMEMBERED_USER_KEY,user.id);sessionStorage.removeItem(LOCAL_SESSION_KEY)}else{sessionStorage.setItem(LOCAL_SESSION_KEY,user.id);localStorage.removeItem(LOCAL_SESSION_KEY);localStorage.removeItem(REMEMBERED_USER_KEY)}
+  localStorage.setItem(LOCAL_SESSION_KEY,user.id);
+  localStorage.setItem(REMEMBERED_USER_KEY,user.id);
+  sessionStorage.removeItem(LOCAL_SESSION_KEY);
   await loadProfile();window.setGuestMode(false);
   $('authPassword').value='';
   toast('Session ouverte · '+username);
