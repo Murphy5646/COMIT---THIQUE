@@ -167,10 +167,10 @@ chapters.forEach((chapter,index)=>{
  const chev=document.createElement('span');chev.className='chevron';chev.textContent='⌄';
  head.append(roman,title,chev);
  const body=document.createElement('div');body.className='chapter-body';
- chapter.articles.forEach(article=>{
+ chapter.articles.forEach((article,articleIndex)=>{
   const item=document.createElement('article');item.className='article';
   const top=document.createElement('div');top.className='article-top';
-  const num=document.createElement('span');num.className='article-num';num.textContent='ARTICLE '+article.n;
+  const num=document.createElement('span');num.className='article-num';num.textContent='ARTICLE '+(index+1)+'.'+(articleIndex+1);
   const h=document.createElement('h3');h.textContent=article.title;top.append(num,h);item.append(top);
   (article.paragraphs||[]).forEach(paragraph=>{const p=document.createElement('p');p.textContent=paragraph;item.append(p)});
   item.dataset.search=[article.n,article.title,...(article.paragraphs||[])].join(' ').toLocaleLowerCase('fr');
