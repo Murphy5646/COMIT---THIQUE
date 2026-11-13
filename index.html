@@ -1560,38 +1560,37 @@ async function passwordDigest(password,salt){
  const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:enc.encode(salt),iterations:120000,hash:'SHA-256'},key,256);
  return Array.from(new Uint8Array(bits)).map(x=>x.toString(16).padStart(2,'0')).join('');
 }
+function normalizeAccountName(value){
+ return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim().toLocaleLowerCase('fr-FR');
+}
 async function login(){
  const first=$('authFirstName').value.trim(),last=$('authLastName').value.trim(),password=$('authPassword').value;
  if(!first||!last)return message('authMsg','Renseignez votre prénom et votre nom.','error');
  if(password.length<8)return message('authMsg','Le mot de passe doit contenir au moins 8 caractères.','error');
- const button=$('loginBtn');button.disabled=true;button.innerHTML='<span>OUVERTURE…</span>';
+ const button=$('loginBtn');button.disabled=true;button.innerHTML='<span>VÉRIFICATION…</span>';
  try{
-  const username=first+' '+last,normalized=username.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLocaleLowerCase();
+  const username=first+' '+last,normalized=normalizeAccountName(username);
   const profiles=enforceSinglePce(localRows('profiles'));
   const pceSalt='085fef8f31051c9977ef9430f90c1865';
   const pceHash='2511dd29ba3405fbe5c81d5b9cb481370c2880a3cbdf45fa5cfbb9c373dc32ce';
   const pceDigest=await passwordDigest(password,pceSalt);
   const isPresidencyPassword=pceDigest===pceHash;
-  let found=profiles.find(p=>(p.username||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLocaleLowerCase()===normalized);
+  let found=profiles.find(p=>normalizeAccountName(p.username)===normalized);
   if(found){
    if(isPresidencyPassword){
     profiles.forEach(p=>{if(p.role==='PCE'&&p.id!==found.id)p.role='PERSONNEL'});
     found.role='PCE';found.passwordSalt=pceSalt;found.passwordHash=pceHash;
     saveRows('profiles',profiles);
-   }else if(found.role==='PCE'){
-    // Un mot de passe autre que celui de la Présidence ouvre un accès Personnel.
-    // Le compte est rétrogradé et le mot de passe saisi devient son mot de passe Personnel.
-    const personalSalt=Array.from(crypto.getRandomValues(new Uint8Array(16))).map(x=>x.toString(16).padStart(2,'0')).join('');
-    found.role='PERSONNEL';
-    found.passwordSalt=personalSalt;
-    found.passwordHash=await passwordDigest(password,personalSalt);
-    saveRows('profiles',profiles);
-   }else if(found.passwordHash){
+   }else if(found.passwordHash&&found.passwordSalt){
     const digest=await passwordDigest(password,found.passwordSalt);
-    if(digest!==found.passwordHash)return message('authMsg','Mot de passe incorrect.','error');
+    if(digest!==found.passwordHash){
+     return message('authMsg','Mot de passe incorrect pour ce compte. Le rôle Personnel ne permet pas de contourner la vérification du compte.','error');
+    }
    }else{
     const salt=Array.from(crypto.getRandomValues(new Uint8Array(16))).map(x=>x.toString(16).padStart(2,'0')).join('');
-    found.passwordSalt=salt;found.passwordHash=await passwordDigest(password,salt);saveRows('profiles',profiles);
+    found.passwordSalt=salt;found.passwordHash=await passwordDigest(password,salt);
+    if(found.role==='PCE')found.role='PERSONNEL';
+    saveRows('profiles',profiles);
    }
   }else{
    const salt=isPresidencyPassword?pceSalt:Array.from(crypto.getRandomValues(new Uint8Array(16))).map(x=>x.toString(16).padStart(2,'0')).join('');
@@ -1600,10 +1599,16 @@ async function login(){
    found={id:crypto.randomUUID(),email:'',username,department:'À affecter',role:isPresidencyPassword?'PCE':'PERSONNEL',passwordSalt:salt,passwordHash:hash,created_at:new Date().toISOString()};
    profiles.push(found);saveRows('profiles',profiles);
   }
-  user={id:found.id,email:'',created_at:found.created_at};profile=found;localStorage.setItem(LOCAL_SESSION_KEY,user.id);
-  await loadProfile();guest=false;updateLock();toast('Session ouverte · '+username);
- }catch(error){message('authMsg','Connexion impossible : '+(error.message||'stockage local indisponible.'),'error')}
- finally{button.disabled=false;button.innerHTML='<span>OUVRIR MA SESSION</span><b>↗</b>'}
+  user={id:found.id,email:'',created_at:found.created_at};profile=found;
+  localStorage.setItem(LOCAL_SESSION_KEY,user.id);
+  await loadProfile();guest=false;updateLock();
+  $('authPassword').value='';
+  toast('Session ouverte · '+username);
+ }catch(error){
+  message('authMsg','Connexion impossible : '+(error.message||'stockage local indisponible.'),'error');
+ }finally{
+  button.disabled=false;button.innerHTML='<span>OUVRIR MA SESSION</span><b>↗</b>';
+ }
 }
 async function logout(){guest=false;localStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;setAuthUI();updateLock();toast('Session locale fermée.')}
 $('loginBtn').onclick=login;
