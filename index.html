@@ -1302,6 +1302,79 @@ body{background:radial-gradient(ellipse at 68% 32%,#315b91 0%,#142c52 34%,#08132
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
+
+/* ASIA 5.1 — Windows 11 desktop refinement */
+:root{--win11-blue:#0078d4;--win11-glass:rgba(25,35,52,.78);--win11-border:rgba(255,255,255,.16)}
+body{font-family:"Segoe UI Variable","Segoe UI",system-ui,sans-serif!important}
+.desktop{background:#071326!important;isolation:isolate}
+.desktop:before{content:"";position:absolute;inset:-12%;z-index:0;pointer-events:none;opacity:1;filter:blur(1px);
+ background:
+ radial-gradient(ellipse 38% 26% at 67% 49%,rgba(116,185,255,.95) 0%,rgba(55,126,207,.62) 34%,transparent 72%),
+ radial-gradient(ellipse 28% 38% at 54% 49%,rgba(49,112,195,.8) 0%,transparent 70%),
+ radial-gradient(ellipse 42% 22% at 68% 55%,rgba(26,69,139,.85) 0%,transparent 75%),
+ radial-gradient(ellipse 24% 40% at 43% 50%,rgba(12,44,100,.85) 0%,transparent 72%),
+ linear-gradient(125deg,#06142c 0%,#0d2a53 42%,#07172f 100%)}
+.desktop:after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(110deg,rgba(0,0,0,.16),transparent 45%,rgba(0,0,0,.08))}
+.topbar{display:none!important}
+.app-rail{display:contents!important}
+.icons,.desktop-icons{position:absolute!important;top:12px!important;left:10px!important;right:auto!important;bottom:82px!important;width:88px!important;height:auto!important;display:grid!important;grid-auto-flow:row!important;grid-template-columns:repeat(1,82px)!important;grid-auto-rows:82px!important;gap:3px!important;align-content:start!important;justify-content:start!important;overflow:visible!important;z-index:4!important;padding:0!important;margin:0!important;pointer-events:auto!important}
+.dicon{position:relative!important;width:78px!important;height:78px!important;min-height:78px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:5px!important;padding:5px 3px!important;border:1px solid transparent!important;border-radius:5px!important;background:transparent!important;color:#fff!important;font-family:"Segoe UI",sans-serif!important;font-size:12px!important;font-weight:400!important;line-height:15px!important;text-align:center!important;text-shadow:0 1px 3px #000!important}
+.dicon:hover,.dicon:focus-visible{background:rgba(160,205,255,.18)!important;border:1px solid rgba(205,230,255,.24)!important;outline:0!important}
+.dicon .ico{width:34px!important;height:34px!important;min-height:34px!important;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
+.work-area{z-index:1!important}
+.workspace-heading,.desktop-hint{display:none!important}
+.asia-dashboard{right:28px!important;top:26px!important;width:310px!important;background:rgba(17,31,52,.5)!important;border:1px solid rgba(255,255,255,.18)!important;border-radius:14px!important;backdrop-filter:blur(30px) saturate(1.6)!important;box-shadow:0 16px 50px rgba(0,0,0,.18)!important;color:#fff!important}
+.task{position:fixed!important;left:50%!important;right:auto!important;bottom:0!important;transform:translateX(-50%)!important;width:max-content!important;max-width:100vw!important;height:58px!important;min-height:58px!important;padding:6px 10px!important;gap:5px!important;border:1px solid rgba(255,255,255,.13)!important;border-bottom:0!important;border-radius:10px 10px 0 0!important;background:rgba(24,32,46,.78)!important;backdrop-filter:blur(30px) saturate(1.65)!important;box-shadow:0 -5px 28px rgba(0,0,0,.22)!important;overflow:visible!important}
+.task .tb{position:relative!important;width:42px!important;height:42px!important;min-width:42px!important;border-radius:6px!important;background:transparent!important;border:1px solid transparent!important;padding:8px!important}
+.task .tb:hover,.task .tb.act{background:rgba(190,220,255,.17)!important;border-color:rgba(255,255,255,.08)!important}
+.task .tb img,.task .tb svg{width:25px!important;height:25px!important;max-width:25px!important;max-height:25px!important}
+.task .tb.run:after{bottom:-4px!important;width:16px!important;height:3px!important;background:#60a5fa!important}
+.task-tray{height:42px;display:flex;align-items:center;gap:12px;padding:0 9px 0 14px;margin-left:5px;border-left:1px solid rgba(255,255,255,.13);color:#f8fafc;font:12px "Segoe UI",sans-serif;white-space:nowrap}
+.task-tray .tray-icons{display:flex;align-items:center;gap:9px;font-size:15px}
+.task-tray .tray-time{text-align:right;line-height:16px;font-size:11px;min-width:66px}
+.task-tray .tray-time b{font-size:12px;font-weight:500}
+.start{position:fixed!important;left:50%!important;right:auto!important;bottom:66px!important;top:auto!important;transform:translate(-50%,12px)!important;width:min(640px,calc(100vw - 20px))!important;max-height:min(680px,calc(100dvh - 82px))!important;border:1px solid rgba(255,255,255,.2)!important;border-radius:9px!important;background:rgba(31,42,59,.91)!important;backdrop-filter:blur(38px) saturate(1.7)!important;box-shadow:0 22px 70px rgba(0,0,0,.46)!important;color:#f8fafc!important}
+.start.on{transform:translate(-50%,0)!important}
+.start .sbody{padding:26px 30px 18px!important;overflow:auto!important}
+.start .ssearch{height:38px!important;border:1px solid rgba(255,255,255,.28)!important;border-bottom:2px solid #60a5fa!important;border-radius:5px!important;background:rgba(255,255,255,.95)!important;color:#1e293b!important}
+.start .ssearch::placeholder{color:#64748b!important}
+.start .sh{margin:22px 0 10px!important;color:#f8fafc!important;font-size:13px!important;font-weight:600!important}
+.start .pins{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:4px!important}
+.start .pin{min-height:76px!important;border-radius:5px!important;color:#f8fafc!important;font-size:11px!important}
+.start .pin:hover,.start .rec:hover{background:rgba(255,255,255,.12)!important}
+.start .pin .ico{width:30px!important;height:30px!important}
+.start .recs{grid-template-columns:1fr 1fr!important}
+.start .rec{min-height:58px!important;border-radius:5px!important;color:#fff!important}
+.start .rec small{color:#cbd5e1!important}
+.start .sfoot{margin:18px -30px -18px!important;padding:12px 26px!important;background:rgba(0,0,0,.18)!important;border-top:1px solid rgba(255,255,255,.12)!important}
+.start .sfoot button{color:#fff!important}
+.win{border:1px solid rgba(255,255,255,.62)!important;border-radius:8px!important;background:#f3f6fb!important;box-shadow:0 24px 80px rgba(0,0,0,.45),0 0 0 1px rgba(0,0,0,.08)!important}
+.wbar{height:42px!important;min-height:42px!important;flex-basis:42px!important;padding:0 7px 0 12px!important;background:#f3f6fb!important;border-bottom:1px solid #e3e8f0!important}
+.wtitle{font-size:12px!important;font-weight:400!important;color:#1e293b!important}
+.wctl button{width:44px!important;height:32px!important;border-radius:0!important;font-size:13px!important}
+.wctl button:hover{background:#e5eaf1!important}
+.wctl button.x:hover{background:#c42b1c!important;color:white!important}
+.wbody{background:#f7f9fc!important;color:#1e293b!important}
+.lock{background:linear-gradient(135deg,#08182e,#163b67 55%,#08172d)!important}
+.access-panel{border-radius:9px!important}
+.lbtn{background:#0067c0!important;border-radius:5px!important}
+@media(max-width:700px){
+ .icons,.desktop-icons{top:8px!important;left:4px!important;bottom:66px!important;grid-auto-rows:72px!important;grid-template-columns:repeat(1,70px)!important}
+ .dicon{width:68px!important;height:68px!important;min-height:68px!important;font-size:10px!important}
+ .dicon .ico{width:29px!important;height:29px!important}
+ .task{height:54px!important;min-height:54px!important;padding:5px 6px!important;gap:1px!important}
+ .task .tb{width:36px!important;min-width:36px!important;height:40px!important;padding:6px!important}
+ .task-tray{gap:6px;padding:0 5px 0 8px;margin-left:1px}
+ .task-tray .tray-icons{gap:5px;font-size:13px}
+ .task-tray .tray-time{min-width:54px;font-size:10px}
+ .task-tray .tray-time b{font-size:11px}
+ .start{bottom:60px!important;width:calc(100vw - 12px)!important;max-height:calc(100dvh - 72px)!important}
+ .start .sbody{padding:18px 16px 12px!important}
+ .start .pins{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+ .start .recs{grid-template-columns:1fr!important}
+ .asia-dashboard{display:none!important}
+}
+
 </style>
 </head>
 <body><div class="desktop" id="desktop">
@@ -1747,7 +1820,7 @@ const task=$('task'),icons=$('icons'),pins=$('pins');
 const workArea=document.querySelector('.work-area'),desktopHint=document.querySelector('.desktop-hint');
 if(workArea&&icons&&desktopHint){icons.classList.add('desktop-icons');workArea.insertBefore(icons,desktopHint);}
 
-const startBtn=mk('tb','<img src="logo.svg" alt="Démarrer">',()=>toggleStart());startBtn.setAttribute('aria-label','Démarrer');task.append(startBtn);
+const startBtn=mk('tb','<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="9" height="9" fill="#60a5fa"/><rect x="13" y="2" width="9" height="9" fill="#60a5fa"/><rect x="2" y="13" width="9" height="9" fill="#60a5fa"/><rect x="13" y="13" width="9" height="9" fill="#60a5fa"/></svg>',()=>toggleStart());startBtn.setAttribute('aria-label','Démarrer');task.append(startBtn);
 const sBtn=mk('tb','<svg class="s" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg>',()=>{toggleStart(true);$('ssearch').focus()});task.append(sBtn);
 Object.keys(APPS).forEach(id=>{const A=APPS[id];
  const d=mk('dicon','',()=>openApp(id),id==='admin'?'adminNav':null);d.innerHTML=ico(id)+A.t;d.dataset.app=id;d.ondblclick=null;icons.append(d);
@@ -1911,4 +1984,10 @@ window.loadWorkspaceData=loadWorkspaceData;
 window.setWorkspaceAccess=setWorkspaceAccess;
 setAuthUI();openApp('accueil');
 }
-</script></body></html>
+</script><script>
+(()=>{const task=document.getElementById('task');if(!task||task.querySelector('.task-tray'))return;
+const tray=document.createElement('div');tray.className='task-tray';tray.innerHTML='<div class="tray-icons" aria-label="État du système"><span title="Connexion réseau">◉</span><span title="Volume">◖))</span></div><div class="tray-time"><b id="trayClock">--:--</b><br><span id="trayDate">--/--/----</span></div>';task.append(tray);
+const update=()=>{const d=new Date(),t=document.getElementById('trayClock'),date=document.getElementById('trayDate');if(t)t.textContent=d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});if(date)date.textContent=d.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'});};update();setInterval(update,15000);
+})();
+</script>
+</body></html>
