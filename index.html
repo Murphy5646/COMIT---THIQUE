@@ -93,6 +93,76 @@ footer b{color:#c5d0c4}
 .alinea[open] summary{background:#203729;border-bottom-color:#344638;color:#ead9ae}
 .alinea p{color:#c0ccc0}
 .chapter-head:focus-visible,.alinea summary:focus-visible,.tool-btn:focus-visible{outline:2px solid #c6a66b;outline-offset:2px}
+
+/* Finition visuelle — interface institutionnelle */
+:root{--gold:#cbb27b;--line:#2b3d31;--panel:#111d15;--panel2:#17271c;--text:#e7ede5;--sub:#b8c5b8}
+body{font-size:14px;line-height:1.65;background:radial-gradient(ellipse at 82% 0%,#203b2a 0,transparent 34%),#0a110d}
+.top{height:76px;padding-inline:clamp(18px,5vw,72px);position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:#09120deF;box-shadow:0 8px 28px #0003}
+.brand img{width:46px;height:46px}
+.brand strong{font-size:14px;letter-spacing:.15em}
+.top-right{font-variant-numeric:tabular-nums}
+.shell{max-width:1600px;grid-template-columns:270px minmax(0,1fr)}
+.sidebar{position:sticky;top:76px;height:calc(100vh - 76px);align-self:start;padding:30px 20px;background:#0d1711}
+main{padding:clamp(26px,4vw,60px);max-width:1300px;width:100%;margin-inline:auto}
+.hero{min-height:245px;display:flex;align-items:center;border-radius:20px;padding:clamp(30px,5vw,56px);background:linear-gradient(118deg,#10251a 0%,#1d402b 62%,#2b5037 100%);border-color:#b99a5d66}
+.hero:after{font-size:280px;right:5%;top:-80px}
+.hero h1{font-size:clamp(34px,4.3vw,50px);letter-spacing:-.045em}
+.hero p{font-size:14px;max-width:660px;line-height:1.8}
+.hero-meta{gap:8px}
+.pill{padding:7px 12px;letter-spacing:.045em}
+.stats{gap:16px;margin:22px 0 34px}
+.stat{padding:20px 22px;border-radius:14px;position:relative;overflow:hidden}
+.stat:after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#b99a5d}
+.stat b{font-size:29px;letter-spacing:-.04em}
+.stat span{font-size:11px;letter-spacing:.02em}
+.guide{padding:24px;border-radius:15px;margin-bottom:34px}
+.guide-grid{gap:13px}
+.guide-card{padding:17px;border-radius:12px;transition:transform .18s,border-color .18s}
+.guide-card:hover{transform:translateY(-2px);border-color:#667e62}
+.section-head{margin-bottom:17px}
+.section-head h2{font-size:23px}
+.tools{position:sticky;top:88px;z-index:10;padding:10px;margin:16px -10px 14px;background:#0b140feF;border:1px solid #29382d;border-radius:13px;backdrop-filter:blur(12px)}
+.field,.tool-btn{height:45px;border-radius:10px}
+.tool-btn{font-size:11px;letter-spacing:.015em}
+.chapter{border-radius:14px;margin-bottom:12px;transition:border-color .18s,transform .18s,box-shadow .18s}
+.chapter-head{padding:17px 19px;min-height:72px}
+.chapter-head:hover{background:#17271c}
+.roman{width:40px;height:40px;flex-basis:40px;border-radius:11px;font-size:11px}
+.chapter-title b{font-size:13px;letter-spacing:.015em}
+.chapter-title small{font-size:10px}
+.chapter-body{padding:0 22px 18px 74px}
+.article{padding:17px 0}
+.article h3{font-size:13px}
+.article p{font-size:12px;line-height:1.85}
+.alinea{border-radius:10px;margin-top:8px}
+.alinea summary{padding:10px 13px;font-size:11px}
+.alinea p{padding:0 14px 12px;line-height:1.85}
+.results{padding:0 2px;font-variant-numeric:tabular-nums}
+footer{margin-top:42px;padding:22px 0;line-height:1.8}
+button:focus-visible,input:focus-visible,select:focus-visible,.alinea summary:focus-visible{outline:2px solid #d0b477;outline-offset:3px}
+@media(max-width:850px){
+ .shell{display:block}.sidebar{position:relative;top:auto;height:auto;flex-direction:row;padding:10px 14px;gap:7px}
+ main{padding:24px 20px}.tools{top:74px}
+}
+@media(max-width:600px){
+ .top{height:65px;padding-inline:13px}.brand img{width:38px;height:38px}
+ .brand strong{font-size:11px}.brand small{font-size:8px}
+ .sidebar{overflow-x:auto;scrollbar-width:none}.sidebar::-webkit-scrollbar{display:none}
+ .nav-item{font-size:11px}.nav-ico{width:26px;height:26px}
+ main{padding:17px 12px}.hero{min-height:0;padding:25px 19px;border-radius:15px}
+ .hero:after{font-size:170px;top:-38px;right:-5%}.hero h1{font-size:30px}
+ .stats{gap:7px;margin:14px 0 24px}.stat{padding:14px 10px;border-radius:11px}
+ .stat b{font-size:21px}.stat span{font-size:9px}
+ .guide{padding:16px}.section-head h2{font-size:19px}
+ .tools{grid-template-columns:1fr 1fr;top:66px;padding:7px;gap:7px}
+ .tools .field:first-child{grid-column:1/-1}.field,.tool-btn{height:41px}
+ .chapter-head{padding:13px 11px;gap:10px;min-height:64px}
+ .chapter-title b{font-size:11px}.chapter-title small{font-size:9px}
+ .chapter-body{padding:0 12px 12px}.article{padding:14px 0}
+ .article-top{align-items:flex-start;flex-direction:column;gap:2px}
+ footer{font-size:9px}
+}
+
 </style>
 </head>
 <body>
@@ -108,7 +178,7 @@ footer b{color:#c5d0c4}
   <div class="side-card"><b>COMITÉ D’ÉTHIQUE · 073</b><p>Préserver l’ordre. Encadrer nos décisions. Assumer nos responsabilités.</p></div>
  </aside>
  <main>
-  <section class="hero" id="overview"><div class="hero-content"><div class="eyebrow">PORTAIL INSTITUTIONNEL · DOCUMENT INTERNE</div><h1>Le Code éthique</h1><p>Référentiel du Comité d’Éthique de la Fondation S.C.P., Installation 73. Consultez les dispositions, recherchez un article ou parcourez les chapitres du Code.</p><div class="hero-meta"><span class="pill">VERSION EN VIGUEUR</span><span class="pill">AUTORITÉ : PRÉSIDENCE DU COMITÉ</span><span class="pill">CLASSIFICATION : INTERNE</span></div></div></section>
+  <section class="hero" id="overview"><div class="hero-content"><div class="eyebrow">PORTAIL INSTITUTIONNEL · DOCUMENT INTERNE</div><h1>Le Code éthique</h1><p>Référentiel fictif du Comité d’Éthique de la Fondation S.C.P., Installation 73. Consultez les dispositions, recherchez un article ou parcourez les chapitres du Code.</p><div class="hero-meta"><span class="pill">VERSION EN VIGUEUR</span><span class="pill">AUTORITÉ : PRÉSIDENCE DU COMITÉ</span><span class="pill">CLASSIFICATION : INTERNE</span></div></div></section>
   <section class="stats" aria-label="Statistiques du Code"><div class="stat"><b id="articleTotal">—</b><span>Articles répertoriés</span></div><div class="stat"><b id="chapterTotal">—</b><span>Chapitres</span></div><div class="stat"><b>73</b><span>Site concerné</span></div></section>
   <section class="guide" id="mode-emploi">
    <div class="section-head"><div><div class="eyebrow">AIDE À LA LECTURE</div><h2>Mode d’emploi — Comment lire un article ?</h2><p>Repères de rédaction et de citation du Code éthique.</p></div></div>
@@ -126,7 +196,7 @@ footer b{color:#c5d0c4}
    <div class="results" id="resultsCount" aria-live="polite"></div>
    <div id="chapters"></div><div class="empty" id="empty">Aucun article ne correspond à votre recherche.</div>
   </section>
-  <footer><span><b>COMITÉ D’ÉTHIQUE — SITE 73</b><br>Fondation S.C.P. · Environnement institutionnel</span><span>« La Fondation S.C.P. est froide, pas cruelle. »<br>Document interne · Version de consultation</span></footer>
+  <footer><span><b>COMITÉ D’ÉTHIQUE — SITE 73</b><br>Fondation S.C.P. · Environnement institutionnel</span><span>« La Fondation S.C.P. est froide, pas cruelle. »<br>Document fictif de jeu de rôle · Version de consultation</span></footer>
  </main>
 </div>
 <script>
