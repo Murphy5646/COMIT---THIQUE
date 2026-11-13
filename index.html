@@ -1375,6 +1375,39 @@ body{font-family:"Segoe UI Variable","Segoe UI",system-ui,sans-serif!important}
  .asia-dashboard{display:none!important}
 }
 
+
+/* ===== CORRECTION AFFICHAGE BUREAU — 13/11/2026 ===== */
+/* Au démarrage, le bureau reste libre : la fenêtre d'accueil ne recouvre plus les raccourcis. */
+#desktop .work-area{z-index:1!important;pointer-events:none!important}
+#desktop .icons.desktop-icons{
+ position:fixed!important;top:88px!important;left:24px!important;right:auto!important;bottom:88px!important;
+ display:grid!important;grid-template-columns:repeat(4,minmax(88px,112px))!important;
+ grid-auto-rows:104px!important;gap:8px 10px!important;
+ width:min(490px,calc(100vw - 48px))!important;max-width:490px!important;
+ height:auto!important;margin:0!important;padding:10px!important;align-content:start!important;
+ border:0!important;border-radius:0!important;background:transparent!important;
+ overflow-y:auto!important;overflow-x:hidden!important;z-index:30!important;
+}
+#desktop .icons.desktop-icons .dicon{
+ display:flex!important;position:relative!important;min-width:0!important;width:100%!important;
+ min-height:92px!important;height:auto!important;flex-direction:column!important;
+ align-items:center!important;justify-content:center!important;gap:7px!important;
+ padding:8px 5px!important;border:1px solid transparent!important;border-radius:9px!important;
+ background:transparent!important;color:#f1f5ef!important;font:11px/1.25 "Segoe UI",Arial,sans-serif!important;
+ text-align:center!important;white-space:normal!important;text-shadow:0 1px 5px #000!important;
+}
+#desktop .icons.desktop-icons .dicon:hover,
+#desktop .icons.desktop-icons .dicon:focus-visible{
+ background:rgba(255,255,255,.12)!important;border-color:rgba(255,255,255,.16)!important;outline:none!important;
+}
+#desktop .icons.desktop-icons .dicon .ico{width:44px!important;height:44px!important;min-width:44px!important;border-radius:11px!important}
+#desktop #task{z-index:600!important;bottom:10px!important}
+@media(max-width:700px){
+ #desktop .icons.desktop-icons{top:60px!important;left:8px!important;right:8px!important;bottom:78px!important;width:auto!important;max-width:none!important;grid-template-columns:repeat(3,minmax(72px,1fr))!important;grid-auto-rows:88px!important;gap:5px!important;padding:5px!important}
+ #desktop .icons.desktop-icons .dicon{min-height:80px!important;font-size:10px!important}
+ #desktop .icons.desktop-icons .dicon .ico{width:38px!important;height:38px!important;min-width:38px!important}
+}
+
 </style>
 </head>
 <body><div class="desktop" id="desktop">
@@ -1982,7 +2015,7 @@ $('closeAuth').onclick=()=>{guest=true;updateLock();toast('Mode consultation : l
 ['authFirstName','authLastName','authDepartment','authPassword'].forEach(i=>$(i).addEventListener('keydown',e=>{if(e.key==='Enter')$('loginBtn').click()}));
 window.loadWorkspaceData=loadWorkspaceData;
 window.setWorkspaceAccess=setWorkspaceAccess;
-setAuthUI();openApp('accueil');
+setAuthUI();
 }
 </script><script>
 (()=>{const task=document.getElementById('task');if(!task||task.querySelector('.task-tray'))return;
