@@ -62,18 +62,45 @@ footer{border-top-color:#dce3d8;color:#7b887a}footer b{color:#365640}
 </div>
 <script>
 const domains=["Principes fondamentaux et garanties","Droits et dignité des personnes","Protection des personnes vulnérables","Traitement équitable et non-discrimination","Consentement et information","Entretiens et auditions","Accueil et orientation","Plaintes et réclamations","Signalements internes","Protection des lanceurs d’alerte","Confidentialité des échanges","Secret professionnel interne","Classification documentaire","Gestion des habilitations","Accès aux locaux","Contrôle des accès","Visites et intervenants","Circulation dans le Site","Surveillance institutionnelle","Traçabilité des opérations","Conservation des preuves","Gestion des incidents","Déclaration des anomalies","Enquêtes administratives","Audits éthiques","Contrôles périodiques","Évaluation des risques","Prévention des atteintes","Gestion des situations sensibles","Recherche et expérimentation","Protocoles de recherche","Validation préalable","Modification des protocoles","Suivi des expérimentations","Arrêt et suspension des activités","Données de recherche","Échantillons et matériels","Installations spécialisées"];
-const aspects=["Préparation et conditions préalables","Autorisations et responsabilités","Exécution et encadrement","Contrôle, bilan et archivage"];
-const subjects=["la demande initiale","la vérification des conditions","la désignation du responsable","la transmission des informations","la tenue du registre","la conservation des éléments","le traitement d’une anomalie","la réévaluation de la situation","la clôture du dossier","le retour d’expérience"];
-const duties=["Enregistrement","Vérification","Information","Autorisation","Traçabilité","Conservation","Signalement","Réexamen","Clôture","Évaluation"];
+const aspects=[
+ {name:"Préparation et conditions préalables",rule:"Avant toute action, le service définit son objectif, identifie les personnes concernées et vérifie que les moyens engagés sont proportionnés. Les éléments indispensables sont réunis avant l’ouverture du dossier."},
+ {name:"Autorisations et responsabilités",rule:"Aucune décision ne peut être prise par une personne dépourvue de compétence ou de délégation. L’autorisation précise son périmètre, sa durée, ses éventuelles limites et le responsable chargé de son suivi."},
+ {name:"Exécution et encadrement",rule:"L’action est conduite dans le respect des instructions validées et des garanties applicables. Le responsable veille à ce que les personnes chargées de l’exécution connaissent leurs obligations et puissent faire remonter toute difficulté."},
+ {name:"Contrôle, bilan et archivage",rule:"À l’issue de l’action, le service vérifie les résultats, relève les écarts et consigne les suites décidées. Les pièces utiles sont conservées selon les règles de classement et de durée applicables."}
+];
+const subjects=[
+ ["la demande initiale","la demande est datée, identifiée et accompagnée des motifs qui permettent d’en comprendre l’objet."],
+ ["la vérification des conditions","les conditions matérielles, humaines et administratives sont contrôlées avant toute validation."],
+ ["la désignation du responsable","un responsable nominativement identifié est chargé du suivi et connaît l’étendue de ses attributions."],
+ ["la transmission des informations","seules les informations utiles sont communiquées aux destinataires autorisés, par un canal adapté."],
+ ["la tenue du registre","le registre comporte les références nécessaires pour retrouver l’opération et comprendre les décisions prises."],
+ ["la conservation des éléments","les pièces sont conservées dans un emplacement autorisé, avec des conditions qui préservent leur intégrité."],
+ ["le traitement d’une anomalie","l’anomalie est décrite de manière factuelle, signalée au bon niveau et suivie jusqu’à sa résolution ou son classement motivé."],
+ ["la réévaluation de la situation","la situation est réexaminée lorsque des faits nouveaux, un changement de risque ou une contestation le justifient."],
+ ["la clôture du dossier","la clôture intervient après vérification des suites, mention des décisions finales et identification des pièces conservées."],
+ ["le retour d’expérience","les enseignements utiles sont consignés afin de corriger les pratiques et d’éviter la répétition des difficultés."]
+];
+const duties=[
+ ["Enregistrement","Le service ouvre une trace écrite et attribue une référence permettant le suivi."],
+ ["Vérification","Le contrôle est réalisé sur des éléments vérifiables ; les suppositions sont distinguées des faits établis."],
+ ["Information","Les personnes qui doivent être informées reçoivent une explication adaptée à leur rôle et aux limites de confidentialité."],
+ ["Autorisation","La décision est prise par l’autorité compétente et son périmètre est explicitement indiqué."],
+ ["Traçabilité","Les dates, intervenants, décisions et changements significatifs sont consignés de façon chronologique."],
+ ["Conservation","Les documents sont protégés contre la perte, l’altération et l’accès non autorisé."],
+ ["Signalement","Tout écart significatif est transmis sans délai indu au responsable compétent, sans dissimulation ni modification des faits."],
+ ["Réexamen","La décision est réévaluée à partir des éléments nouveaux et les motifs du maintien ou de la modification sont consignés."],
+ ["Clôture","Le dossier n’est clos qu’après traitement des points en suspens ou mention explicite de ceux qui restent à suivre."],
+ ["Évaluation","Le service apprécie la conformité, les conséquences et les améliorations nécessaires à partir de critères explicites."]
+];
 function toRoman(n){const t=[[1000,"M"],[900,"CM"],[500,"D"],[400,"CD"],[100,"C"],[90,"XC"],[50,"L"],[40,"XL"],[10,"X"],[9,"IX"],[5,"V"],[4,"IV"],[1,"I"]];let s="";for(const [v,l] of t)while(n>=v){s+=l;n-=v}return s}
 const chapters=[];let articleNumber=1;
 domains.forEach(domain=>aspects.forEach(aspect=>{
- const chapterTitle=domain+" — "+aspect, articles=[];
- for(let group=0;group<10;group++)for(let item=0;item<10;item++){
-  const subject=subjects[item],duty=duties[group];
-  articles.push({n:articleNumber++,title:duty+" : "+subject.charAt(0).toUpperCase()+subject.slice(1),paragraphs:[
-   "Dans le cadre de « "+chapterTitle.toLowerCase()+" », la mesure de "+duty.toLowerCase()+" relative à "+subject+" doit être adaptée à la situation et aux personnes concernées. Le responsable désigné précise son objet, vérifie les éléments utiles et s’assure que la décision relève bien de ses attributions.",
-   "Le résultat de cette mesure est consigné dans le dossier ou le registre approprié, avec sa date et l’autorité qui en répond. Toute information manquante, divergence ou difficulté est signalée sans délai ; la suite donnée, y compris un refus ou une suspension, doit pouvoir être vérifiée ultérieurement."
+ const chapterTitle=domain+" — "+aspect.name, articles=[];
+ for(let d=0;d<duties.length;d++)for(let q=0;q<subjects.length;q++){
+  const duty=duties[d],subject=subjects[q];
+  articles.push({n:articleNumber++,title:duty[0]+" — "+subject[0].charAt(0).toUpperCase()+subject[0].slice(1),paragraphs:[
+   "Dans le cadre de « "+domain.toLowerCase()+" », "+aspect.rule+" "+subject[1].charAt(0).toUpperCase()+subject[1].slice(1),
+   duty[1]+" Cette obligation s’applique à chaque étape pertinente et ne dispense jamais le personnel de respecter les autres garanties du présent Code. En cas d’incertitude sur la conduite à tenir, l’intéressé suspend la décision qui pourrait porter atteinte aux droits d’une personne et sollicite l’autorité compétente."
   ]});
  }
  chapters.push({roman:toRoman(chapters.length+1),title:chapterTitle,articles});
