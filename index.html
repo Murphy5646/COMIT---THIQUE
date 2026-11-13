@@ -1706,7 +1706,7 @@ function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setT
 function showAuth(v=true){$('authBox').classList.toggle('show',v);if(v)$('authFirstName').focus()}
 $('authToggle').onclick=()=>{if(user)logout();else showAuth(true)};
 $('openAuth').onclick=()=>showAuth(true);$('closeAuth').onclick=()=>showAuth(false);
-const LOCAL_DB_KEY='site73-local-database-v1',LOCAL_SESSION_KEY='site73-local-session-v1';
+const LOCAL_DB_KEY='site73-local-database-v1',LOCAL_SESSION_KEY='site73-local-session-v1',REMEMBERED_USER_KEY='site73-remembered-user-v1';
 function readLocalDB(){try{return JSON.parse(localStorage.getItem(LOCAL_DB_KEY)||'{}')}catch(e){return {}}}
 function writeLocalDB(db){localStorage.setItem(LOCAL_DB_KEY,JSON.stringify(db))}
 function localRows(table){const db=readLocalDB();return Array.isArray(db[table])?db[table]:[]}
@@ -1807,7 +1807,7 @@ async function login(){
    profiles.push(found);saveRows('profiles',profiles);
   }
   user={id:found.id,email:'',created_at:found.created_at};profile=found;
-  if($('staySigned')?.checked){localStorage.setItem(LOCAL_SESSION_KEY,user.id);sessionStorage.removeItem(LOCAL_SESSION_KEY)}else{sessionStorage.setItem(LOCAL_SESSION_KEY,user.id);localStorage.removeItem(LOCAL_SESSION_KEY)}
+  if($('staySigned')?.checked){localStorage.setItem(LOCAL_SESSION_KEY,user.id);localStorage.setItem(REMEMBERED_USER_KEY,user.id);sessionStorage.removeItem(LOCAL_SESSION_KEY)}else{sessionStorage.setItem(LOCAL_SESSION_KEY,user.id);localStorage.removeItem(LOCAL_SESSION_KEY);localStorage.removeItem(REMEMBERED_USER_KEY)}
   await loadProfile();window.setGuestMode(false);
   $('authPassword').value='';
   toast('Session ouverte · '+username);
@@ -1817,7 +1817,7 @@ async function login(){
   button.disabled=false;button.innerHTML='<span>OUVRIR MA SESSION</span><b>↗</b>';
  }
 }
-async function logout(){window.setGuestMode(false);localStorage.removeItem(LOCAL_SESSION_KEY);sessionStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;setAuthUI();updateLock();toast('Session locale fermée.')}
+async function logout(){window.setGuestMode(false);localStorage.removeItem(LOCAL_SESSION_KEY);localStorage.removeItem(REMEMBERED_USER_KEY);sessionStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;setAuthUI();updateLock();toast('Session locale fermée.')}
 $('loginBtn').onclick=login;
 async function submitReport(e){e.preventDefault();if(!user)return;const payload={reporter:profile?.username||'Personnel',reporter_id:user.id,department:$('rDepartment').value.trim()||profile?.department||'Personnel',incident_date:$('rDate').value||null,location:$('rLocation').value.trim()||null,subject:$('rSubject').value.trim(),facts:$('rFacts').value.trim(),evidence:$('rEvidence').value.trim()||null};if(!payload.subject||!payload.facts)return message('reportMsg','Les champs obligatoires doivent être remplis.','error');const {error}=await sb.from('reports').insert(payload);if(error)return message('reportMsg',error.message,'error');$('reportForm').reset();message('reportMsg','Signalement enregistré sur cet appareil.','ok')}
 $('reportForm').addEventListener('submit',submitReport);
@@ -1918,7 +1918,7 @@ function exportReport(rep){
  a.href=url;a.download='rapport-signalement-'+String(rep.id).slice(0,8)+'.txt';document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url)
 }
 $('refreshAdmin').onclick=()=>loadAdmin().catch(e=>toast(e.message));
-async function boot(){const id=localStorage.getItem(LOCAL_SESSION_KEY)||sessionStorage.getItem(LOCAL_SESSION_KEY);if(!id)return;const p=localRows('profiles').find(x=>x.id===id);if(!p){localStorage.removeItem(LOCAL_SESSION_KEY);return}user={id:p.id,email:'',created_at:p.created_at};try{await loadProfile()}catch(error){localStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;setAuthUI();throw error}}
+async function boot(){const id=localStorage.getItem(LOCAL_SESSION_KEY)||localStorage.getItem(REMEMBERED_USER_KEY)||sessionStorage.getItem(LOCAL_SESSION_KEY);if(!id)return false;const p=localRows('profiles').find(x=>x.id===id);if(!p){localStorage.removeItem(LOCAL_SESSION_KEY);localStorage.removeItem(REMEMBERED_USER_KEY);sessionStorage.removeItem(LOCAL_SESSION_KEY);return false}user={id:p.id,email:'',created_at:p.created_at};try{await loadProfile();localStorage.setItem(LOCAL_SESSION_KEY,p.id);localStorage.setItem(REMEMBERED_USER_KEY,p.id);sessionStorage.removeItem(LOCAL_SESSION_KEY);return true}catch(error){localStorage.removeItem(LOCAL_SESSION_KEY);localStorage.removeItem(REMEMBERED_USER_KEY);sessionStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;setAuthUI();throw error}}
 /* La restauration de session est lancée après l'initialisation complète du bureau. */
 </script>
 <script>
@@ -2276,7 +2276,7 @@ window.loadWorkspaceData=loadWorkspaceData;
 window.setWorkspaceAccess=setWorkspaceAccess;
 setAuthUI();
 /* Restaure la session persistante après le chargement de toutes les fonctions du bureau. */
-boot().then(()=>{if(user){window.setGuestMode(false);window.setAuthUI();}}).catch(e=>{localStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;window.setAuthUI();toast('Session non restaurée : '+e.message)});
+boot().then(restored=>{if(restored&&user){window.setGuestMode(false);window.setAuthUI();$('authBox').classList.remove('show');}}).catch(e=>{localStorage.removeItem(LOCAL_SESSION_KEY);localStorage.removeItem(REMEMBERED_USER_KEY);sessionStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;window.setAuthUI();toast('Session non restaurée : '+e.message)});
 }
 </script><script>
 (()=>{const task=document.getElementById('task');if(!task||task.querySelector('.task-tray'))return;
