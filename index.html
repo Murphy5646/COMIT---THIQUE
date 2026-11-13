@@ -2268,6 +2268,7 @@ let typed=false;function startType(){
  next();
 }
 window.showAuth=function(v=true){if(v)guest=false;updateLock();if(v&&!user)$('authFirstName').focus()};
+window.setGuestMode=function(value){guest=!!value;updateLock();};
 const _setAuthUI=setAuthUI;window.setAuthUI=function(){_setAuthUI();const who=profile?.username||user?.email;$('whoLabel').textContent=user?`${who} · ${profile?.role||'PERSONNEL'}`:'Invité';$('whoStart').textContent=user?who:'Invité (consultation)';$('powerLabel').textContent=user?'Fermer la session':'Écran de connexion';const pce=isPce();document.querySelectorAll('[data-app=admin]').forEach(e=>e.classList.toggle('hidden',!pce));$('adminNav').classList.toggle('hidden',!pce);if(!pce)closeApp('admin');updateLock()};
 const _logout=logout;window.logout=async function(){guest=false;typed=false;$('greet').firstChild.textContent='';await _logout();updateLock()};
 $('closeAuth').onclick=()=>{guest=true;updateLock();toast('Mode consultation : la transmission d’un signalement nécessite une connexion.')};
@@ -2280,23 +2281,16 @@ async function restoreLocalSession(){
  const id=localStorage.getItem(LOCAL_SESSION_KEY)||localStorage.getItem(REMEMBERED_USER_KEY)||sessionStorage.getItem(LOCAL_SESSION_KEY);
  if(!id)return false;
  const savedProfile=localRows('profiles').find(x=>x.id===id);
- if(!savedProfile){
-  localStorage.removeItem(LOCAL_SESSION_KEY);
-  localStorage.removeItem(REMEMBERED_USER_KEY);
-  sessionStorage.removeItem(LOCAL_SESSION_KEY);
-  return false;
- }
+ if(!savedProfile)return false;
  user={id:savedProfile.id,email:'',created_at:savedProfile.created_at};
- try{
-  await loadProfile();
-  localStorage.setItem(LOCAL_SESSION_KEY,savedProfile.id);
-  localStorage.setItem(REMEMBERED_USER_KEY,savedProfile.id);
-  sessionStorage.removeItem(LOCAL_SESSION_KEY);
-  return true;
- }catch(error){
-  user=null;profile=null;setAuthUI();
-  throw error;
- }
+ profile=savedProfile;
+ setAuthUI();
+ if(profile.role==='PCE'&&sb)await loadAdmin();
+ await loadWorkspaceData();
+ localStorage.setItem(LOCAL_SESSION_KEY,savedProfile.id);
+ localStorage.setItem(REMEMBERED_USER_KEY,savedProfile.id);
+ sessionStorage.removeItem(LOCAL_SESSION_KEY);
+ return true;
 }
 restoreLocalSession().then(restored=>{
  if(restored&&user){
