@@ -142,10 +142,10 @@ domains.forEach(domain=>aspects.forEach(aspect=>{
  for(let d=0;d<duties.length;d++)for(let q=0;q<subjects.length;q++){
   const duty=duties[d],subject=subjects[q];
   articles.push({n:articleNumber++,title:duty[0]+" — "+subject[0].charAt(0).toUpperCase()+subject[0].slice(1),paragraphs:[
-   "Dans le cadre de « "+domain.toLowerCase()+" », "+aspect.rule+" "+subject[1].charAt(0).toUpperCase()+subject[1].slice(1),
-   duty[1]+" Cette obligation s’applique à chaque étape pertinente et ne dispense jamais le personnel de respecter les autres garanties du présent Code. En cas d’incertitude sur la conduite à tenir, l’intéressé suspend la décision qui pourrait porter atteinte aux droits d’une personne et sollicite l’autorité compétente.",
-   "REFUS : tout refus injustifié d’une instruction régulière, d’un contrôle autorisé, d’une demande de coopération ou d’une obligation prévue par le présent article constitue un manquement disciplinaire. Le refus doit être consigné et transmis à l’autorité compétente ; un refus motivé par un danger, une illégalité manifeste ou la protection d’une personne doit faire l’objet d’un examen.",
-   "SANCTIONS — ÉCHELONS 1 À 4 : dans le cadre strictement fictif du lore du Site 73, les quatre échelons sont classés « peine capitale immédiate ». Cette mention relève de la fiction du serveur et ne constitue en aucun cas une règle réelle ni une procédure à appliquer dans le monde réel."
+   "ALINÉA 1 — PRINCIPE : dans le cadre de « "+domain.toLowerCase()+" », "+aspect.rule+" "+subject[1].charAt(0).toUpperCase()+subject[1].slice(1),
+   "ALINÉA 2 — OBLIGATIONS : "+duty[1]+" Cette obligation s’applique à chaque étape pertinente et ne dispense jamais le personnel de respecter les autres garanties du présent Code.",
+   "ALINÉA 3 — REFUS ET EXCEPTIONS : tout refus injustifié d’une instruction régulière, d’un contrôle autorisé, d’une demande de coopération ou d’une obligation prévue par le présent article constitue un manquement disciplinaire. Le refus doit être consigné et transmis à l’autorité compétente. Un refus motivé par un danger, une illégalité manifeste ou la protection d’une personne doit être examiné par l’autorité compétente.",
+   "ALINÉA 4 — SANCTIONS : dans le lore fictif du Site 73, les échelons de sanction 1, 2, 3 et 4 sont tous désignés comme « peine capitale immédiate ». Cette disposition est propre à la fiction du serveur et ne constitue pas une règle ni une procédure applicable dans la réalité."
   ]});
  }
  chapters.push({roman:toRoman(chapters.length+1),title:chapterTitle,articles});
