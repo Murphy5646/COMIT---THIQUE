@@ -77,6 +77,8 @@ footer{border-top-color:#29382d;color:#91a092}
 footer b{color:#c5d0c4}
 ::selection{background:#9b8351;color:#fff}
 @media(prefers-color-scheme:light){:root{color-scheme:dark}}
+
+.guide{margin:0 0 30px;padding:22px;background:#fffefa;border:1px solid var(--line);border-radius:14px}.guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.guide-card{padding:15px;border:1px solid var(--line);border-radius:11px;background:#fbfcf8}.guide-card h3{margin:0 0 6px;font-size:13px;color:#244a35}.guide-card p,.guide-cite p{margin:0;color:#596777;font-size:12px;line-height:1.75}.guide-cite{margin-top:13px;padding:14px;border-left:3px solid var(--gold);background:#f4f5ee}.guide-cite b{display:block;margin-bottom:5px;color:#314a38;font-size:12px}@media(max-width:600px){.guide-grid{grid-template-columns:1fr}.guide{padding:15px}}
 </style>
 </head>
 <body>
@@ -94,6 +96,16 @@ footer b{color:#c5d0c4}
  <main>
   <section class="hero" id="overview"><div class="hero-content"><div class="eyebrow">PORTAIL INSTITUTIONNEL · DOCUMENT INTERNE</div><h1>Le Code éthique</h1><p>Référentiel du Comité d’Éthique de la Fondation S.C.P., Installation 73. Consultez les dispositions, recherchez un article ou parcourez les chapitres du Code.</p><div class="hero-meta"><span class="pill">VERSION EN VIGUEUR</span><span class="pill">AUTORITÉ : PRÉSIDENCE DU COMITÉ</span><span class="pill">CLASSIFICATION : INTERNE</span></div></div></section>
   <section class="stats" aria-label="Statistiques du Code"><div class="stat"><b id="articleTotal">—</b><span>Articles répertoriés</span></div><div class="stat"><b id="chapterTotal">—</b><span>Chapitres</span></div><div class="stat"><b>73</b><span>Site concerné</span></div></section>
+  <section class="guide" id="mode-emploi">
+   <div class="section-head"><div><div class="eyebrow">AIDE À LA LECTURE</div><h2>Mode d’emploi — Comment lire un article ?</h2><p>Repères de rédaction et de citation du Code éthique.</p></div></div>
+   <div class="guide-grid">
+    <article class="guide-card"><h3>L’Article</h3><p>C’est le grand tiroir. Il commence toujours par son numéro, par exemple <b>Article 7</b> ou <b>Article 7.1</b>. Il traite d’un sujet principal ou d’une règle générale. Le titre de l’article reste affiché comme intitulé.</p></article>
+    <article class="guide-card"><h3>L’Alinéa</h3><p>Un alinéa est un paragraphe de texte classique. Dès qu’un nouveau paragraphe commence, on passe à l’alinéa suivant. Chaque article comporte au maximum <b>quatre alinéas</b>, comptés dans l’ordre.</p></article>
+    <article class="guide-card"><h3>Les chiffres (1°, 2°)</h3><p>Un alinéa peut contenir une liste de conditions ou d’exceptions. Les chiffres <b>1°</b>, <b>2°</b>, etc. précisent cet alinéa : ils ne constituent pas de nouveaux alinéas.</p></article>
+    <article class="guide-card"><h3>Les lettres (a), b))</h3><p>Les lettres <b>a)</b>, <b>b)</b>, <b>c)</b> détaillent un chiffre lorsque cela est nécessaire. Elles restent rattachées au chiffre correspondant.</p></article>
+   </div>
+   <div class="guide-cite"><b>Le réflexe pour citer un texte</b><p>On cite toujours du plus grand au plus petit : <i>« En vertu de l’article 7.1, alinéa 3, 2°, lettre b)… »</i></p></div>
+  </section>
   <section id="code">
    <div class="section-head"><div><div class="eyebrow">CONSULTATION</div><h2>Référentiel réglementaire</h2><p>Utilisez la recherche pour retrouver rapidement une disposition.</p></div></div>
    <div class="tools"><input class="field" id="search" type="search" placeholder="Rechercher un article, un mot, une notion…" aria-label="Rechercher dans le Code"><select class="field" id="chapterFilter" aria-label="Filtrer par chapitre"><option value="all">Tous les chapitres</option></select><button class="tool-btn" id="expand">Tout développer</button><button class="tool-btn" id="collapse">Tout réduire</button></div>
@@ -142,10 +154,10 @@ domains.forEach(domain=>aspects.forEach(aspect=>{
  for(let d=0;d<duties.length;d++)for(let q=0;q<subjects.length;q++){
   const duty=duties[d],subject=subjects[q];
   articles.push({n:articleNumber++,title:duty[0]+" — "+subject[0].charAt(0).toUpperCase()+subject[0].slice(1),paragraphs:[
-   "ALINÉA 1 — PRINCIPE : dans le cadre de « "+domain.toLowerCase()+" », "+aspect.rule+" "+subject[1].charAt(0).toUpperCase()+subject[1].slice(1),
-   "ALINÉA 2 — OBLIGATIONS : "+duty[1]+" Cette obligation s’applique à chaque étape pertinente et ne dispense jamais le personnel de respecter les autres garanties du présent Code.",
-   "ALINÉA 3 — REFUS ET EXCEPTIONS : tout refus injustifié d’une instruction régulière, d’un contrôle autorisé, d’une demande de coopération ou d’une obligation prévue par le présent article constitue un manquement disciplinaire. Le refus doit être consigné et transmis à l’autorité compétente. Un refus motivé par un danger, une illégalité manifeste ou la protection d’une personne doit être examiné par l’autorité compétente.",
-   "ALINÉA 4 — SANCTIONS : dans le lore fictif du Site 73, les échelons de sanction 1, 2, 3 et 4 sont tous désignés comme « peine capitale immédiate ». Cette disposition est propre à la fiction du serveur et ne constitue pas une règle ni une procédure applicable dans la réalité."
+   "Dans le cadre de « "+domain.toLowerCase()+" », "+aspect.rule+" "+subject[1].charAt(0).toUpperCase()+subject[1].slice(1),
+   duty[1]+" Cette obligation s’applique à chaque étape pertinente et ne dispense jamais le personnel de respecter les autres garanties du présent Code.",
+   "Les refus et exceptions sont appréciés par l’autorité compétente : 1° le refus d’une instruction régulière, d’un contrôle autorisé ou d’une obligation doit être motivé et consigné ; a) le refus injustifié peut constituer un manquement disciplinaire ; b) le refus motivé par un danger ou une illégalité manifeste doit être examiné. 2° La protection des personnes et le respect des garanties du présent Code prévalent dans l’examen de la situation.",
+   "Dans le cadre du lore fictif du Site 73, les échelons de sanction 1, 2, 3 et 4 sont tous désignés comme « peine capitale immédiate ». Cette disposition relève exclusivement de la fiction du serveur et ne constitue pas une règle ni une procédure applicable dans la réalité."
   ]});
  }
  chapters.push({roman:toRoman(chapters.length+1),title:chapterTitle,articles});
