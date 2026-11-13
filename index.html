@@ -2276,7 +2276,38 @@ window.loadWorkspaceData=loadWorkspaceData;
 window.setWorkspaceAccess=setWorkspaceAccess;
 setAuthUI();
 /* Restaure la session persistante après le chargement de toutes les fonctions du bureau. */
-boot().then(restored=>{if(restored&&user){window.setGuestMode(false);window.setAuthUI();$('authBox').classList.remove('show');}}).catch(e=>{localStorage.removeItem(LOCAL_SESSION_KEY);localStorage.removeItem(REMEMBERED_USER_KEY);sessionStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;window.setAuthUI();toast('Session non restaurée : '+e.message)});
+async function restoreLocalSession(){
+ const id=localStorage.getItem(LOCAL_SESSION_KEY)||localStorage.getItem(REMEMBERED_USER_KEY)||sessionStorage.getItem(LOCAL_SESSION_KEY);
+ if(!id)return false;
+ const savedProfile=localRows('profiles').find(x=>x.id===id);
+ if(!savedProfile){
+  localStorage.removeItem(LOCAL_SESSION_KEY);
+  localStorage.removeItem(REMEMBERED_USER_KEY);
+  sessionStorage.removeItem(LOCAL_SESSION_KEY);
+  return false;
+ }
+ user={id:savedProfile.id,email:'',created_at:savedProfile.created_at};
+ try{
+  await loadProfile();
+  localStorage.setItem(LOCAL_SESSION_KEY,savedProfile.id);
+  localStorage.setItem(REMEMBERED_USER_KEY,savedProfile.id);
+  sessionStorage.removeItem(LOCAL_SESSION_KEY);
+  return true;
+ }catch(error){
+  user=null;profile=null;setAuthUI();
+  throw error;
+ }
+}
+restoreLocalSession().then(restored=>{
+ if(restored&&user){
+  window.setGuestMode(false);
+  window.setAuthUI();
+  $('authBox').classList.remove('show');
+ }
+}).catch(e=>{
+ user=null;profile=null;window.setAuthUI();
+ toast('Session non restaurée : '+e.message);
+});
 }
 </script><script>
 (()=>{const task=document.getElementById('task');if(!task||task.querySelector('.task-tray'))return;
