@@ -171,47 +171,66 @@ const empty=document.getElementById('empty');
 const total=chapters.reduce((n,c)=>n+c.articles.length,0);
 document.getElementById('articleTotal').textContent=total;
 document.getElementById('chapterTotal').textContent=chapters.length;
+function renderArticles(chapterIndex,body,query=''){
+ const chapter=chapters[chapterIndex];body.replaceChildren();
+ chapter.articles.forEach((article,articleIndex)=>{
+  const searchable=[article.n,article.title,...article.paragraphs].join(' ').toLocaleLowerCase('fr');
+  if(query&&!searchable.includes(query))return;
+  const item=document.createElement('article');item.className='article';
+  const top=document.createElement('div');top.className='article-top';
+  const num=document.createElement('span');num.className='article-num';num.textContent='ARTICLE '+(chapterIndex+1)+'.'+(articleIndex+1);
+  const h=document.createElement('h3');h.textContent=article.title;top.append(num,h);item.append(top);
+  article.paragraphs.forEach((paragraph,paragraphIndex)=>{const alinea=document.createElement('details');alinea.className='alinea';const summary=document.createElement('summary');summary.textContent='Alinéa '+(paragraphIndex+1);const p=document.createElement('p');p.textContent=paragraph;alinea.append(summary,p);item.append(alinea)});
+  body.append(item);
+ });
+ body.dataset.rendered='true';body.dataset.query=query;
+}
+const sections=[];
 chapters.forEach((chapter,index)=>{
  const option=document.createElement('option');option.value=String(index);option.textContent=chapter.roman+' — '+chapter.title;filter.append(option);
- const section=document.createElement('section');section.className='chapter';section.dataset.chapter=String(index);
- const head=document.createElement('button');head.className='chapter-head';head.type='button';head.setAttribute('aria-expanded','true');
+ const section=document.createElement('section');section.className='chapter closed';section.dataset.chapter=String(index);
+ const head=document.createElement('button');head.className='chapter-head';head.type='button';head.setAttribute('aria-expanded','false');
  const roman=document.createElement('span');roman.className='roman';roman.textContent=chapter.roman;
  const title=document.createElement('span');title.className='chapter-title';
  const name=document.createElement('b');name.textContent=chapter.title;
- const sub=document.createElement('small');sub.textContent=chapter.articles.length+' article'+(chapter.articles.length>1?'s':'');
+ const sub=document.createElement('small');sub.textContent=chapter.articles.length+' articles';
  title.append(name,sub);
  const chev=document.createElement('span');chev.className='chevron';chev.textContent='⌄';
  head.append(roman,title,chev);
  const body=document.createElement('div');body.className='chapter-body';
- chapter.articles.forEach((article,articleIndex)=>{
-  const item=document.createElement('article');item.className='article';
-  const top=document.createElement('div');top.className='article-top';
-  const num=document.createElement('span');num.className='article-num';num.textContent='ARTICLE '+(index+1)+'.'+(articleIndex+1);
-  const h=document.createElement('h3');h.textContent=article.title;top.append(num,h);item.append(top);
-  (article.paragraphs||[]).forEach((paragraph,paragraphIndex)=>{const alinea=document.createElement('details');alinea.className='alinea';const summary=document.createElement('summary');summary.textContent='Alinéa '+(paragraphIndex+1);const p=document.createElement('p');p.textContent=paragraph;alinea.append(summary,p);item.append(alinea)});
-  item.dataset.search=[article.n,article.title,...(article.paragraphs||[])].join(' ').toLocaleLowerCase('fr');
-  body.append(item);
+ head.addEventListener('click',()=>{
+  const opening=section.classList.contains('closed');
+  section.classList.toggle('closed',!opening);
+  head.setAttribute('aria-expanded',String(opening));
+  if(opening&&body.dataset.rendered!=='true')renderArticles(index,body);
  });
- head.addEventListener('click',()=>{section.classList.toggle('closed');head.setAttribute('aria-expanded',String(!section.classList.contains('closed')))});
- section.append(head,body);host.append(section);
+ section.append(head,body);host.append(section);sections.push(section);
 });
 function applyFilters(){
- const q=search.value.trim().toLocaleLowerCase('fr');const selected=filter.value;let visible=0;
- document.querySelectorAll('.chapter').forEach(section=>{
-  let inChapter=0;const matchChapter=selected==='all'||selected===section.dataset.chapter;
-  section.querySelectorAll('.article').forEach(article=>{
-   const match=matchChapter&&(!q||article.dataset.search.includes(q));
-   article.hidden=!match;if(match)inChapter++;
-  });
-  section.hidden=inChapter===0;visible+=inChapter;
-  if(q&&inChapter){section.classList.remove('closed');section.querySelector('.chapter-head').setAttribute('aria-expanded','true')}
+ const q=search.value.trim().toLocaleLowerCase('fr'),selected=filter.value;let visible=0;
+ sections.forEach((section,index)=>{
+  const matches=chapters[index].articles.filter(article=>!q||[article.n,article.title,...article.paragraphs].join(' ').toLocaleLowerCase('fr').includes(q));
+  const allowed=(selected==='all'||selected===String(index))&&matches.length>0;
+  section.hidden=!allowed;if(!allowed)return;
+  visible+=matches.length;
+  if(q){
+   section.classList.remove('closed');section.querySelector('.chapter-head').setAttribute('aria-expanded','true');
+   renderArticles(index,section.querySelector('.chapter-body'),q);
+  }else{
+   const body=section.querySelector('.chapter-body');
+   if(body.dataset.rendered==='true'&&body.dataset.query) {body.replaceChildren();delete body.dataset.rendered;delete body.dataset.query;}
+  }
  });
  empty.style.display=visible?'none':'block';
- document.getElementById('resultsCount').textContent=visible+' article'+(visible>1?'s':'')+' affiché'+(visible>1?'s':'');
+ document.getElementById('resultsCount').textContent=visible+' article'+(visible>1?'s':'')+' correspondant'+(visible>1?'s':'');
 }
 search.addEventListener('input',applyFilters);filter.addEventListener('change',applyFilters);
-document.getElementById('expand').addEventListener('click',()=>document.querySelectorAll('.chapter:not([hidden])').forEach(x=>{x.classList.remove('closed');x.querySelector('.chapter-head').setAttribute('aria-expanded','true')}));
-document.getElementById('collapse').addEventListener('click',()=>document.querySelectorAll('.chapter:not([hidden])').forEach(x=>{x.classList.add('closed');x.querySelector('.chapter-head').setAttribute('aria-expanded','false')}));
+document.getElementById('expand').textContent='Ouvrir le chapitre sélectionné';
+document.getElementById('expand').addEventListener('click',()=>{
+ const index=filter.value==='all'?sections.findIndex(x=>!x.hidden):Number(filter.value);
+ if(index>=0){const section=sections[index];section.classList.remove('closed');section.querySelector('.chapter-head').setAttribute('aria-expanded','true');const body=section.querySelector('.chapter-body');if(body.dataset.rendered!=='true')renderArticles(index,body);}
+});
+document.getElementById('collapse').addEventListener('click',()=>sections.forEach(x=>{x.classList.add('closed');x.querySelector('.chapter-head').setAttribute('aria-expanded','false')}));
 document.getElementById('navTop').addEventListener('click',()=>document.getElementById('overview').scrollIntoView({behavior:'smooth'}));
 document.getElementById('navCode').addEventListener('click',()=>document.getElementById('code').scrollIntoView({behavior:'smooth'}));
 function updateClock(){document.getElementById('clock').textContent=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}
