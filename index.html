@@ -1712,7 +1712,7 @@ function exportReport(rep){
 }
 $('refreshAdmin').onclick=()=>loadAdmin().catch(e=>toast(e.message));
 async function boot(){const id=localStorage.getItem(LOCAL_SESSION_KEY);if(!id)return;const p=localRows('profiles').find(x=>x.id===id);if(!p){localStorage.removeItem(LOCAL_SESSION_KEY);return}user={id:p.id,email:'',created_at:p.created_at};try{await loadProfile()}catch(error){localStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;setAuthUI();throw error}}
-boot().catch(e=>toast(e.message));
+/* La restauration de session est lancée après l'initialisation complète du bureau. */
 </script>
 <script>
 {
@@ -2021,6 +2021,8 @@ $('closeAuth').onclick=()=>{guest=true;updateLock();toast('Mode consultation : l
 window.loadWorkspaceData=loadWorkspaceData;
 window.setWorkspaceAccess=setWorkspaceAccess;
 setAuthUI();
+/* Restaure la session persistante après le chargement de toutes les fonctions du bureau. */
+boot().then(()=>{if(user){guest=false;window.setAuthUI();}}).catch(e=>{localStorage.removeItem(LOCAL_SESSION_KEY);user=null;profile=null;window.setAuthUI();toast('Session non restaurée : '+e.message)});
 }
 </script><script>
 (()=>{const task=document.getElementById('task');if(!task||task.querySelector('.task-tray'))return;
