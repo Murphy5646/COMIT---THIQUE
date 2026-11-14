@@ -44,8 +44,27 @@ footer{background:#09120c!important;border-top:1px solid #344d38!important;color
 @media(max-width:650px){.hero,.cover{border-radius:5px!important}.card,.panel,.item{box-shadow:none!important}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 
+
+/* SCPF // SITE 73 — IDENTITÉ INSTITUTIONNELLE */
+:root{--scp-black:#080c09;--scp-deep:#0c1710;--scp-panel:#111f16;--scp-line:#314c37;--scp-gold:#c8ad70;--scp-white:#e9eee8;--scp-muted:#9eaa9f}
+body{background-color:var(--scp-black)!important;background-image:radial-gradient(ellipse at 50% -18%,#294b32 0,transparent 47%),linear-gradient(180deg,#080d09 0%,#0b130d 55%,#080d09 100%)!important}
+.scpf-mast{min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:8px clamp(14px,3vw,42px);background:linear-gradient(90deg,#070b08,#101b13 48%,#080d09);border-bottom:1px solid #bda56b66;color:#e8eee7;font-family:"Segoe UI",Arial,sans-serif}
+.scpf-brand{display:flex;align-items:center;gap:12px;min-width:0}.scpf-brand img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 0 7px #c8ad7030)}
+.scpf-brand strong{display:block;font-size:12px;letter-spacing:.2em;font-weight:700;white-space:nowrap}.scpf-brand small{display:block;color:#aab7aa;font-size:9px;letter-spacing:.14em;margin-top:3px}
+.scpf-meta{display:flex;align-items:center;gap:16px;color:#aeb9ae;font-size:9px;letter-spacing:.12em;text-transform:uppercase;text-align:right}.scpf-meta b{color:#d1bc84;font-weight:600}
+.scpf-sub{display:flex;justify-content:space-between;gap:12px;padding:5px clamp(14px,3vw,42px);background:#0b120d;border-bottom:1px solid #263b2b;color:#829184;font:9px "Courier New",monospace;letter-spacing:.08em}
+.scpf-sub span:last-child{color:#c0ad7b}.scpf-led{display:inline-block;width:6px;height:6px;border-radius:50%;background:#8eaf80;box-shadow:0 0 9px #8eaf80;margin-right:6px}
+.scpf-footer{margin-top:44px;padding:20px clamp(16px,4vw,48px);background:#070c08;border-top:1px solid #8d794b66;color:#89968a;font:10px/1.7 "Courier New",monospace;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.scpf-footer strong{color:#d0ba82;letter-spacing:.14em}.scp-watermark{position:fixed;right:-80px;bottom:-100px;width:330px;opacity:.025;filter:grayscale(1);pointer-events:none;z-index:0}
+main,.layout,.hero,.cover,.section,header,footer{position:relative}
+.hero,.cover{isolation:isolate}
+.kicker,.eyebrow,.coatline,.side-head,.cap,.section-head small,.sectionhead .kicker{letter-spacing:.18em}
+.card,.panel,.item,.chapter,.form-card,.tile,.stat{backdrop-filter:blur(5px)}
+@media(max-width:640px){.scpf-mast{align-items:flex-start}.scpf-meta{font-size:8px;gap:7px;flex-direction:column;align-items:flex-end}.scpf-brand strong{font-size:10px}.scpf-brand img{width:32px;height:32px}.scpf-sub{font-size:8px}}
+@media print{.scpf-mast,.scpf-sub{background:#fff!important;color:#111!important;border-color:#777!important}.scpf-brand small,.scpf-meta,.scpf-sub{color:#333!important}.scpf-footer{background:#fff!important;color:#333!important}}
+
 </style></head><body>
-<div class="paper-masthead"><div class="left"><img src="logo.svg" alt=""><span>FONDATION S.C.P. &nbsp;|&nbsp; SECURE CONTAIN PROTECT</span></div><div class="right">SITE 73 &nbsp;|&nbsp; 14/11/2026</div></div><div class="paper-subline"><span>Managed by the Ethics Committee</span><span>DOCUMENT INSTITUTIONNEL <i class="paper-barcode"></i></span></div>
+<div class="scpf-mast"><div class="scpf-brand"><img src="logo.svg" alt="Emblème du Comité d'Éthique"><span><strong>SCP FOUNDATION</strong><small>SECURE · CONTAIN · PROTECT &nbsp;|&nbsp; SITE 73</small></span></div><div class="scpf-meta"><span><b>ETHICS COMMITTEE</b></span><span>INSTITUTIONAL NETWORK</span></div></div><div class="scpf-sub"><span><i class="scpf-led"></i>FOUNDATION NETWORK // SITE 73</span><span>CONTROLLED DOCUMENT · INTERNAL USE</span></div>
 <div id="loading-screen"><div class="loader"><img src="logo.svg" alt=""><small>FONDATION S.C.P. · SITE 73</small><h2>COMITÉ D'ÉTHIQUE</h2><p>INITIALISATION DE L'ENVIRONNEMENT INSTITUTIONNEL</p><div class="load-track"><div class="load-bar" id="loader-progress"></div></div><div class="load-status" id="loader-status">Vérification des registres...</div></div></div>
 <header class="top"><div class="brand"><img src="logo.svg" alt=""><span><b>COMITÉ D'ÉTHIQUE</b><small>INTRANET INSTITUTIONNEL · SITE 73</small></span></div><div class="topright"><a class="public-link" href="portail.html">↗ PORTAIL PUBLIC</a><span class="green">● SYSTÈME OPÉRATIONNEL</span><span id="clock">--:--:--</span><span>SESSION RP LOCALE</span></div></header>
 <div class="layout"><aside>
@@ -122,5 +141,5 @@ keys.forEach(render);stats();keys.forEach(k=>{const f=document.getElementById('f
 const mk=document.getElementById('makeReport');mk.addEventListener('click',()=>{const v=id=>document.getElementById(id).value.trim();if(!v('rTitle')||!v('rFacts')){document.getElementById('reportStatus').textContent='Renseignez le titre et les faits observés.';return}document.getElementById('reportOutput').value='COMITÉ D’ÉTHIQUE — SITE 73\nBROUILLON DE SIGNALEMENT RP\n\nRéférence : '+v('rTitle')+'\nDépartement : '+(v('rDept')||'Non précisé')+'\nNature : '+v('rType')+'\n\nFAITS OBSERVÉS\n'+v('rFacts')+'\n\nÉLÉMENTS DISPONIBLES\n'+(v('rEvidence')||'Non précisés')+'\n\nSUITE SOUHAITÉE\n'+(v('rRequest')||'Examen par l’autorité compétente')+'\n\nDocument préparatoire fictif — transmission manuelle uniquement.';document.getElementById('copyReport').disabled=false;document.getElementById('reportStatus').textContent='Brouillon généré.'});document.getElementById('copyReport').addEventListener('click',async()=>{const o=document.getElementById('reportOutput');try{await navigator.clipboard.writeText(o.value);say('Texte copié.')}catch{o.select();say('Sélectionnez puis copiez le texte.')}});
 const clock=document.getElementById('clock');const tick=()=>clock.textContent=new Date().toLocaleTimeString('fr-FR');tick();setInterval(tick,1000);const c=document.getElementById('count-personnel');function upd(){c.textContent=load('personnel').length+' ENREGISTREMENT(S)'}upd();document.getElementById('form-personnel').addEventListener('submit',()=>setTimeout(upd,0));
 })();
-</script><div class="paper-distribution"><b> : DISTRIBUTION DIRECTIVE : </b><span>This document was created and is managed by the SCP Foundation. Unauthorized distribution of this document will result in possible disciplinary action.</span></div><div class="paper-footer">SCPF - Secure Contain Protect<br>CL-1-5-6<br>COMITÉ D’ÉTHIQUE · SITE 73<br>DOCUMENT INSTITUTIONNEL</div>
+</script><div class="scpf-footer"><span><strong>SCP FOUNDATION</strong><br>SECURE · CONTAIN · PROTECT<br>SITE 73 — COMITÉ D’ÉTHIQUE</span><span>RÉSEAU INSTITUTIONNEL<br>DOCUMENTATION ET ADMINISTRATION<br>ENVIRONNEMENT DE JEU DE RÔLE</span></div>
 </body></html>
