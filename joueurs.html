@@ -68,19 +68,43 @@ main,.layout,.hero,.cover,.section,header,footer{position:relative}
 @media(max-width:640px){.scpf-mast{align-items:flex-start}.scpf-meta{font-size:8px;gap:7px;flex-direction:column;align-items:flex-end}.scpf-brand strong{font-size:10px}.scpf-brand img{width:32px;height:32px}.scpf-sub{font-size:8px}}
 @media print{.scpf-mast,.scpf-sub{background:#fff!important;color:#111!important;border-color:#777!important}.scpf-brand small,.scpf-meta,.scpf-sub{color:#333!important}.scpf-footer{background:#fff!important;color:#333!important}}
 
+
+/* SITE 73 — FOUNDATION INFORMATION SYSTEM */
+:root{--scp-void:#050906;--scp-black:#080e0a;--scp-panel:#0d1811;--scp-panel-hi:#132219;--scp-border:#314a36;--scp-gold:#c8ad70;--scp-ivory:#e8ede5;--scp-muted:#9aa999}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{background:radial-gradient(ellipse at 50% -20%,#294832 0,transparent 48%),linear-gradient(180deg,#080e0a 0%,#0a120c 48%,#050906 100%)!important;color:var(--scp-ivory)!important}
+.scpf-mast{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:9px clamp(14px,3vw,42px);background:linear-gradient(90deg,#050906,#101b13 50%,#080d09);border-bottom:1px solid #a78c5266;color:#e8ede5;font-family:"Segoe UI",Arial,sans-serif}
+.scpf-brand{display:flex;align-items:center;gap:13px;min-width:0}.scpf-brand img{width:40px;height:40px;object-fit:contain;filter:drop-shadow(0 0 9px #c8ad7033)}
+.scpf-brand strong{display:block;font-size:12px;letter-spacing:.22em;font-weight:750;white-space:nowrap}.scpf-brand small{display:block;color:#aab7a8;font-size:9px;letter-spacing:.15em;margin-top:4px}
+.scpf-meta{display:flex;align-items:center;gap:18px;color:#aeb9ae;font-size:9px;letter-spacing:.13em;text-transform:uppercase;text-align:right}.scpf-meta b{color:#d1bc84;font-weight:650}
+.scpf-sub{display:flex;justify-content:space-between;gap:12px;padding:6px clamp(14px,3vw,42px);background:#080e0a;border-bottom:1px solid #263b2b;color:#879487;font:9px "Courier New",monospace;letter-spacing:.09em}
+.scpf-sub span:last-child{color:#c0ad7b}.scpf-led{display:inline-block;width:6px;height:6px;border-radius:50%;background:#8eaf80;box-shadow:0 0 9px #8eaf80;margin-right:7px}
+.scpf-rule{height:2px;background:linear-gradient(90deg,transparent,#b89c60 18%,#536b4d 50%,#b89c60 82%,transparent);opacity:.8}
+.scpf-footer{margin-top:48px;padding:22px clamp(16px,4vw,48px);background:#050906;border-top:1px solid #8d794b66;color:#89968a;font:10px/1.8 "Courier New",monospace;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.scpf-footer strong{color:#d0ba82;letter-spacing:.16em}.scpf-footer .seal{border:1px solid #8d794b88;padding:7px 12px;color:#c8b783;letter-spacing:.12em;align-self:center}
+.hero,.cover{border-color:#a78b5066!important;box-shadow:0 22px 65px #0007,inset 0 1px #ffffff0b!important}
+.card,.panel,.item,.chapter,.form-card,.tile,.stat,.notice,.document-note{border-color:#314a36!important;box-shadow:0 12px 30px #0003!important}
+button,.btn,.public-link{letter-spacing:.045em}
+input,select,textarea{border-color:#3a5840!important}
+.kicker,.eyebrow,.coatline,.side-head,.cap,.section-head small,.sectionhead .kicker{letter-spacing:.17em!important}
+.paper-masthead,.paper-subline,.paper-distribution,.paper-footer{display:none!important}
+@media(max-width:640px){.scpf-mast{align-items:flex-start}.scpf-meta{font-size:8px;gap:6px;flex-direction:column;align-items:flex-end}.scpf-brand strong{font-size:10px;letter-spacing:.14em}.scpf-brand img{width:33px;height:33px}.scpf-sub{font-size:8px}}
+@media print{.scpf-mast,.scpf-sub{background:#fff!important;color:#111!important;border-color:#777!important}.scpf-brand small,.scpf-meta,.scpf-sub{color:#333!important}.scpf-footer{background:#fff!important;color:#333!important}}
+
 </style>
 </head>
 <body>
+<div class="scpf-mast"><div class="scpf-brand"><img src="logo.svg" alt="Emblème du Site 73"><span><strong>SCP FOUNDATION</strong><small>SECURE · CONTAIN · PROTECT &nbsp;|&nbsp; SITE 73</small></span></div><div class="scpf-meta"><span><b>ETHICS COMMITTEE</b></span><span>FOUNDATION INFORMATION SYSTEM</span></div></div><div class="scpf-sub"><span><i class="scpf-led"></i>NETWORK NODE // SITE-073</span><span>CONTROLLED DOCUMENT · AUTHORIZED PERSONNEL</span></div><div class="scpf-rule"></div>
 <div class="scpf-mast"><div class="scpf-brand"><img src="logo.svg" alt="Emblème du Comité d'Éthique"><span><strong>SCP FOUNDATION</strong><small>SECURE · CONTAIN · PROTECT &nbsp;|&nbsp; SITE 73</small></span></div><div class="scpf-meta"><span><b>ETHICS COMMITTEE</b></span><span>INSTITUTIONAL NETWORK</span></div></div><div class="scpf-sub"><span><i class="scpf-led"></i>FOUNDATION NETWORK // SITE 73</span><span>CONTROLLED DOCUMENT · INTERNAL USE</span></div><div id="site-loader" class="site-loader"><div class="site-loader-box"><img src="logo.svg" alt=""><b>FONDATION S.C.P. · SITE 73</b><span>Établissement de la liaison institutionnelle…</span><i><em></em></i></div></div>
 <header><div class="bar"><a class="brand" href="#accueil"><img src="logo.svg" alt="Logo du Comité d'Éthique"><span><b>COMITÉ D'ÉTHIQUE</b><small>ESPACE JOUEURS · SITE 73</small></span></a><nav class="links"><a href="#missions">Rôle du Comité</a><a href="#droits">Vos droits RP</a><a href="#demarches">Démarches</a><a href="#faq">FAQ</a><a href="portail.html">Portail public</a><a href="joueurs.html">Espace joueurs</a><a href="code-ethique.html">Code éthique</a></nav></div></header>
 <main id="accueil">
-<section class="hero"><div class="kicker">FONDATION S.C.P. · SITE 73 · PORTAIL EXTERNE RP</div><h1>Votre espace joueur.</h1><p>Une question, une difficulté ou une situation à faire examiner ? Retrouvez ici les informations utiles sur le Comité d'Éthique et les démarches prévues pour les joueurs du serveur.</p><div class="actions"><a class="btn gold" href="#demarches">Effectuer une démarche</a><a class="btn" href="#droits">Consulter mes droits RP</a></div></section>
+<section class="hero"><div class="kicker">FONDATION S.C.P. · SITE 73 · BUREAU DES REQUÊTES</div><h1>Bureau des requêtes et recours</h1><p>Le présent guichet centralise les modalités de saisine du Comité d’Éthique, les garanties applicables et les voies de recours ouvertes aux membres de l’installation.</p><div class="actions"><a class="btn gold" href="#demarches">Effectuer une démarche</a><a class="btn" href="#droits">Consulter mes droits RP</a></div></section>
 <div class="section" id="missions"><div class="sectionhead"><div><div class="kicker">LE COMITÉ D'ÉTHIQUE</div><h2>À quoi sert-il ?</h2><p>Un organe de contrôle et d'écoute dans l'univers du serveur.</p></div></div><div class="grid">
 <article class="card"><div class="symbol">§</div><h3>Veiller au respect des règles</h3><p>Le Comité examine les situations liées au Code éthique et aux règles institutionnelles du serveur.</p></article>
 <article class="card"><div class="symbol">◇</div><h3>Écouter les joueurs</h3><p>Il peut recueillir les demandes, questions et signalements transmis par les canaux prévus.</p></article>
 <article class="card"><div class="symbol">⚖</div><h3>Examiner avec impartialité</h3><p>Les faits sont étudiés avec recul. Un signalement ne constitue pas, à lui seul, une preuve.</p></article>
 </div></div>
-<div class="section" id="droits"><div class="sectionhead"><div><div class="kicker">REPÈRES POUR LES JOUEURS</div><h2>Vos garanties dans le RP</h2><p>Quelques principes simples qui encadrent l'examen d'une situation.</p></div></div><div class="grid">
+<div class="section" id="droits"><div class="sectionhead"><div><div class="kicker">REPÈRES POUR LES JOUEURS</div><h2>Garanties de procédure</h2><p>Quelques principes simples qui encadrent l'examen d'une situation.</p></div></div><div class="grid">
 <article class="card"><h3>Être entendu</h3><p>Vous pouvez exposer votre version des faits et apporter des précisions utiles.</p></article>
 <article class="card"><h3>Être traité avec respect</h3><p>Les échanges doivent rester corrects, sans intimidation ni humiliation.</p></article>
 <article class="card"><h3>Un examen impartial</h3><p>Le grade ou le département d'un joueur ne doit pas suffire à déterminer l'issue d'un examen.</p></article>
@@ -88,20 +112,20 @@ main,.layout,.hero,.cover,.section,header,footer{position:relative}
 <article class="card"><h3>Respecter la confidentialité</h3><p>Ne diffusez pas publiquement les informations privées ou les éléments d'un dossier.</p></article>
 <article class="card"><h3>Contester une décision RP</h3><p>Selon les règles du serveur, vous pouvez demander un réexamen motivé d'une décision.</p></article>
 </div></div>
-<div class="section" id="demarches"><div class="sectionhead"><div><div class="kicker">PROCÉDURE</div><h2>Comment effectuer une démarche ?</h2><p>Préparez une demande claire et factuelle.</p></div></div><div class="two"><div class="steps">
+<div class="section" id="demarches"><div class="sectionhead"><div><div class="kicker">PROCÉDURE</div><h2>Procédure de saisine</h2><p>Préparez une demande claire et factuelle.</p></div></div><div class="two"><div class="steps">
 <div class="step"><div class="num">1</div><div><b>Décrivez la situation</b><span>Indiquez le contexte RP, la date approximative et les personnes concernées par leurs pseudonymes.</span></div></div>
 <div class="step"><div class="num">2</div><div><b>Restez factuel</b><span>Distinguez ce que vous avez vu, ce qui vous a été rapporté et votre interprétation.</span></div></div>
 <div class="step"><div class="num">3</div><div><b>Utilisez le canal officiel du serveur</b><span>Transmettez votre demande via le salon ou le formulaire Discord indiqué par l'équipe du serveur.</span></div></div>
 <div class="step"><div class="num">4</div><div><b>Attendez un retour</b><span>Le Comité peut demander des précisions. Évitez de publier le dossier en public.</span></div></div>
-</div><div class="panel card"><div class="kicker">PRÉPARER UNE DEMANDE</div><h3 style="font-size:18px;margin:6px 0 10px">Brouillon personnel</h3><p class="muted" style="margin-bottom:14px">Ce formulaire sert à préparer votre texte. Rien n'est envoyé automatiquement.</p>
+</div><div class="panel card"><div class="kicker">PRÉPARER UNE DEMANDE</div><h3 style="font-size:18px;margin:6px 0 10px">Préparation d’une requête</h3><p class="muted" style="margin-bottom:14px">Ce formulaire sert à préparer votre texte. Rien n'est envoyé automatiquement.</p>
 <form id="draftForm"><div class="fields">
 <label>Votre pseudonyme RP<input class="field" id="pName" maxlength="50" required placeholder="Votre pseudo"></label>
 <label>Objet<select class="field" id="pType"><option>Question au Comité</option><option>Signalement RP</option><option>Demande d'audience</option><option>Contestation d'une décision RP</option><option>Demande d'information</option><option>Autre</option></select></label>
 <label class="wide">Résumé de la situation<input class="field" id="pSubject" maxlength="120" required placeholder="En quelques mots"></label>
 <label class="wide">Description<textarea class="field" id="pDetails" maxlength="3000" required placeholder="Décrivez les faits et le contexte RP..."></textarea></label>
-</div><div class="actions" style="margin-top:0"><button class="btn gold" type="submit">Créer mon brouillon</button><button class="btn" type="button" id="copyDraft" disabled>Copier le texte</button></div><div id="draftStatus" class="status" aria-live="polite"></div><textarea class="field" id="draftOutput" rows="8" readonly placeholder="Votre brouillon apparaîtra ici."></textarea></form>
+</div><div class="actions" style="margin-top:0"><button class="btn gold" type="submit">Générer le document</button><button class="btn" type="button" id="copyDraft" disabled>Copier le texte</button></div><div id="draftStatus" class="status" aria-live="polite"></div><textarea class="field" id="draftOutput" rows="8" readonly placeholder="Votre brouillon apparaîtra ici."></textarea></form>
 </div></div></div>
-<div class="section faq" id="faq"><div class="sectionhead"><div><div class="kicker">AIDE</div><h2>Questions fréquentes</h2><p>Les réponses essentielles avant de contacter le Comité.</p></div></div>
+<div class="section faq" id="faq"><div class="sectionhead"><div><div class="kicker">INFORMATIONS AUX REQUÉRANTS</div><h2>Questions fréquentes</h2><p>Les réponses essentielles avant de contacter le Comité.</p></div></div>
 <details><summary>Le Comité peut-il me sanctionner automatiquement ?</summary><p>Non. Un signalement doit être examiné et les personnes concernées doivent pouvoir présenter leur version. Les décisions suivent les règles internes du serveur.</p></details>
 <details><summary>Est-ce que ce site envoie ma demande ?</summary><p>Non. Le brouillon est généré dans votre navigateur uniquement. Vous devez le copier et le transmettre via le canal officiel indiqué sur le Discord du serveur.</p></details>
 <details><summary>Dois-je fournir des preuves ?</summary><p>Vous pouvez joindre les éléments autorisés par les règles du serveur. Ne modifiez pas les captures et ne partagez aucune donnée personnelle réelle.</p></details>
@@ -115,4 +139,5 @@ main,.layout,.hero,.cover,.section,header,footer{position:relative}
 (()=>{let draft='';const form=document.getElementById('draftForm'),out=document.getElementById('draftOutput'),copy=document.getElementById('copyDraft'),status=document.getElementById('draftStatus');form.addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('pName').value.trim(),type=document.getElementById('pType').value,subject=document.getElementById('pSubject').value.trim(),details=document.getElementById('pDetails').value.trim();if(!name||!subject||!details)return;draft='COMITÉ D’ÉTHIQUE — SITE 73\nBROUILLON DE DEMANDE JOUEUR\n\nPseudonyme RP : '+name+'\nType : '+type+'\nObjet : '+subject+'\n\nDESCRIPTION\n'+details+'\n\nDocument préparatoire fictif — à transmettre via le canal officiel du serveur.';out.value=draft;copy.disabled=false;status.textContent='Brouillon créé. Copiez-le puis transmettez-le sur le canal officiel du serveur.'});copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(draft);status.textContent='Texte copié.'}catch{out.focus();out.select();status.textContent='Sélectionnez le texte puis copiez-le.'}})})();
 </script>
 <script>(()=>{const e=document.getElementById('site-loader');if(e)setTimeout(()=>e.classList.add('done'),1750)})();</script><div class="scpf-footer"><span><strong>SCP FOUNDATION</strong><br>SECURE · CONTAIN · PROTECT<br>SITE 73 — COMITÉ D’ÉTHIQUE</span><span>RÉSEAU INSTITUTIONNEL<br>DOCUMENTATION ET ADMINISTRATION<br>ENVIRONNEMENT DE JEU DE RÔLE</span></div>
+<div class="scpf-footer"><span><strong>SCP FOUNDATION // SITE 73</strong><br>SECURE · CONTAIN · PROTECT<br>SECRÉTARIAT DU COMITÉ D’ÉTHIQUE</span><span>DOCUMENTATION · REGISTRES · CONTRÔLE INSTITUTIONNEL<br>DIFFUSION SELON HABILITATION</span><span class="seal">FIN DE DOCUMENT</span></div>
 </body></html>
