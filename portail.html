@@ -71,7 +71,7 @@ footer{background:#09120c!important;border-top:1px solid #344d38!important;color
 .sheet-top,.sheet-title,.sheet-warning,.sheet-form,.sheet-bottom{color:#dce6dc!important}
 .sheet-title h2{color:#f2f3eb!important}.sheet-warning{background:#cbb47712!important;border-color:#9a8654!important}
 .sheet-result{background:#17291c!important;color:#dfe9dd!important;border-color:#59745b!important}
-.paper-masthead,.paper-subline,.paper-distribution,.paper-footer{display:none!important}
+
 @media(max-width:650px){.hero,.cover{border-radius:5px!important}.card,.panel,.item{box-shadow:none!important}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 
@@ -113,7 +113,7 @@ body{background:radial-gradient(ellipse at 50% -20%,#294832 0,transparent 48%),l
 button,.btn,.public-link{letter-spacing:.045em}
 input,select,textarea{border-color:#3a5840!important}
 .kicker,.eyebrow,.coatline,.side-head,.cap,.section-head small,.sectionhead .kicker{letter-spacing:.17em!important}
-.paper-masthead,.paper-subline,.paper-distribution,.paper-footer{display:none!important}
+
 @media(max-width:640px){.scpf-mast{align-items:flex-start}.scpf-meta{font-size:8px;gap:6px;flex-direction:column;align-items:flex-end}.scpf-brand strong{font-size:10px;letter-spacing:.14em}.scpf-brand img{width:33px;height:33px}.scpf-sub{font-size:8px}}
 @media print{.scpf-mast,.scpf-sub{background:#fff!important;color:#111!important;border-color:#777!important}.scpf-brand small,.scpf-meta,.scpf-sub{color:#333!important}.scpf-footer{background:#fff!important;color:#333!important}}
 
@@ -121,8 +121,8 @@ input,select,textarea{border-color:#3a5840!important}
 :root{color-scheme:dark;--scp-bg:#07100b;--scp-panel:#102016;--scp-line:#34513a;--scp-ink:#e6ece5;--scp-muted:#9eaa9e;--scp-accent:#a9bd83}
 html{background:#07100b!important;scroll-behavior:smooth}
 body{background:radial-gradient(ellipse at 50% 0%,#1c3825 0,transparent 42%),#07100b!important;color:var(--scp-ink)!important;font-family:"Courier New",monospace!important}
-body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:url("logo.svg") no-repeat center 46%/min(68vw,620px);opacity:.055;filter:grayscale(1) brightness(1.6)}
-body>*{position:relative;z-index:1}
+body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("logo.svg");background-repeat:no-repeat;background-position:center 48%;background-size:min(62vw,560px);opacity:.045;filter:grayscale(1) brightness(1.55)}
+body> :not(script):not(style){position:relative;z-index:1}
 .scpf-mast{background:linear-gradient(90deg,#050a07,#102016 50%,#050a07)!important;border-bottom:1px solid #718b6377!important;color:#e6ece5!important}
 .scpf-brand img{filter:grayscale(1) brightness(1.35)!important;opacity:.9}
 .scpf-brand strong{font-family:"Courier New",monospace!important;letter-spacing:.17em!important}
@@ -142,15 +142,14 @@ footer,.scpf-footer{background:#050a07!important;border-top:1px solid #496448!im
 .pill,.tag,.badge{background:#a9bd8318!important;color:#c9d9b6!important;border:1px solid #718c6555!important;border-radius:2px!important}
 .nav.active,.side-link.active,.nav:hover,.side-link:hover{background:#1b3321!important;border-color:#789879!important;color:#f0f4ed!important}
 #loading-screen,.site-loader{background:radial-gradient(ellipse at center,#193522,#050a07 72%)!important}
-.paper-masthead,.paper-subline,.paper-distribution,.paper-footer{display:none!important}
+
 .scpf-footer .seal{border:1px solid #6e8b6577!important;color:#b9ce9b!important}
 @media(max-width:640px){body:before{background-size:92vw;background-position:center 42%;opacity:.04}.scpf-mast{align-items:center!important}.scpf-meta{font-size:7px!important;gap:5px!important}.scpf-brand strong{font-size:10px!important}.scpf-brand img{width:34px!important;height:34px!important}.scpf-sub{font-size:8px!important}}
 @media print{body{background:#fff!important;color:#111!important}body:before{display:none!important}.scpf-mast,.scpf-sub,.scpf-footer{background:#fff!important;color:#111!important}}
 </style></head>
 <body>
-<div class="scpf-mast"><div class="scpf-brand"><img src="logo.svg" alt="SCP Foundation"><span><strong>SCP FOUNDATION</strong><small>SECURE · CONTAIN · PROTECT &nbsp;|&nbsp; SITE 73</small></span></div><div class="scpf-meta"><span><b>ETHICS COMMITTEE</b></span><span>FOUNDATION RECORDS SYSTEM</span></div></div><div class="scpf-sub"><span><i class="scpf-led"></i>NODE 073 // INTERNAL NETWORK</span><span>AUTHORIZED ACCESS · CONTROLLED COPY</span></div><div class="scpf-rule"></div>
 
-<div class="scpf-mast"><div class="scpf-brand"><img src="logo.svg" alt="Emblème du Comité d'Éthique"><span><strong>SCP FOUNDATION</strong><small>SECURE · CONTAIN · PROTECT &nbsp;|&nbsp; SITE 73</small></span></div><div class="scpf-meta"><span><b>ETHICS COMMITTEE</b></span><span>INSTITUTIONAL NETWORK</span></div></div><div class="scpf-sub"><span><i class="scpf-led"></i>FOUNDATION NETWORK // SITE 73</span><span>CONTROLLED DOCUMENT · INTERNAL USE</span></div>
+
 <div class="utility"><span><b>FONDATION S.C.P.</b> · DIRECTION DU SITE 73</span><span>RÉSEAU CENTRAL · ACCÈS GÉNÉRAL</span></div>
 <header><div class="head"><a class="brand" href="#accueil"><img src="logo.svg" alt=""><span><strong>FONDATION S.C.P. · SITE 73</strong><small>RÉSEAU INSTITUTIONNEL CENTRAL</small></span></a><nav class="nav"><a class="active" href="#accueil">Accueil</a><a href="#services">Services</a><a href="#direction">Gouvernance</a><a href="#communications">Communications</a><a href="#documents">Documents</a><a href="#personnel">Personnel</a><a href="#repertoire">Saisine éthique</a></nav></div></header>
 <div class="layout">
