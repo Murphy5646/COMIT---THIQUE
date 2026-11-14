@@ -36,8 +36,52 @@ footer{border-top:1px solid var(--line);background:#080e0d;padding:22px max(26px
 .sheet-warning{margin:18px 24px 0;border:1px solid #a4a59d}.sheet-warning b{display:block;background:#353936;color:#f0f0e9;text-align:center;padding:6px;font-size:10px;letter-spacing:.12em}.sheet-warning span{display:block;text-align:center;padding:9px 12px;font-size:10px;line-height:1.5;color:#4d534d}
 .sheet-form{padding:20px 24px 24px}.form-ref{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #b5b6ae;padding-bottom:10px;margin-bottom:16px;font-size:9px;color:#555c55}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.form-field{display:flex;flex-direction:column;gap:5px}.form-field.full{grid-column:1/-1}.form-field label{font-size:9px;font-weight:bold;letter-spacing:.08em;color:#454b45}.form-field input,.form-field select,.form-field textarea{width:100%;border:1px solid #aeb0a7;border-radius:0;background:#f7f7f1;color:#242923;padding:10px;font:11px "Courier New",monospace;outline:none}.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:#535c53;box-shadow:0 0 0 1px #535c53}.form-field textarea{min-height:125px;resize:vertical}.form-field small{font-size:9px;color:#73796f;line-height:1.4}.form-check{display:flex;gap:9px;align-items:flex-start;font-size:10px;color:#555b54;line-height:1.45}.form-check input{margin-top:2px;accent-color:#3d5144}.sheet-actions{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px;padding-top:15px;border-top:1px solid #b5b6ae}.sheet-actions button{border:1px solid #434b44;background:#343a35;color:#f5f5ed;padding:10px 14px;font:700 9px "Courier New",monospace;letter-spacing:.08em;cursor:pointer}.sheet-actions button.secondary{background:transparent;color:#3e463f}.sheet-actions button:hover{filter:brightness(1.15)}.sheet-close{position:absolute;right:12px;top:10px;border:0;background:transparent;color:#515750;font-size:20px;cursor:pointer}.sheet-result{display:none;margin-top:13px;padding:12px;border:1px solid #788b78;background:#e0e7dd;color:#344337;font-size:10px;line-height:1.5}.sheet-result.show{display:block}.sheet-bottom{border-top:1px solid #b5b6ae;padding:10px 24px;display:flex;justify-content:space-between;gap:10px;color:#74796f;font-size:8px}
 @media(max-width:600px){.contact-banner{grid-template-columns:1fr}.contact-banner:before{right:12px;top:10px}.contact-banner .btn{justify-self:start}.sheet-top,.sheet-form{padding-left:15px;padding-right:15px}.sheet-warning{margin-left:15px;margin-right:15px}.form-grid{grid-template-columns:1fr}.form-field.full{grid-column:auto}.sheet-title{padding:22px 15px}.sheet-bottom{padding:10px 15px;flex-direction:column}}
+
+/* IDENTITÉ DOCUMENTAIRE SCPF — édition monochrome */
+:root{color-scheme:light!important;--bg:#f4f4f1!important;--surface:#fff!important;--surface2:#f7f7f5!important;--surface3:#ededeb!important;--panel:#fff!important;--panel2:#f7f7f5!important;--line:#bfc1bd!important;--line2:#aeb1ac!important;--text:#252725!important;--muted:#686d68!important;--gold:#555955!important;--green:#555e58!important;--red:#6f4d4a!important}
+html,body{background:#fff!important;color:#292c29!important;font-family:"Courier New",Courier,monospace!important}
+body{background:#fff!important;font-size:13px!important;line-height:1.55!important}
+a{color:#303430}button,input,select,textarea{font-family:"Courier New",Courier,monospace!important}
+header,.top,.utility,.topline{background:#fff!important;color:#343834!important;backdrop-filter:none!important;border-color:#bfc1bd!important;box-shadow:none!important}
+.brand img,.sheet-logo img,.loader img{filter:grayscale(1)!important}
+.brand b,.brand strong,.brand small,.brand small,.topright,.nav,.links{color:#343834!important}
+main{color:#292c29}
+.hero,.cover,.card,.panel,.item,.notice,.document-note,.sidefoot,.side-foot,.sidebar,aside,.loader,.site-loader-box,.quick-card,.stat,.tile,.chapter,.chapter-head,.chapter-body,.step,.form-card,.box,.modal-card{background:#fff!important;color:#292c29!important;border:1px solid #bfc1bd!important;border-radius:0!important;box-shadow:none!important}
+.hero,.cover{background:#fff!important;border:0!important;border-top:1px solid #aaa!important;border-bottom:1px solid #aaa!important}
+.hero:after,.cover:after{color:#00000008!important}
+.hero h1,.cover h1,.head h1,.sectionhead h2,.section-head h2{color:#252825!important;text-shadow:none!important}
+.hero p,.cover p,.card p,.notice,.document-note,.muted,.muted-text{color:#555b56!important}
+.kicker,.eyebrow,.hero-top,.coatline,.side-head,.side-head,.cap,.section-head small,.sectionhead .kicker{color:#555b56!important}
+.btn,.public-link,.nav.active,.side-link.active,.nav:hover,.side-link:hover{background:#eceeeb!important;color:#222622!important;border:1px solid #555b56!important;border-radius:0!important;box-shadow:none!important}
+.btn.primary,.btn.gold{background:#303430!important;color:#fff!important;border-color:#303430!important}
+button{border-radius:0!important}
+input,select,textarea{background:#fff!important;color:#252925!important;border:1px solid #aeb2ad!important;border-radius:0!important}
+.pill,.tag,.badge{background:#eee!important;color:#353a35!important;border:1px solid #c0c2be!important;border-radius:0!important}
+footer{background:#fff!important;color:#555b56!important;border-top:1px solid #aeb2ad!important}
+#loading-screen,.site-loader{background:#fff!important;color:#292c29!important}
+.loader,.site-loader-box{border:1px solid #aaa!important;padding:28px!important}
+.load-track,.site-loader-box i{background:#ddd!important}.load-bar,.site-loader-box em{background:#454a45!important}
+.contact-banner{background:#f1f1ee!important;color:#252925!important;border:1px solid #9ea39d!important;border-radius:0!important;box-shadow:none!important}
+.contact-banner h3{color:#252925!important}.contact-banner p,.contact-banner .stamp{color:#535953!important}
+.contact-overlay{background:#0009!important}
+.contact-sheet{background:#f4f4f0!important;color:#252925!important;border-radius:0!important;box-shadow:0 15px 55px #0005!important}
+.sheet-top,.sheet-title,.sheet-warning,.sheet-form,.sheet-bottom{color:#303530!important}
+.sheet-title h2{color:#252925!important}
+.searchbox input{background:#fff!important}
+@media print{body{background:#fff!important;color:#000!important}.hero,.cover,.card,.panel,.item{break-inside:avoid;box-shadow:none!important}}
+.paper-masthead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px clamp(14px,4vw,55px) 7px;border-bottom:1px solid #bfc1bd;background:#fff;color:#555b56;font:10px "Courier New",monospace;letter-spacing:.02em}
+.paper-masthead .left{display:flex;align-items:center;gap:8px}.paper-masthead img{width:29px;height:29px;filter:grayscale(1);opacity:.8}.paper-masthead .right{text-align:right;white-space:nowrap}
+.paper-subline{display:flex;justify-content:space-between;gap:12px;padding:5px clamp(14px,4vw,55px);border-bottom:1px solid #c8cac6;color:#626761;font:9px "Courier New",monospace}
+.paper-barcode{display:inline-block;width:65px;height:12px;background:repeating-linear-gradient(90deg,#222 0 1px,transparent 1px 3px,#222 3px 5px,transparent 5px 6px);vertical-align:middle;margin-left:8px}
+.paper-distribution{max-width:760px;margin:28px auto 12px;border:1px solid #aeb2ad;background:#fff;color:#535953;text-align:center;font:10px/1.5 "Courier New",monospace}
+.paper-distribution b{display:block;background:#383c39;color:#fff;padding:5px;letter-spacing:.08em}
+.paper-distribution span{display:block;padding:8px 12px}
+.paper-footer{margin:32px auto 14px;max-width:760px;padding:12px 10px 0;border-top:1px solid #aeb2ad;text-align:center;color:#777d77;font:10px/1.5 "Courier New",monospace}
+@media(max-width:600px){.paper-masthead,.paper-subline{padding-left:12px;padding-right:12px;font-size:8px}.paper-distribution{margin:18px 12px}.paper-footer{margin:24px 12px 12px}}
+
 </style></head>
 <body>
+<div class="paper-masthead"><div class="left"><img src="logo.svg" alt=""><span>FONDATION S.C.P. &nbsp;|&nbsp; SECURE CONTAIN PROTECT</span></div><div class="right">SITE 73 &nbsp;|&nbsp; 14/11/2026</div></div><div class="paper-subline"><span>Managed by the Ethics Committee</span><span>DOCUMENT INSTITUTIONNEL <i class="paper-barcode"></i></span></div>
 <div class="topline"><span><b>FONDATION S.C.P.</b> / DIRECTION DU SITE 73</span><span>RÉSEAU DOCUMENTAIRE · DIFFUSION GÉNÉRALE</span></div>
 <header><div class="bar"><a class="brand" href="portail.html"><img src="logo.svg" alt=""><span><strong>FONDATION S.C.P. · SITE 73</strong><small>SECRÉTARIAT DU COMITÉ D’ÉTHIQUE</small></span></a><nav class="nav"><a href="portail.html">Réseau institutionnel</a><a class="current" href="code-ethique.html">Référentiel éthique</a><a href="#sommaire">Sommaire</a><a href="portail.html#repertoire">Répertoire</a></nav></div></header>
 <main>
@@ -82,4 +126,5 @@ function openEthics(){overlay.classList.add("open");document.body.style.overflow
 openForm.addEventListener("click",openEthics);closeForm.addEventListener("click",closeEthics);document.getElementById("cancelEthicsForm").addEventListener("click",closeEthics);overlay.addEventListener("click",e=>{if(e.target===overlay)closeEthics()});document.addEventListener("keydown",e=>{if(e.key==="Escape"&&overlay.classList.contains("open"))closeEthics()});
 ethicsForm.addEventListener("submit",e=>{e.preventDefault();if(!ethicsForm.reportValidity())return;const d=new Date(),stamp=d.toISOString().replace(/[-:TZ.]/g,"").slice(0,14),ref="CE-073-"+stamp;const val=id=>document.getElementById(id).value.trim();const body=["FONDATION S.C.P. — SITE 73","SECRÉTARIAT DU COMITÉ D’ÉTHIQUE","PLI DE SAISINE — DIFFUSION RESTREINTE","","Référence : "+ref,"Date : "+d.toLocaleString("fr-FR"),"Identité : "+(val("ethicsName")||"Non communiquée"),"Service : "+(val("ethicsDept")||"Non précisé"),"Contact : "+(val("ethicsContact")||"Non communiqué"),"Nature : "+val("ethicsType"),"Objet : "+val("ethicsSubject"),"","EXPOSÉ DES FAITS",val("ethicsFacts"),"","SUITE ATTENDUE",val("ethicsExpected")||"Non précisée","","Fin du pli."].join("\n");const blob=new Blob([body],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=ref+".txt";document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url);document.getElementById("caseReference").textContent=ref;ethicsResult.textContent="Pli généré sur cet appareil sous la référence "+ref+". Le fichier texte vient d’être téléchargé. Pour qu’il soit effectivement reçu et instruit, transmettez-le au canal officiel du Comité d’Éthique sur votre serveur. Aucun envoi réseau n’a été effectué depuis cette page.";ethicsResult.classList.add("show")});
 </script>
+<div class="paper-distribution"><b> : DISTRIBUTION DIRECTIVE : </b><span>This document was created and is managed by the SCP Foundation. Unauthorized distribution of this document will result in possible disciplinary action.</span></div><div class="paper-footer">SCPF - Secure Contain Protect<br>CL-1-5-6<br>COMITÉ D’ÉTHIQUE · SITE 73<br>DOCUMENT INSTITUTIONNEL</div>
 </body></html>
