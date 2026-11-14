@@ -86,8 +86,38 @@ input,select,textarea{border-color:#3a5840!important}
 @media(max-width:640px){.scpf-mast{align-items:flex-start}.scpf-meta{font-size:8px;gap:6px;flex-direction:column;align-items:flex-end}.scpf-brand strong{font-size:10px;letter-spacing:.14em}.scpf-brand img{width:33px;height:33px}.scpf-sub{font-size:8px}}
 @media print{.scpf-mast,.scpf-sub{background:#fff!important;color:#111!important;border-color:#777!important}.scpf-brand small,.scpf-meta,.scpf-sub{color:#333!important}.scpf-footer{background:#fff!important;color:#333!important}}
 
+/* SCP FOUNDATION DOSSIER THEME */
+:root{color-scheme:dark;--scp-bg:#07100b;--scp-panel:#102016;--scp-line:#34513a;--scp-ink:#e6ece5;--scp-muted:#9eaa9e;--scp-accent:#a9bd83}
+html{background:#07100b!important;scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 50% 0%,#1c3825 0,transparent 42%),#07100b!important;color:var(--scp-ink)!important;font-family:"Courier New",monospace!important}
+body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:url("logo.svg") no-repeat center 46%/min(68vw,620px);opacity:.055;filter:grayscale(1) brightness(1.6)}
+body>*{position:relative;z-index:1}
+.scpf-mast{background:linear-gradient(90deg,#050a07,#102016 50%,#050a07)!important;border-bottom:1px solid #718b6377!important;color:#e6ece5!important}
+.scpf-brand img{filter:grayscale(1) brightness(1.35)!important;opacity:.9}
+.scpf-brand strong{font-family:"Courier New",monospace!important;letter-spacing:.17em!important}
+.scpf-brand small{color:#a7b6a5!important}
+.scpf-meta b,.scpf-sub span:last-child,.scpf-footer strong{color:#b9ce9b!important}
+.scpf-sub{background:#08110b!important;border-color:#304936!important;color:#9eae9e!important}
+.scpf-rule{background:linear-gradient(90deg,transparent,#6e8e6c 18%,#a8bd83 50%,#6e8e6c 82%,transparent)!important}
+.hero,.cover{background:linear-gradient(135deg,#14291b,#0b1710 68%,#102219)!important;border:1px solid #6d8b6377!important;border-radius:2px!important;box-shadow:0 18px 55px #0008!important}
+.card,.panel,.item,.chapter,.form-card,.tile,.stat,.notice,.document-note,.sidebar,.sidefoot,.side-foot,.box{background:linear-gradient(145deg,#122319,#0b160f)!important;border:1px solid #34513a!important;border-radius:2px!important;box-shadow:0 10px 30px #0005!important}
+.card:hover,.panel:hover,.item:hover{border-color:#91a97b!important;box-shadow:0 14px 36px #0007!important}
+button,.btn,.public-link{border-radius:2px!important;text-transform:uppercase!important;letter-spacing:.08em!important}
+.btn.primary,.btn.gold{background:linear-gradient(135deg,#a8bd83,#718c65)!important;color:#08110b!important;border:1px solid #c3d5a7!important}
+input,select,textarea{background:#07110b!important;color:#e6ece5!important;border:1px solid #45634a!important;border-radius:2px!important}
+input:focus,select:focus,textarea:focus{outline:1px solid #a9bd83!important;border-color:#a9bd83!important}
+footer,.scpf-footer{background:#050a07!important;border-top:1px solid #496448!important;color:#a3b09f!important}
+.kicker,.eyebrow,.coatline,.side-head,.cap,.section-head small,.sectionhead .kicker{color:#b9ce9b!important;letter-spacing:.15em!important}
+.pill,.tag,.badge{background:#a9bd8318!important;color:#c9d9b6!important;border:1px solid #718c6555!important;border-radius:2px!important}
+.nav.active,.side-link.active,.nav:hover,.side-link:hover{background:#1b3321!important;border-color:#789879!important;color:#f0f4ed!important}
+#loading-screen,.site-loader{background:radial-gradient(ellipse at center,#193522,#050a07 72%)!important}
+.paper-masthead,.paper-subline,.paper-distribution,.paper-footer{display:none!important}
+.scpf-footer .seal{border:1px solid #6e8b6577!important;color:#b9ce9b!important}
+@media(max-width:640px){body:before{background-size:92vw;background-position:center 42%;opacity:.04}.scpf-mast{align-items:center!important}.scpf-meta{font-size:7px!important;gap:5px!important}.scpf-brand strong{font-size:10px!important}.scpf-brand img{width:34px!important;height:34px!important}.scpf-sub{font-size:8px!important}}
+@media print{body{background:#fff!important;color:#111!important}body:before{display:none!important}.scpf-mast,.scpf-sub,.scpf-footer{background:#fff!important;color:#111!important}}
 </style></head><body>
-<div class="scpf-mast"><div class="scpf-brand"><img src="logo.svg" alt="Emblème du Site 73"><span><strong>SCP FOUNDATION</strong><small>SECURE · CONTAIN · PROTECT &nbsp;|&nbsp; SITE 73</small></span></div><div class="scpf-meta"><span><b>ETHICS COMMITTEE</b></span><span>FOUNDATION INFORMATION SYSTEM</span></div></div><div class="scpf-sub"><span><i class="scpf-led"></i>NETWORK NODE // SITE-073</span><span>CONTROLLED DOCUMENT · AUTHORIZED PERSONNEL</span></div><div class="scpf-rule"></div>
+<div class="scpf-mast"><div class="scpf-brand"><img src="logo.svg" alt="SCP Foundation"><span><strong>SCP FOUNDATION</strong><small>SECURE · CONTAIN · PROTECT &nbsp;|&nbsp; SITE 73</small></span></div><div class="scpf-meta"><span><b>ETHICS COMMITTEE</b></span><span>FOUNDATION RECORDS SYSTEM</span></div></div><div class="scpf-sub"><span><i class="scpf-led"></i>NODE 073 // INTERNAL NETWORK</span><span>AUTHORIZED ACCESS · CONTROLLED COPY</span></div><div class="scpf-rule"></div>
+
 <div class="scpf-mast"><div class="scpf-brand"><img src="logo.svg" alt="Emblème du Comité d'Éthique"><span><strong>SCP FOUNDATION</strong><small>SECURE · CONTAIN · PROTECT &nbsp;|&nbsp; SITE 73</small></span></div><div class="scpf-meta"><span><b>ETHICS COMMITTEE</b></span><span>INSTITUTIONAL NETWORK</span></div></div><div class="scpf-sub"><span><i class="scpf-led"></i>FOUNDATION NETWORK // SITE 73</span><span>CONTROLLED DOCUMENT · INTERNAL USE</span></div>
 <div id="loading-screen"><div class="loader"><img src="logo.svg" alt=""><small>FONDATION S.C.P. · SITE 73</small><h2>COMITÉ D'ÉTHIQUE</h2><p>INITIALISATION DE L'ENVIRONNEMENT INSTITUTIONNEL</p><div class="load-track"><div class="load-bar" id="loader-progress"></div></div><div class="load-status" id="loader-status">Vérification des registres...</div></div></div>
 <header class="top"><div class="brand"><img src="logo.svg" alt=""><span><b>COMITÉ D'ÉTHIQUE</b><small>INTRANET INSTITUTIONNEL · SITE 73</small></span></div><div class="topright"><a class="public-link" href="portail.html">↗ PORTAIL PUBLIC</a><span class="green">● SYSTÈME OPÉRATIONNEL</span><span id="clock">--:--:--</span><span>SESSION DE TRAVAIL</span></div></header>
@@ -165,6 +195,7 @@ keys.forEach(render);stats();keys.forEach(k=>{const f=document.getElementById('f
 const mk=document.getElementById('makeReport');mk.addEventListener('click',()=>{const v=id=>document.getElementById(id).value.trim();if(!v('rTitle')||!v('rFacts')){document.getElementById('reportStatus').textContent='Renseignez le titre et les faits observés.';return}document.getElementById('reportOutput').value='COMITÉ D’ÉTHIQUE — SITE 73\nBROUILLON DE SIGNALEMENT RP\n\nRéférence : '+v('rTitle')+'\nDépartement : '+(v('rDept')||'Non précisé')+'\nNature : '+v('rType')+'\n\nFAITS OBSERVÉS\n'+v('rFacts')+'\n\nÉLÉMENTS DISPONIBLES\n'+(v('rEvidence')||'Non précisés')+'\n\nSUITE SOUHAITÉE\n'+(v('rRequest')||'Examen par l’autorité compétente')+'\n\nDocument préparatoire fictif — transmission manuelle uniquement.';document.getElementById('copyReport').disabled=false;document.getElementById('reportStatus').textContent='Brouillon généré.'});document.getElementById('copyReport').addEventListener('click',async()=>{const o=document.getElementById('reportOutput');try{await navigator.clipboard.writeText(o.value);say('Texte copié.')}catch{o.select();say('Sélectionnez puis copiez le texte.')}});
 const clock=document.getElementById('clock');const tick=()=>clock.textContent=new Date().toLocaleTimeString('fr-FR');tick();setInterval(tick,1000);const c=document.getElementById('count-personnel');function upd(){c.textContent=load('personnel').length+' ENREGISTREMENT(S)'}upd();document.getElementById('form-personnel').addEventListener('submit',()=>setTimeout(upd,0));
 })();
-</script><div class="scpf-footer"><span><strong>SCP FOUNDATION</strong><br>SECURE · CONTAIN · PROTECT<br>SITE 73 — COMITÉ D’ÉTHIQUE</span><span>RÉSEAU INSTITUTIONNEL<br>DOCUMENTATION ET ADMINISTRATION<br>ENVIRONNEMENT DE JEU DE RÔLE</span></div>
-<div class="scpf-footer"><span><strong>SCP FOUNDATION // SITE 73</strong><br>SECURE · CONTAIN · PROTECT<br>SECRÉTARIAT DU COMITÉ D’ÉTHIQUE</span><span>DOCUMENTATION · REGISTRES · CONTRÔLE INSTITUTIONNEL<br>DIFFUSION SELON HABILITATION</span><span class="seal">FIN DE DOCUMENT</span></div>
+</script>
+
+<div class="scpf-footer"><span><strong>SCP FOUNDATION — SITE 73</strong><br>SECURE · CONTAIN · PROTECT<br>COMITÉ D’ÉTHIQUE</span><span>REGISTRE INSTITUTIONNEL · DOCUMENT CONTRÔLÉ<br>DIFFUSION SELON HABILITATION</span><span class="seal">END OF RECORD</span></div>
 </body></html>
